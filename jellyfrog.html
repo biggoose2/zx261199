@@ -43,16 +43,13 @@ body{touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-c
 .tool:active{transform:scale(.92)}
 .tool[aria-pressed="true"]{background:#fff;color:var(--accent);box-shadow:0 4px 12px rgba(110,70,60,.15)}
 .tool:focus-visible,.spawn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.seal{position:fixed;transform:translate(-50%,-100%);border:0;border-radius:999px;padding:10px 18px;font:900 14px var(--font);color:#fff;cursor:pointer;white-space:nowrap;
-  background:linear-gradient(180deg,#d9a46a,#b98149);box-shadow:0 8px 18px rgba(140,90,40,.35),inset 0 2px 0 rgba(255,255,255,.35);animation:bob 1.2s ease-in-out infinite}
-@keyframes bob{50%{transform:translate(-50%,calc(-100% - 5px))}}
 .toast{position:fixed;left:50%;top:22%;transform:translate(-50%,-50%);padding:11px 22px;border-radius:999px;font-weight:900;font-size:16px;pointer-events:none;white-space:nowrap;animation:pop .4s cubic-bezier(.3,1.6,.5,1)}
 .toast small{font-weight:700;font-size:12px;margin-right:8px;padding:2px 8px;border-radius:999px;color:#fff;vertical-align:2px}
 @keyframes pop{from{transform:translate(-50%,-50%) scale(.5);opacity:0}}
 .hint{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 70px);transform:translateX(-50%);padding:8px 16px;border-radius:14px;font-size:12.5px;line-height:1.7;text-align:center;pointer-events:none;transition:opacity 1s;max-width:calc(100% - 40px);width:max-content}
 .hint.fade{opacity:0}
 .rot{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 104px);transform:translateX(-50%);padding:6px 14px;border-radius:999px;font-size:12px;pointer-events:none;display:none}
-@media (orientation:portrait){.rot{display:block}.tool{width:52px}.spawn{width:64px;height:64px}}
+@media (orientation:portrait){.rot{display:block}.tool{width:44px}.spawn{width:64px;height:64px}.dock-wrap{gap:8px}.jarbtn{font-size:0;gap:0;padding:0 12px}.meter{min-width:90px}}
 .sheet{position:fixed;inset:0;background:rgba(60,40,50,.28);display:flex;align-items:center;justify-content:center;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
   padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
 .card{background:#fffaf6;border-radius:26px;box-shadow:0 24px 60px rgba(60,30,40,.25);width:min(760px,100%);max-height:100%;display:flex;flex-direction:column;overflow:hidden;animation:pop2 .35s cubic-bezier(.3,1.4,.5,1)}
@@ -78,8 +75,45 @@ body{touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-c
 .jar small{font-size:11px;color:var(--ink-soft);font-variant-numeric:tabular-nums}
 .jar b{font-size:13px}
 .empty{padding:30px 0;text-align:center;color:var(--ink-soft);font-size:13px}
+/* 底部：左工具坞 · 中间来只蛙 · 右装瓶；装瓶模式时换成装瓶条 */
+.spawn small{font:600 10px var(--latin);opacity:.85;font-variant-numeric:tabular-nums}
+.jarbtn{pointer-events:auto;height:58px;padding:0 16px 0 12px;border-radius:22px;border:1px solid var(--line);display:flex;align-items:center;gap:6px;font:900 13px var(--font);color:#2a8f6a;cursor:pointer}
+.jarbtn svg{width:28px;height:28px}
+.jarbar{pointer-events:auto;display:flex;align-items:center;gap:10px;padding:8px 8px 8px 16px;border-radius:26px}
+.meter{display:flex;flex-direction:column;gap:5px;min-width:130px;font-size:12px;font-weight:700}
+.meter i{display:block;height:8px;border-radius:99px;background:rgba(74,60,69,.1);overflow:hidden}
+.meter i b{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#7fe3c0,#4fcf9f);transition:width .25s}
+.meter.full i b{background:linear-gradient(90deg,#ffb36b,#ff7d93)}
+.bbtn{height:46px;padding:0 18px;border-radius:18px;border:0;font:900 14px var(--font);cursor:pointer}
+.bbtn.ghost{background:#f2e8e2;color:var(--ink)}
+.bbtn.go{color:#fff;background:linear-gradient(180deg,#d9a46a,#b98149);box-shadow:0 6px 14px rgba(140,90,40,.3),inset 0 2px 0 rgba(255,255,255,.35)}
+.bbtn.go:disabled{background:#d8ccc4;box-shadow:none;cursor:default}
+/* 果冻回弹 */
+.jelly{animation:jelly .45s}
+@keyframes jelly{20%{transform:scale(1.18,.84)}45%{transform:scale(.9,1.1)}70%{transform:scale(1.05,.96)}}
+.stat.bump{animation:jelly .5s}
+/* 拖出工具时的幽灵图标 */
+.ghost-tool{position:fixed;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:50%;display:grid;place-items:center;color:var(--accent);pointer-events:none;z-index:20;transform:scale(1.1)}
+.ghost-tool svg{width:30px;height:30px}
+/* 蛙头顶飘字 */
+.float{position:fixed;transform:translate(-50%,-100%);pointer-events:none;white-space:nowrap;font-weight:900;font-size:15px;color:var(--ink);text-shadow:0 1px 0 #fff,0 0 8px rgba(255,255,255,.9);animation:floatUp 1.5s ease-out forwards;z-index:5}
+.float small{display:inline-block;font-size:11px;padding:2px 7px;border-radius:999px;color:#fff;margin-right:6px;vertical-align:2px;text-shadow:none}
+.float.combo{font-family:var(--latin);font-size:22px;color:#ff7d93}
+@keyframes floatUp{0%{opacity:0;transform:translate(-50%,-60%) scale(.6)}15%{opacity:1;transform:translate(-50%,-100%) scale(1.08)}25%{transform:translate(-50%,-100%) scale(1)}100%{opacity:0;transform:translate(-50%,-260%)}}
+/* 图鉴：每种颜色下 4 个体型格，集齐金框 */
+.dx .shapes{display:flex;gap:4px}
+.dx .shapes i{width:12px;height:10px;background:#e7ded8;display:inline-block}
+.dx .shapes i.on{background:var(--c)}
+.dx.gold{border:2px solid #f2c45a;box-shadow:0 0 0 3px rgba(242,196,90,.25),0 4px 12px rgba(242,196,90,.35)}
+:is(.dots,.shapes,.legend-row) i.s-normal{border-radius:50% 50% 46% 46%/60% 60% 40% 40%}
+:is(.dots,.shapes,.legend-row) i.s-round{border-radius:50%}
+:is(.dots,.shapes,.legend-row) i.s-fat{border-radius:50% 50% 44% 44%/55% 55% 45% 45%;transform:scaleX(1.25)}
+:is(.dots,.shapes,.legend-row) i.s-floppy{border-radius:60% 60% 30% 30%/80% 80% 20% 20%;transform:scale(1.25,.7)}
+.legend-row{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--ink-soft);margin:6px 0 2px}
+.legend-row span{display:flex;align-items:center;gap:5px}
+.legend-row i{width:14px;height:12px;background:#ff98aa;display:inline-block}
 #err{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center;font-size:14px}
-@media (prefers-reduced-motion:reduce){.toast,.card,.seal{animation:none}}
+@media (prefers-reduced-motion:reduce){.toast,.card,.jelly,.float{animation:none}}
 </style>
 </head>
 <body>
@@ -89,25 +123,31 @@ body{touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-c
 <header class="top">
   <div class="brand glass"><div class="logo"></div><div><b>果冻蛙瓶</b><i>JELLY FROG</i></div></div>
   <div class="stats">
-    <div class="stat glass" style="cursor:default"><em style="background:#ff8fa3">蛙</em>桌上 <span id="sCnt">0</span></div>
     <button class="stat glass" id="openDex" type="button"><em style="background:#8b7bff">鉴</em>图鉴 <span id="sDex">0/0</span></button>
     <button class="stat glass" id="openCab" type="button"><em style="background:#4fcf9f">瓶</em>展柜 <span id="sCol">0</span></button>
   </div>
 </header>
-<div class="hint glass" id="hint">拖动甩飞 · 双指拉长到爆开 · 同款同大小挤在一起会合成<br>把蛙塞进右边的玻璃罐，点「封瓶收藏」放进展柜 · 歪手机，蛙会跟着滚</div>
+<div class="hint glass" id="hint">拖动甩飞 · 同色同大小挤一起会合成 · 在蛙身上来回滑动可以撸蛙 · 长按捏扁再松手</div>
 <div class="rot glass">横过来玩更舒服</div>
 <div class="toast glass" id="toast" hidden></div>
-<button class="seal" id="seal" type="button" hidden>封瓶收藏</button>
-<div class="dock-wrap">
-  <button class="spawn" id="spawn" type="button" aria-label="来只蛙"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>来只蛙</button>
-  <nav class="dock glass">
+<div class="dock-wrap" id="mainBar">
+  <nav class="dock glass" aria-label="工具（点选或拖到桌上）">
     <button class="tool" data-tool="hand" aria-pressed="true" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V11m0-1.5V4a1.5 1.5 0 0 1 3 0v6m0-4.5a1.5 1.5 0 0 1 3 0V12m0-3.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1.5a6 6 0 0 1-4.6-2.2L4.2 15a1.6 1.6 0 0 1 2.4-2.1L8 14.5"/></svg>拖拽</button>
     <button class="tool" data-tool="bomb" aria-pressed="false" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10.5" cy="14" r="6.5"/><path d="M15 9.5l2-2M17.5 4.5l.5-1.5M20 7l1.5-.5"/></svg>炸弹</button>
     <button class="tool" data-tool="hammer" aria-pressed="false" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="12" height="7" rx="3" transform="rotate(-30 9 7.5)"/><path d="M11.5 10.5L19 21"/></svg>小锤</button>
     <button class="tool" data-tool="freeze" aria-pressed="false" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9M9.5 4.5L12 6l2.5-1.5M9.5 19.5L12 18l2.5 1.5"/></svg>冰冻</button>
   </nav>
+  <button class="spawn" id="spawn" type="button" aria-label="来只蛙"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>来只蛙<small id="sCnt">0/12</small></button>
+  <button class="jarbtn glass" id="jarBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M9.5 3v3.2c0 .6-.3 1.1-.8 1.4C6.5 9 5.5 10.5 5.5 12.5V19a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-6.5c0-2-1-3.5-3.2-4.9-.5-.3-.8-.8-.8-1.4V3"/><path d="M8.5 15.5c1 .8 2.2 1.2 3.5 1.2s2.5-.4 3.5-1.2"/></svg>装瓶</button>
 </div>
-<div class="sheet" id="dexSheet" hidden><div class="card" role="dialog" aria-labelledby="dexT"><div class="card-h"><div><h2 id="dexT">果冻蛙图鉴</h2><p>合成会随机出新款，越大越容易出稀有和传说</p></div><button class="x" type="button" data-close>×</button></div><div class="card-b" id="dexBody"></div></div></div>
+<div class="dock-wrap" id="jarBar" hidden>
+  <div class="jarbar glass">
+    <div class="meter" id="meter"><span id="meterT">点蛙，它会自己跳进瓶子</span><i><b id="meterB"></b></i></div>
+    <button class="bbtn ghost" id="jarCancel" type="button">算了</button>
+    <button class="bbtn go" id="jarSeal" type="button" disabled>封瓶</button>
+  </div>
+</div>
+<div class="sheet" id="dexSheet" hidden><div class="card" role="dialog" aria-labelledby="dexT"><div class="card-h"><div><h2 id="dexT">果冻蛙图鉴</h2><p>同色合成会变大，偶尔变异出稀有款或新体型；集齐一种颜色的 4 种体型会镶金边</p></div><button class="x" type="button" data-close>×</button></div><div class="card-b" id="dexBody"></div></div></div>
 <div class="sheet" id="cabSheet" hidden><div class="card" role="dialog" aria-labelledby="cabT"><div class="card-h"><div><h2 id="cabT">我的展柜</h2><p>封好的每一瓶都在这里</p></div><button class="x" type="button" data-close>×</button></div><div class="card-b" id="cabBody"></div></div></div>
 <div id="err" hidden>这台设备的浏览器不支持 WebGL，无法显示 3D 效果。</div>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
@@ -191,9 +231,16 @@ function tone(f0,f1,dur,vol,type='sine',delay=0){if(!AC)return;const t=AC.curren
 /* ---------- 青蛙：二维软体 → 实时充气成 3D ---------- */
 const N=32,SUB=4,H2=1/60/SUB,GRAV=-15;
 const BUMPS=[{x:-.47,y:.62,R:.35},{x:.47,y:.62,R:.35},{x:-.84,y:-.42,R:.3},{x:.84,y:-.42,R:.3}];
-function frogShape(r){const out=[];for(let i=0;i<N;i++){const a=i/N*Math.PI*2,dx=Math.cos(a),dy=Math.sin(a);let lo=0,hi=2;
-    for(let k=0;k<22;k++){const m=(lo+hi)/2,x=dx*m,y=dy*m;const v=Math.pow(Math.abs(x)/1.08,2.4)+Math.pow(Math.abs(y)/.8,y<0?3:2.2);if(v<=1)lo=m;else hi=m}
-    let t=lo;for(const d of BUMPS){const b=dx*d.x+dy*d.y,disc=b*b-(d.x*d.x+d.y*d.y)+d.R*d.R;if(disc>=0){const tt=b+Math.sqrt(disc);if(tt>t)t=tt}}out.push({x:dx*t*r,y:dy*t*r})}
+// 体型：轮廓（超椭圆长宽/指数）+ 手感（回形软度、边软度、弹跳、落地反弹/摩擦、着地摊平、爆开阈值）
+const SHAPES={
+  normal:{name:'普通',ax:1.08,ay:.8,pX:2.4,pT:2.2,pB:3,soft:1,ke:1,hop:1,hopX:1,dz:1,bounce:.15,fric:.8,sag:0,pop:2.6,pitch:1},
+  round:{name:'圆滚滚',ax:.98,ay:.92,pX:2,pT:2,pB:2.1,soft:1.35,ke:1.2,hop:.85,hopX:1.9,dz:1.12,bounce:.5,fric:.97,sag:0,pop:2.6,pitch:1.3},
+  fat:{name:'肥胖',ax:1.32,ay:.86,pX:2.3,pT:2.3,pB:3.4,soft:.75,ke:.45,hop:.78,hopX:.7,dz:1.28,bounce:.04,fric:.62,sag:.12,pop:2.4,pitch:.7},
+  floppy:{name:'软塌塌',ax:1.2,ay:.66,pX:2.6,pT:2.4,pB:4.2,soft:.22,ke:.35,hop:.62,hopX:.8,dz:.8,bounce:0,fric:.55,sag:.32,pop:3.4,pitch:.85}};
+const SHAPE_K=Object.keys(SHAPES);
+function frogShape(r,S=SHAPES.normal){const out=[],kx=S.ax/1.08,ky=S.ay/.8,kb=(kx+ky)/2;for(let i=0;i<N;i++){const a=i/N*Math.PI*2,dx=Math.cos(a),dy=Math.sin(a);let lo=0,hi=3;
+    for(let k=0;k<24;k++){const m=(lo+hi)/2,x=dx*m,y=dy*m;const v=Math.pow(Math.abs(x)/S.ax,S.pX)+Math.pow(Math.abs(y)/S.ay,y<0?S.pB:S.pT);if(v<=1)lo=m;else hi=m}
+    let t=lo;for(const d0 of BUMPS){const d={x:d0.x*kx,y:d0.y*ky,R:d0.R*kb},b=dx*d.x+dy*d.y,disc=b*b-(d.x*d.x+d.y*d.y)+d.R*d.R;if(disc>=0){const tt=b+Math.sqrt(disc);if(tt>t)t=tt}}out.push({x:dx*t*r,y:dy*t*r})}
   let mx=0,my=0;for(const q of out){mx+=q.x;my+=q.y}mx/=N;my/=N;for(const q of out){q.x-=mx;q.y-=my}return out}
 const area=pts=>{let a=0;for(let i=0;i<pts.length;i++){const p=pts[i],q=pts[(i+1)%pts.length];a+=p.x*q.y-q.x*p.y}return a/2};
 const CLEAR={color:'#ffffff',att:'#ffffff',dist:5,core:'#ffffff'};
@@ -275,19 +322,17 @@ void main(){vec3 p=vL;float t=uTime;vec3 col;float sh=.72+.28*clamp(vN.z,0.,1.);
  else if(uMode==8){float h=clamp(p.y*.6+.5,0.,1.);col=mix(vec3(.01,.18,.32),vec3(.16,.62,.82),h);vec2 q=p.xz*5.+vec2(t*.5,t*.35);
   float c=abs(sin(q.x+sin(q.y*1.3+t))*sin(q.y+sin(q.x*1.1-t*.8)));col+=vec3(.55,.95,1.)*pow(c,8.)*1.4*h;col+=vec3(.85,1.,1.)*smoothstep(.55,.95,p.y)*.35;
   float rays=pow(max(0.,sin(p.x*7.+t*.3)*.5+.5),6.)*smoothstep(-.4,.9,p.y);col+=vec3(.5,.9,1.)*rays*.35;}
- else if(uMode==9){float n=fbm(p*1.8+vec3(t*.02,0.,uSeed));float m=fbm(p*3.1+vec3(5.,t*.03,2.));col=mix(vec3(.05,.04,.18),vec3(.22,.12,.42),smoothstep(-.6,.7,p.y));col+=vec3(.9,.35,.7)*pow(n,2.5)*1.6+vec3(.2,.7,.95)*pow(m,3.)*1.4;vec3 g=p*15.;float s=hash(floor(g)+5.);
-  col+=vec3(1.)*step(.9,s)*smoothstep(.22,0.,length(fract(g)-.5))*(.5+.5*sin(t*2.+s*30.))*3.5;}
  else {float n=fbm(p*2.+vec3(0.,t*.35,0.));float pulse=.75+.25*sin(t*1.8+uSeed*6.);col=mix(vec3(.05,.7,.25),vec3(.75,1.,.55),n)*(1.1+n*1.8)*pulse;}
  gl_FragColor=vec4(col,1.);}`;
 const M=96,LV=12;// 轮廓细分数 / 截面层数
 const sphereGeo=new THREE.SphereGeometry(1,32,24),icoGeo=new THREE.IcosahedronGeometry(1,1);const GM=18,GL=3;
-let frogs=[],colorIdx=0;
+let frogs=[],frogSeq=0;
 function jellyMat(C,r){
   if(C.diamond)return new THREE.MeshPhysicalMaterial({color:'#ffffff',transmission:1,thickness:r*.9,roughness:0,ior:2.2,attenuationColor:new THREE.Color(C.att),attenuationDistance:C.dist,
     clearcoat:1,clearcoatRoughness:0,specularIntensity:1,envMapIntensity:2.6,iridescence:.7,iridescenceIOR:1.6,iridescenceThicknessRange:[250,900],flatShading:true});
-  return new THREE.MeshPhysicalMaterial({color:C.color,vertexColors:!!C.grad,transmission:C.milk?.55:.96,thickness:r*1.3,roughness:C.milk?.16:.06,ior:1.36,attenuationColor:new THREE.Color(C.att),attenuationDistance:C.dist,
+  return new THREE.MeshPhysicalMaterial({color:C.color,transmission:C.milk?.55:.96,thickness:r*1.3,roughness:C.milk?.16:.06,ior:1.36,attenuationColor:new THREE.Color(C.att),attenuationDistance:C.dist,
   clearcoat:1,clearcoatRoughness:.03,specularIntensity:1,envMapIntensity:1.15,sheen:.35,sheenRoughness:.35,sheenColor:new THREE.Color('#ffffff'),
-  iridescence:C.grad==='rainbow'?.6:C.grad?.3:0,iridescenceIOR:1.45,iridescenceThicknessRange:[180,820],emissive:C.glow||'#000000',emissiveIntensity:C.glow?.08:0})}
+  iridescence:0,iridescenceIOR:1.45,iridescenceThicknessRange:[180,820],emissive:C.glow||'#000000',emissiveIntensity:C.glow?.08:0})}
 /* ---------- 嘴巴贴花（不进透射通道，避免双层） ---------- */
 function mouthTex(kind){return canTex(256,160,(x,w,h)=>{x.lineCap='round';x.lineJoin='round';const ink='#5a1029',tg='#ff7f9e';
   if(kind==='smile'){x.strokeStyle=ink;x.lineWidth=15;x.beginPath();x.moveTo(70,62);x.quadraticCurveTo(100,100,128,70);x.quadraticCurveTo(156,100,186,62);x.stroke()}
@@ -296,29 +341,29 @@ function mouthTex(kind){return canTex(256,160,(x,w,h)=>{x.lineCap='round';x.line
   else{x.fillStyle=ink;x.beginPath();x.moveTo(56,58);x.quadraticCurveTo(92,44,128,58);x.quadraticCurveTo(164,44,200,58);x.quadraticCurveTo(196,140,128,140);x.quadraticCurveTo(60,140,56,58);x.fill();x.fillStyle=tg;x.beginPath();x.ellipse(128,122,40,15,0,0,7);x.fill()}
   x.fillStyle='rgba(255,255,255,.55)';if(kind!=='smile'){x.beginPath();x.ellipse(104,66,9,5,-.3,0,7);x.fill()}})}
 const MT={smile:mouthTex('smile'),o:mouthTex('o'),happy:mouthTex('happy'),wail:mouthTex('wail')};
-function makeFrog(C,x,y,r=.56){
-  const rest=frogShape(r),f={C,r,rest,pts:[],Ls:[],grabs:[],hopT:rand(1,3),blink:1,blinkT:rand(1,3),sq:0,ground:0,wasG:true,vy:0,vx:0,cy:y,cx:x,expr:'idle',exprT:0,jst:'out'};
+function makeFrog(C,x,y,r=.56,shape='normal'){
+  const S=SHAPES[shape]||SHAPES.normal,kx=S.ax/1.08,ky=S.ay/.8,rest=frogShape(r,S),f={id:++frogSeq,S,shape,C,r,rest,pts:[],pet:0,love:0,sagK:0,press:0,Ls:[],grabs:[],hopT:rand(1,3),blink:1,blinkT:rand(1,3),sq:0,ground:0,wasG:true,vy:0,vx:0,cy:y,cx:x,expr:'idle',exprT:0,jst:'out'};
   for(const q of rest)f.pts.push({x:x+q.x,y:y+q.y,px:x+q.x,py:y+q.y});
   for(let i=0;i<N;i++){const a=rest[i],b=rest[(i+1)%N];f.Ls.push(Math.hypot(b.x-a.x,b.y-a.y))}f.A0=area(rest);
-  let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;for(const q of rest){x0=Math.min(x0,q.x);x1=Math.max(x1,q.x);y0=Math.min(y0,q.y);y1=Math.max(y1,q.y)}f.rw=x1-x0;f.rh=y1-y0;
+  let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;for(const q of rest){x0=Math.min(x0,q.x);x1=Math.max(x1,q.x);y0=Math.min(y0,q.y);y1=Math.max(y1,q.y)}f.rw=x1-x0;f.rh=y1-y0;f.hx=f.rw/2;f.hy=f.rh/2;
   // 身体网格
-  const g=new THREE.BufferGeometry(),nv=(2*LV+1)*M;g.setAttribute('position',new THREE.BufferAttribute(new Float32Array(nv*3),3));g.setAttribute('normal',new THREE.BufferAttribute(new Float32Array(nv*3),3));g.setAttribute('color',new THREE.BufferAttribute(new Float32Array(nv*3).fill(1),3));
+  const g=new THREE.BufferGeometry(),nv=(2*LV+1)*M;g.setAttribute('position',new THREE.BufferAttribute(new Float32Array(nv*3),3));g.setAttribute('normal',new THREE.BufferAttribute(new Float32Array(nv*3),3));
   const idx=[];for(let q=0;q<2*LV;q++)for(let i=0;i<M;i++){const a=q*M+i,b=q*M+(i+1)%M,c=(q+1)*M+i,d=(q+1)*M+(i+1)%M;idx.push(a,c,b,b,c,d)}g.setIndex(idx);
   const mat=C.diamond?gemMat():jellyMat(C,r);f.mat=mat;f.body=new THREE.Mesh(g,mat);f.body.frustumCulled=false;scene.add(f.body);
   if(C.diamond){f.body.visible=false;const R2=2*GL+1,gn=R2*GM+2,gg=new THREE.BufferGeometry();gg.setAttribute('position',new THREE.BufferAttribute(new Float32Array(gn*3),3));
     const gi=[];for(let q=0;q<2*GL;q++)for(let i=0;i<GM;i++){const a=q*GM+i,b=q*GM+(i+1)%GM,c2=(q+1)*GM+i,d=(q+1)*GM+(i+1)%GM;gi.push(a,c2,b,b,c2,d)}
     const F=R2*GM,B=F+1;for(let i=0;i<GM;i++){gi.push(F,i,(i+1)%GM);gi.push(B,(2*GL)*GM+(i+1)%GM,(2*GL)*GM+i)}gg.setIndex(gi);
     f.gem=new THREE.Mesh(gg,mat);f.gem.frustumCulled=false;scene.add(f.gem)}
-  const cg=new THREE.BufferGeometry();cg.setAttribute('position',new THREE.BufferAttribute(new Float32Array(nv*3),3));cg.setAttribute('normal',new THREE.BufferAttribute(new Float32Array(nv*3),3));cg.setAttribute('color',new THREE.BufferAttribute(new Float32Array(nv*3).fill(1),3));cg.setIndex(idx);
-  f.coreMat=C.fx!=null?new THREE.ShaderMaterial({vertexShader:FX_VS,fragmentShader:FX_FS,uniforms:{uTime:{value:0},uCt:{value:new THREE.Vector2()},uR:{value:r},uSeed:{value:Math.random()},uTilt:{value:0},uWave:{value:0},uMode:{value:C.fx},uC1:{value:new THREE.Color(C.c1||'#ffffff')},uC2:{value:new THREE.Color(C.c2||'#ffffff')}}}):new THREE.MeshStandardMaterial({color:C.core,vertexColors:!!C.grad,roughness:C.milk?.6:.45,emissive:C.grad==='lava'?'#ff3c00':C.grad?'#000000':C.core,emissiveIntensity:C.lume?1.6:C.grad==='lava'?.9:C.milk?.05:.22});
-  if(C.world)f.coreMat.side=THREE.BackSide;f.core=new THREE.Mesh(cg,f.coreMat);f.core.frustumCulled=false;f.core.visible=!C.diamond&&!C.nocore;scene.add(f.core);
+  const cg=new THREE.BufferGeometry();cg.setAttribute('position',new THREE.BufferAttribute(new Float32Array(nv*3),3));cg.setAttribute('normal',new THREE.BufferAttribute(new Float32Array(nv*3),3));cg.setIndex(idx);
+  f.coreMat=C.fx!=null?new THREE.ShaderMaterial({vertexShader:FX_VS,fragmentShader:FX_FS,uniforms:{uTime:{value:0},uCt:{value:new THREE.Vector2()},uR:{value:r},uSeed:{value:Math.random()},uTilt:{value:0},uWave:{value:0},uMode:{value:C.fx},uC1:{value:new THREE.Color(C.c1||'#ffffff')},uC2:{value:new THREE.Color(C.c2||'#ffffff')}}}):new THREE.MeshStandardMaterial({color:C.core,roughness:C.milk?.6:.45,emissive:C.core,emissiveIntensity:C.milk?.05:.22});
+  if(C.world)f.coreMat.side=THREE.BackSide;f.core=new THREE.Mesh(cg,f.coreMat);f.core.frustumCulled=false;f.core.visible=!C.diamond;scene.add(f.core);
   // 局部部件（眼包、眼睛、嘴、腮红、手脚）
-  const grp=new THREE.Group();scene.add(grp);f.grp=grp;const d0=r*.82;f.d0=d0;
+  const grp=new THREE.Group();scene.add(grp);f.grp=grp;const d0=r*.82*S.dz;f.d0=d0;
   const part=(m,px,py,pz,sx,sy,sz)=>{const o=new THREE.Mesh(C.diamond?icoGeo:sphereGeo,m);o.position.set(px,py,pz);o.scale.set(sx,sy,sz);grp.add(o);return o};
   f.eyes=[];
   const eyeMat=new THREE.MeshPhysicalMaterial({color:'#160d1c',roughness:.04,clearcoat:1,clearcoatRoughness:.02,envMapIntensity:2,transparent:true});
   const hiMat=new THREE.MeshBasicMaterial({color:'#ffffff',transparent:true});const pinkHi=new THREE.MeshBasicMaterial({color:'#ffb3c6',transparent:true});
-  for(const s of [-1,1]){const ex=s*.47*r,ey=.6*r;part(mat,ex,ey,d0*.28,.37*r,.37*r,.33*r);
+  for(const s of [-1,1]){const ex=s*.47*r*kx,ey=.6*r*ky;part(mat,ex,ey,d0*.28,.37*r,.37*r,.33*r);
     const e=new THREE.Group();e.position.set(ex,ey,d0*.28+.37*r);grp.add(e);const ball=new THREE.Mesh(sphereGeo,eyeMat);ball.scale.set(.25*r,.26*r,.13*r);e.add(ball);
     const h1=new THREE.Mesh(sphereGeo,hiMat);h1.scale.set(.085*r,.075*r,.02*r);h1.position.set(-.08*r,.09*r,.12*r);e.add(h1);
     const h2=new THREE.Mesh(sphereGeo,hiMat);h2.scale.setScalar(.035*r);h2.position.set(.09*r,-.07*r,.12*r);e.add(h2);
@@ -327,15 +372,11 @@ function makeFrog(C,x,y,r=.56){
   f.tw=[];f.mov=[];
   const inc=(n,mk)=>{for(let k=0;k<n;k++){const o=mk(k);const a=Math.random()*6.28,rr=Math.sqrt(Math.random())*.66*r;o.position.set(Math.cos(a)*rr,Math.sin(a)*rr*.68-.06*r,(Math.random()-.5)*d0*.75);grp.add(o);f.mov.push({o,k:C.inc,ph:rand(0,6),sp:rand(.4,1)})}};
   if(C.inc==='bubbles'){const bm=new THREE.MeshPhysicalMaterial({color:'#ffffff',roughness:.05,clearcoat:1,envMapIntensity:2,emissive:'#ffffff',emissiveIntensity:.25});inc(16,()=>{const o=new THREE.Mesh(sphereGeo,bm);o.scale.setScalar(rand(.02,.055)*r);return o})}
-  if(C.inc==='seeds'){const sm3=new THREE.MeshStandardMaterial({color:'#1b120e',roughness:.25});inc(9,()=>{const o=new THREE.Mesh(sphereGeo,sm3);o.scale.set(.04*r,.065*r,.03*r);o.rotation.z=rand(-.6,.6);return o})}
   if(C.inc==='pearls'){const pm=new THREE.MeshPhysicalMaterial({color:'#2a1408',roughness:.2,clearcoat:1});for(let k=0;k<9;k++){const o=new THREE.Mesh(sphereGeo,pm);o.scale.setScalar(.085*r);o.position.set(rand(-.5,.5)*r,-.42*r+rand(0,.12)*r,(Math.random()-.5)*d0*.6);grp.add(o)}}
   if(C.inc==='petals'){const pm=new THREE.MeshStandardMaterial({color:'#ff9ec2',roughness:.5,side:THREE.DoubleSide,emissive:'#ff6fa3',emissiveIntensity:.2});inc(10,()=>{const o=new THREE.Mesh(sphereGeo,pm);o.scale.set(.07*r,.045*r,.008*r);o.rotation.set(rand(0,3),rand(0,3),rand(0,3));return o})}
   if(C.inc==='chips'){const cm=new THREE.MeshStandardMaterial({color:'#3b2114',roughness:.6});inc(12,()=>{const o=new THREE.Mesh(new THREE.BoxGeometry(1,1,1),cm);o.scale.set(rand(.04,.07)*r,rand(.03,.05)*r,.03*r);o.rotation.set(rand(0,3),rand(0,3),rand(0,3));return o})}
-  if(C.inc==='snow'){const wm=new THREE.MeshBasicMaterial({color:new THREE.Color('#ffffff').multiplyScalar(1.4)});inc(40,()=>{const o=new THREE.Mesh(sphereGeo,wm);o.scale.setScalar(rand(.012,.026)*r);return o});
-    const pine=new THREE.MeshStandardMaterial({color:'#4f9a6a',roughness:.6});for(let k=0;k<3;k++){const t=new THREE.Mesh(new THREE.ConeGeometry(.12*r-k*.025*r,.16*r,16),pine);t.position.set(0,-.42*r+k*.1*r,0);grp.add(t)}}
   if(C.inc==='leaf'){const lm=new THREE.MeshStandardMaterial({color:'#7a5a12',roughness:.6,side:THREE.DoubleSide});const o=new THREE.Mesh(sphereGeo,lm);o.scale.set(.22*r,.1*r,.01*r);o.rotation.set(.3,.4,.6);o.position.set(.05*r,-.05*r,0);grp.add(o);
     const v=new THREE.Mesh(new THREE.CylinderGeometry(.006*r,.006*r,.42*r,6),lm);v.rotation.z=Math.PI/2+.6;v.position.copy(o.position);grp.add(v)}
-  if(C.stars){for(let k=0;k<30;k++){const big=k%6===0;const sm2=new THREE.MeshBasicMaterial({color:new THREE.Color(big?'#fff3c4':'#cfe3ff').multiplyScalar(big?4:2.2)});const o=new THREE.Mesh(sphereGeo,sm2);const a=Math.random()*6.28,rr=Math.sqrt(Math.random())*.72*r;o.position.set(Math.cos(a)*rr,Math.sin(a)*rr*.7-.05*r,(Math.random()-.5)*d0*.8);const b=rand(.012,.024)*r*(big?2:1);o.scale.setScalar(b);grp.add(o);f.tw.push({o,b,sp:rand(1.5,4),ph:rand(0,6)})}}
   if(C.gold){const gm=new THREE.MeshStandardMaterial({color:'#ffcf5a',metalness:1,roughness:.18,emissive:'#6a4300',emissiveIntensity:.6,side:THREE.DoubleSide});for(let k=0;k<34;k++){const o=new THREE.Mesh(new THREE.PlaneGeometry(1,1),gm);const a=Math.random()*6.28,rr=Math.sqrt(Math.random())*.75*r;o.position.set(Math.cos(a)*rr,Math.sin(a)*rr*.7-.05*r,(Math.random()-.5)*d0*.9);o.scale.set(rand(.04,.1)*r,rand(.03,.08)*r,1);o.rotation.set(rand(0,3),rand(0,3),rand(0,3));grp.add(o)}}
   if(C.sparkle){const sp=new THREE.SpriteMaterial({map:sparkTex,color:new THREE.Color('#ffffff').multiplyScalar(2.5),transparent:true,depthWrite:false,blending:THREE.AdditiveBlending});
     for(let k=0;k<C.sparkle;k++){const o=new THREE.Sprite(sp);const a=rand(0,6.28),rr=rand(.2,.8)*r;o.position.set(Math.cos(a)*rr,Math.sin(a)*rr*.75,d0*rand(.75,1.05));const b=rand(.12,.24)*r;o.scale.setScalar(b);grp.add(o);f.tw.push({o,b,sp:rand(1,2.5),ph:rand(0,6),spark:1})}}
@@ -350,7 +391,7 @@ function makeFrog(C,x,y,r=.56){
     const wall=new THREE.Mesh(new THREE.BoxGeometry(.2*r,.15*r,.16*r),new THREE.MeshStandardMaterial({color:'#f2dcc0',roughness:.7}));wall.position.set(.1*r,-.36*r,.05*d0);grp.add(wall);
     const roof=new THREE.Mesh(new THREE.ConeGeometry(.17*r,.12*r,4),new THREE.MeshStandardMaterial({color:'#d8484e',roughness:.6}));roof.rotation.y=Math.PI/4;roof.position.set(.1*r,-.23*r,.05*d0);grp.add(roof);
     const win=new THREE.Mesh(new THREE.PlaneGeometry(.06*r,.06*r),new THREE.MeshBasicMaterial({color:new THREE.Color('#ffc861').multiplyScalar(3)}));win.position.set(.1*r,-.36*r,.05*d0+.081*r);grp.add(win);
-    const lamp=new THREE.PointLight('#ffb347',.6,r*1.2,2);lamp.position.set(.1*r,-.3*r,.2*d0);grp.add(lamp);
+    const lamp=new THREE.Sprite(new THREE.SpriteMaterial({map:glowTex,color:new THREE.Color('#ffb347').multiplyScalar(1.6),transparent:true,depthWrite:false,blending:THREE.AdditiveBlending}));lamp.scale.setScalar(.4*r);lamp.position.set(.1*r,-.35*r,.05*d0+.1*r);grp.add(lamp);
     const flM=new THREE.MeshBasicMaterial({color:new THREE.Color('#ffffff').multiplyScalar(1.6)});const fl=[];
     for(let k=0;k<70;k++){const o=new THREE.Mesh(sphereGeo,flM);o.scale.setScalar(rand(.01,.022)*r);o.position.set(rand(-.6,.6)*r,rand(-.4,.6)*r,rand(-.4,.4)*d0);grp.add(o);fl.push({o,vx:0,vy:0,vz:0})}
     let lt=performance.now()/1000;f.upd=tt=>{const dt=Math.min(.05,tt-lt);lt=tt;const kick=Math.min(3,Math.hypot(f.ax||0,f.ay||0)*.004);
@@ -374,31 +415,24 @@ function makeFrog(C,x,y,r=.56){
       grp.add(fg);fishes.push({g:fg,tail,ph:rand(0,6),w:rand(.5,.9),A:rand(.32,.46),B:rand(.12,.22),y0:rand(-.2,.25)})}
     f.upd=tt=>{for(const fi of fishes){const t2=tt*fi.w+fi.ph,x=Math.sin(t2)*fi.A*r,y=(fi.y0+Math.sin(t2*1.7)*fi.B*.5)*r,dx=Math.cos(t2);fi.g.position.set(x,y,Math.cos(t2*.8)*.25*d0);fi.g.scale.x=dx>=0?1:-1;fi.tail.rotation.y=Math.sin(tt*12+fi.ph)*.5}
       weeds.forEach((sg,wi)=>sg.forEach((s3,k)=>{s3.rotation.z=Math.sin(tt*1.4+wi+k*.6)*.18}))}}
-  if(C.world==='planet'){
-    const PB=['#ffd6e4','#ffe9cf','#fff6e8','#e9dcff','#ffc8d9','#ffe0c2','#d8f2ff'];
-    const ptex=canTex(256,128,(x,w,h)=>{let y=0;let k=0;while(y<h){const bh=6+Math.random()*16;x.fillStyle=PB[k++%PB.length];x.fillRect(0,y,w,bh+1);y+=bh}x.filter='blur(3px)';x.drawImage(x.canvas,0,0);x.filter='none';x.fillStyle='rgba(255,150,180,.6)';x.beginPath();x.ellipse(w*.62,h*.6,16,8,0,0,7);x.fill()});
-    const planet=new THREE.Mesh(new THREE.SphereGeometry(1,48,32),new THREE.MeshStandardMaterial({map:ptex,roughness:.55,emissive:'#ffffff',emissiveMap:ptex,emissiveIntensity:.35}));planet.scale.setScalar(.38*r);planet.position.set(-.04*r,-.02*r,0);grp.add(planet);
-    const rtex=canTex(256,16,(x,w,h)=>{for(let i=0;i<w;i++){const v=i/w;const a=(.5+.5*Math.sin(v*60))*(v>.08&&v<.95?1:0);const cc=['255,214,232','255,240,214','216,236,255'][(i/20|0)%3];x.fillStyle=`rgba(${cc},${a})`;x.fillRect(i,0,1,h)}});
-    const ringG=new THREE.RingGeometry(.44*r,.74*r,128);const uv=ringG.attributes.uv,pos2=ringG.attributes.position;for(let i=0;i<uv.count;i++){const rr=Math.hypot(pos2.getX(i),pos2.getY(i));uv.setXY(i,(rr-.44*r)/(.3*r),.5)}
-    const ring=new THREE.Mesh(ringG,new THREE.MeshStandardMaterial({map:rtex,alphaTest:.4,side:THREE.DoubleSide,roughness:.5,emissive:'#ffffff',emissiveMap:rtex,emissiveIntensity:.9}));ring.position.copy(planet.position);ring.rotation.set(1.18,.2,.32);grp.add(ring);
-    const moon=new THREE.Mesh(sphereGeo,new THREE.MeshStandardMaterial({color:'#fff3c4',roughness:.6,emissive:'#ffe08a',emissiveIntensity:1.2}));moon.scale.setScalar(.07*r);grp.add(moon);
-    f.upd=tt=>{planet.rotation.y=tt*.4;const a=tt*.7;moon.position.set(planet.position.x+Math.cos(a)*.62*r,planet.position.y+.2*r+Math.sin(a)*.12*r,Math.sin(a)*.45*d0)}}
-  const mouthMat=new THREE.MeshStandardMaterial({color:'#6e1733',roughness:.35});
-  f.mouthMat=new THREE.MeshBasicMaterial({map:MT.smile,transparent:true,depthWrite:false});const mouth=new THREE.Mesh(new THREE.PlaneGeometry(.46*r,.29*r),f.mouthMat);mouth.position.set(0,.12*r,d0*1.04);mouth.renderOrder=5;grp.add(mouth);f.mouth=mouth;
-  const cheekMat=new THREE.MeshBasicMaterial({map:cheekTex,transparent:true,depthWrite:false,opacity:.75});
-  for(const s of [-1,1]){const c=new THREE.Mesh(new THREE.CircleGeometry(.15*r,24),cheekMat);c.position.set(s*.52*r,.2*r,d0*.86);c.rotation.y=s*.5;grp.add(c)}
-  for(const s of [-1,1]){part(mat,s*.3*r,-.12*r,d0*.86,.13*r,.1*r,.08*r);for(let t=-1;t<=1;t++)part(mat,s*.3*r+t*.06*r,-.2*r,d0*.9,.035*r,.035*r,.03*r)}
-  for(const s of [-1,1])for(let t=-1;t<=1;t++)part(mat,s*.58*r+t*.1*r,-.74*r,d0*.42,.07*r,.06*r,.07*r);
+  f.mouthMat=new THREE.MeshBasicMaterial({map:MT.smile,transparent:true,depthWrite:false});const mouth=new THREE.Mesh(new THREE.PlaneGeometry(.46*r,.29*r),f.mouthMat);mouth.position.set(0,.12*r*ky,d0*1.04);mouth.renderOrder=5;grp.add(mouth);f.mouth=mouth;
+  const cheekMat=new THREE.MeshBasicMaterial({map:cheekTex,transparent:true,depthWrite:false,opacity:.75});f.cheekMat=cheekMat;
+  for(const s of [-1,1]){const c=new THREE.Mesh(new THREE.CircleGeometry(.15*r,24),cheekMat);c.position.set(s*.52*r*kx,.2*r*ky,d0*.86);c.rotation.y=s*.5;grp.add(c)}
+  for(const s of [-1,1]){part(mat,s*.3*r*kx,-.12*r*ky,d0*.86,.13*r,.1*r,.08*r);for(let t=-1;t<=1;t++)part(mat,s*.3*r*kx+t*.06*r,-.12*r*ky-.08*r,d0*.9,.035*r,.035*r,.03*r)}
+  for(const s of [-1,1])for(let t=-1;t<=1;t++)part(mat,s*.58*r*kx+t*.1*r,-.74*r*ky,d0*.42,.07*r,.06*r,.07*r);
   // 投影 + 彩色焦散
   f.shadow=new THREE.Mesh(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({map:blobTex,transparent:true,depthWrite:false}));f.shadow.rotation.x=-Math.PI/2;scene.add(f.shadow);
   f.caustic=new THREE.Mesh(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({map:causticTex,color:new THREE.Color(C.color).lerp(new THREE.Color(C.att),.3),transparent:true,depthWrite:false,blending:THREE.AdditiveBlending}));f.caustic.rotation.x=-Math.PI/2;scene.add(f.caustic);
   frogs.push(f);return f}
-function removeFrog(f){for(const o of [f.body,f.core,f.grp,f.shadow,f.caustic,f.gem])if(o)scene.remove(o);frogs=frogs.filter(x=>x!==f)}
+const SHARED_GEO=new Set([sphereGeo,icoGeo]);
+function removeFrog(f){const geos=new Set(),mats=new Set();
+  for(const o of [f.body,f.core,f.grp,f.shadow,f.caustic,f.gem])if(o){scene.remove(o);o.traverse(n=>{if(n.geometry&&!SHARED_GEO.has(n.geometry))geos.add(n.geometry);if(n.material)mats.add(n.material)})}
+  for(const g of geos)g.dispose();for(const m of mats)m.dispose();if(f.mat.isGem)gemMats.splice(gemMats.indexOf(f.mat),1);frogs=frogs.filter(x=>x!==f)}
 const centroid=f=>{let x=0,y=0;for(const p of f.pts){x+=p.x;y+=p.y}return{x:x/N,y:y/N}};
 function addVel(f,vx,vy,tb=0){for(let i=0;i<N;i++){const p=f.pts[i],k=1+tb*(f.rest[i].y/f.r);p.px-=vx*H2*k;p.py-=vy*H2*k}}
 
 /* ---------- 玻璃罐（截面多边形做碰撞 + Lathe 做渲染） ---------- */
-const J={on:true,x:2,bw:.86,nw:.5,neck:.28,sh:.34,H:2.35,cr:.18,sealed:false,lidT:0};
+const J={on:false,x:2,bw:.86,nw:.5,neck:.28,sh:.34,H:2.35,cr:.18,sealed:false,lidT:0};
 let jarGroup=null,cork=null;
 function jarPoly(){const {bw,nw,neck,sh,H,cr}=J;return[[-nw,H],[-nw,H-neck],[-(nw+(bw-nw)*.6),H-neck-sh*.3],[-bw,H-neck-sh],[-bw,cr],[-bw+cr*.3,cr*.3],[-bw+cr,0],[bw-cr,0],[bw-cr*.3,cr*.3],[bw,cr],[bw,H-neck-sh],[nw+(bw-nw)*.6,H-neck-sh*.3],[nw,H-neck],[nw,H]]}
 let JP=jarPoly(),JS=[],JSC=[];function jarSegs(){JS=[];for(let i=0;i<JP.length-1;i++)JS.push([JP[i],JP[i+1]]);JSC=JS.concat([[JP[JP.length-1],JP[0]]])}jarSegs();
@@ -413,38 +447,44 @@ function buildJar(){
   const base=new THREE.Mesh(new THREE.CylinderGeometry(J.bw-.04,J.bw-.1,.12,64),new THREE.MeshPhysicalMaterial({color:'#b9e7d3',transparent:true,opacity:.4,roughness:.03,clearcoat:1,envMapIntensity:1.4,depthWrite:false}));base.position.y=.06;base.renderOrder=11;jarGroup.add(base);
   const sh=new THREE.Mesh(new THREE.PlaneGeometry(J.bw*3,J.bw*1.6),new THREE.MeshBasicMaterial({map:blobTex,transparent:true,opacity:.6,depthWrite:false}));sh.rotation.x=-Math.PI/2;sh.position.set(.25,.004,.15);jarGroup.add(sh);
   const ca=new THREE.Mesh(new THREE.PlaneGeometry(J.bw*2.4,J.bw*1.3),new THREE.MeshBasicMaterial({map:causticTex,color:'#d8fff0',transparent:true,opacity:.55,depthWrite:false,blending:THREE.AdditiveBlending}));ca.rotation.x=-Math.PI/2;ca.position.set(.55,.006,.3);jarGroup.add(ca);
-  scene.add(jarGroup);
+  // 瓶身竖向反光条
+  const hlTex=canTex(32,128,(x,w,h)=>{const g=x.createLinearGradient(0,0,w,0);g.addColorStop(0,'rgba(255,255,255,0)');g.addColorStop(.5,'rgba(255,255,255,1)');g.addColorStop(1,'rgba(255,255,255,0)');x.fillStyle=g;x.fillRect(0,0,w,h);
+    x.globalCompositeOperation='destination-in';const v=x.createLinearGradient(0,0,0,h);v.addColorStop(0,'rgba(0,0,0,0)');v.addColorStop(.2,'#000');v.addColorStop(.8,'#000');v.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=v;x.fillRect(0,0,w,h)});
+  const hh=J.H-J.neck-J.sh-.25;for(const [hx,hw,op] of [[-.5,.14,.55],[-.3,.05,.4],[.55,.06,.22]]){const m=new THREE.Mesh(new THREE.PlaneGeometry(hw,hh),new THREE.MeshBasicMaterial({map:hlTex,transparent:true,opacity:op,depthWrite:false,blending:THREE.AdditiveBlending}));
+    m.position.set(hx,.2+hh/2,Math.sqrt(J.bw*J.bw-hx*hx)+.01);m.rotation.y=Math.asin(hx/J.bw);m.renderOrder=12;jarGroup.add(m)}
+  jarGroup.visible=false;scene.add(jarGroup);
   corkTex.wrapS=corkTex.wrapT=THREE.RepeatWrapping;
-  cork=new THREE.Mesh(new THREE.CylinderGeometry(J.nw+.05,J.nw-.02,.34,40),new THREE.MeshStandardMaterial({map:corkTex,roughness:.9,bumpMap:corkTex,bumpScale:.02}));cork.castShadow=true;cork.receiveShadow=true;scene.add(cork)}
+  cork=new THREE.Mesh(new THREE.CylinderGeometry(J.nw+.05,J.nw-.02,.34,40),new THREE.MeshStandardMaterial({map:corkTex,roughness:.9,bumpMap:corkTex,bumpScale:.02}));cork.castShadow=true;cork.receiveShadow=true;cork.visible=false;scene.add(cork)}
 function layoutJar(){J.x=Xw-J.bw-.6;if(jarGroup)jarGroup.position.set(J.x,0,0);placeCork()}
-function corkHome(){return new THREE.Vector3(Math.max(-Xw+.8,J.x-J.bw-.75),.17,.35)}
+function corkHome(){return new THREE.Vector3(J.x-J.bw-.35,.17,-1.15)}
 function placeCork(){if(!cork)return;if(J.lidT<=0){cork.position.copy(corkHome());cork.rotation.set(0,0,0)}}
 const pip=(x,y,poly)=>{let ins=false;for(let i=0,k=poly.length-1;i<poly.length;k=i++){const a=poly[i],b=poly[k];if((a[1]>y)!==(b[1]>y)&&x<(b[0]-a[0])*(y-a[1])/(b[1]-a[1])+a[0])ins=!ins}return ins};
 function nearSeg(x,y,segs){let best=1e9,r=null;for(const [a,b] of segs){const ex=b[0]-a[0],ey=b[1]-a[1],l2=ex*ex+ey*ey,t=clamp(((x-a[0])*ex+(y-a[1])*ey)/l2,0,1),cx=a[0]+ex*t,cy=a[1]+ey*t,d=Math.hypot(x-cx,y-cy);if(d<best){best=d;const l=Math.sqrt(l2);r={x:cx,y:cy,d,nx:-ey/l,ny:ex/l}}}return r}
-function jarConstrain(p,f){if(!J.on)return;const lx=p.x-J.x,ly=p.y,th=.045;if(f.jst!=='in'&&(Math.abs(lx)>J.bw+.4||ly>J.H+.4))return;let nx=lx,ny=ly,mv=false;
+function jarConstrain(p,f){if(!J.on||f.noJar)return;const lx=p.x-J.x,ly=p.y,th=.045;if(f.jst!=='in'&&(Math.abs(lx)>J.bw+.4||ly>J.H+.4))return;let nx=lx,ny=ly,mv=false;
   if(f.jst==='in'){if(J.sealed&&ny>J.H-th){ny=J.H-th;mv=true}
     if(ny>J.H-J.neck){const lim=J.nw-th;if(nx<-lim){nx=-lim;mv=true}else if(nx>lim){nx=lim;mv=true}}
     else{const q=nearSeg(nx,ny,JS);if(!pip(nx,ny,JP)||q.d<th){nx=q.x+q.nx*th;ny=q.y+q.ny*th;mv=true}}}
   else{const q=nearSeg(nx,ny,JSC);if(pip(nx,ny,JP)||q.d<th){nx=q.x-q.nx*th;ny=q.y-q.ny*th;mv=true}}
   if(mv){p.x=nx+J.x;p.y=ny}}
-function jarState(f,c){if(!J.on){f.jst='out';f.inJar=false;f.frac=0;return}const lx=c.x-J.x,ly=c.y;
+function jarState(f,c){if(f.noJar)return;if(!J.on){f.jst='out';f.inJar=false;f.frac=0;return}const lx=c.x-J.x,ly=c.y;
   if(f.jst!=='in'){if(!J.sealed&&((Math.abs(lx)<J.nw+f.r*.25&&ly<J.H+f.r*2.1&&ly>J.H-J.neck)||pip(lx,ly,JP)))f.jst='in'}
   else if(!J.sealed&&(ly>J.H+f.r*2.6||(ly>J.H&&Math.abs(lx)>J.nw+f.r)))f.jst='out';
   if(f.jst==='in'){let k=0;for(const p of f.pts)if(p.y<J.H-J.neck*.4)k++;f.frac=k/N}else f.frac=0;f.inJar=f.jst==='in'&&f.frac>.9}
 
 /* ---------- 物理 ---------- */
 function internal(f){let cx=0,cy=0;for(const p of f.pts){cx+=p.x;cy+=p.y}cx/=N;cy/=N;
-  const ng=f.grabs.length;let ks=f.frozen>0?.9:f.C.soft,ke=f.frozen>0?.9:.35;if(f.jst==='in'&&!f.inJar&&f.frozen<=0)ks*=.18;if(ng>=2){ks*=.04;ke*=.06}const sqy=1-.55*f.sq,sqx=1/Math.sqrt(sqy);
+  const ng=f.grabs.length,S=f.S;let ks=f.frozen>0?.9:Math.min(.5,f.C.soft*S.soft),ke=f.frozen>0?.9:.35*S.ke;if(f.jst==='in'&&!f.inJar&&f.frozen<=0)ks*=.18;if(ng>=2){ks*=.04;ke*=.06}
+  const sq=1-.55*f.sq,sg=1-S.sag*f.sagK,sqy=sq*sg,sqx=1/Math.sqrt(sq)/sg;
   for(let i=0;i<N;i++){const p=f.pts[i],q=f.rest[i];p.x+=(cx+q.x*sqx-p.x)*ks;p.y+=(cy+q.y*sqy-p.y)*ks}
   for(let i=0;i<N;i++){const a=f.pts[i],b=f.pts[(i+1)%N],dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy)||1e-5,k=(d-f.Ls[i])/d*.5*ke;a.x+=dx*k;a.y+=dy*k;b.x-=dx*k;b.y-=dy*k}
   const A=area(f.pts);let per=0;for(let i=0;i<N;i++){const a=f.pts[i],b=f.pts[(i+1)%N];per+=Math.hypot(b.x-a.x,b.y-a.y)}const amt=(f.A0-A)/per*.6;
   for(let i=0;i<N;i++){const a=f.pts[i],b=f.pts[(i+1)%N],dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy)||1e-5,nx=dy/d*amt*.5,ny=-dx/d*amt*.5;a.x+=nx;a.y+=ny;b.x+=nx;b.y+=ny}}
 function world(f){for(const p of f.pts){const vx=p.x-p.px,vy=p.y-p.py;
-  if(p.y<0){p.y=0;p.py=vy*.15;p.px=p.x-vx*(f.frozen>0?.98:.8);f.ground++}else if(p.y>Ytop){p.y=Ytop;p.py=Ytop+vy*.2}
+  if(p.y<0){p.y=0;p.py=vy*f.S.bounce;p.px=p.x-vx*(f.frozen>0?.98:f.S.fric);f.ground++}else if(p.y>Ytop){p.y=Ytop;p.py=Ytop+vy*.2}
   if(p.x<-Xw){p.x=-Xw;p.px=-Xw+vx*.3}else if(p.x>Xw){p.x=Xw;p.px=Xw+vx*.3}
   jarConstrain(p,f)}}
-function pair(a,b){if(a.merge&&a.merge===b.merge)return;const ca=centroid(a),cb=centroid(b);if(Math.hypot(ca.x-cb.x,ca.y-cb.y)>(a.r+b.r)*1.4)return;
-  for(const [A,B,cB] of [[a,b,cb],[b,a,ca]]){let sx=0,sy=0;for(const p of A.pts){const dx=p.x-cB.x,dy=p.y-cB.y,d=Math.hypot(dx,dy)||1e-4,nx=dx/d,ny=dy/d,R=B.r*(.84+.22*Math.abs(nx));if(d<R){const pen=R-d;p.x+=nx*pen*.5;p.y+=ny*pen*.5;sx-=nx*pen*.5;sy-=ny*pen*.5}}
+function pair(a,b){if(a.merge&&a.merge===b.merge)return;const ca=centroid(a),cb=centroid(b);if(Math.hypot(ca.x-cb.x,ca.y-cb.y)>(Math.max(a.hx,a.hy)+Math.max(b.hx,b.hy))*1.15)return;
+  for(const [A,B,cB] of [[a,b,cb],[b,a,ca]]){let sx=0,sy=0;for(const p of A.pts){const dx=p.x-cB.x,dy=p.y-cB.y,d=Math.hypot(dx,dy)||1e-4,nx=dx/d,ny=dy/d,R=lerp(B.hy*.95,B.hx*.93,Math.abs(nx));if(d<R){const pen=R-d;p.x+=nx*pen*.5;p.y+=ny*pen*.5;sx-=nx*pen*.5;sy-=ny*pen*.5}}
     if(sx||sy)for(const q of B.pts){q.x+=sx/N*1.2;q.y+=sy/N*1.2}}}
 const pointers=new Map();
 function applyGrabs(f){for(const g of f.grabs){const P=pointers.get(g.pid);if(!P)continue;for(const o of g.cl){const p=f.pts[o.i];p.x+=(P.x+o.ox-p.x)*.7;p.y+=(P.y+o.oy-p.y)*.7;jarConstrain(p,f)}}
@@ -460,6 +500,7 @@ function syncFrog(f){
   for(let i=0;i<N;i++){const p0=f.pts[(i-1+N)%N],p1=f.pts[i],p2=f.pts[(i+1)%N],p3=f.pts[(i+2)%N];for(let s=0;s<3;s++){const t=s/3,t2=t*t,t3=t2*t;const k=(i*3+s)*2;
     sm[k]=.5*((2*p1.x)+(-p0.x+p2.x)*t+(2*p0.x-5*p1.x+4*p2.x-p3.x)*t2+(-p0.x+3*p1.x-3*p2.x+p3.x)*t3);sm[k+1]=.5*((2*p1.y)+(-p0.y+p2.y)*t+(2*p0.y-5*p1.y+4*p2.y-p3.y)*t2+(-p0.y+3*p1.y-3*p2.y+p3.y)*t3)}}
   let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;for(let i=0;i<M;i++){const x=sm[i*2],y=sm[i*2+1];if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y}
+  f.hx=clamp(x1-x0,f.rw*.4,f.rw*1.6)/2;f.hy=clamp(y1-y0,f.rh*.4,f.rh*1.6)/2;
   const sx=clamp((x1-x0)/f.rw,.35,3),sy=clamp((y1-y0)/f.rh,.35,3),dz=f.d0*clamp(1/Math.sqrt(sx*sy),.55,1.5);
   const pos=f.body.geometry.attributes.position.array,nrm=f.body.geometry.attributes.normal.array,cp=f.core.geometry.attributes.position.array,cn=f.core.geometry.attributes.normal.array,K=f.C.world?.9:f.C.fx!=null?.82:f.C.milk?.8:.6;
   const DI=f.C.diamond;
@@ -470,40 +511,31 @@ function syncFrog(f){
       for(let i=0;i<GM;i++){const k=Math.round(i*M/GM+(q%2)*M/GM*.5)%M,dx=sm[k*2]-c.x,dy=sm[k*2+1]-c.y,o=(q*GM+i)*3;gp[o]=c.x+dx*s;gp[o+1]=c.y+dy*(dy<0?Math.sqrt(s):s);gp[o+2]=z}}
     const F=R2*GM*3;gp[F]=c.x;gp[F+1]=c.y+f.r*.05;gp[F+2]=dz*1.02;gp[F+3]=c.x;gp[F+4]=c.y;gp[F+5]=-dz*1.02;f.gem.geometry.attributes.position.needsUpdate=true}
   f.body.geometry.attributes.position.needsUpdate=true;f.body.geometry.attributes.normal.needsUpdate=true;f.core.geometry.attributes.position.needsUpdate=true;f.core.geometry.attributes.normal.needsUpdate=true;
-  if(f.C.grad)paintGrad(f,c,pos);
   const tt=performance.now()/1000;
-  for(const m of f.mov){const o=m.o;if(m.k==='bubbles'){o.position.y+=.004*m.sp;if(o.position.y>.5*f.r){o.position.y=-.55*f.r;o.position.x=rand(-.5,.5)*f.r}}else if(m.k==='snow'){o.position.y-=.0015*m.sp;o.position.x+=Math.sin(tt*m.sp+m.ph)*.0008;if(o.position.y<-.55*f.r)o.position.y=.5*f.r}else if(m.k==='petals'){o.rotation.x+=.01*m.sp;o.rotation.y+=.008}}
-  for(const m of gemMats)m.uniforms.uTime.value=tt;
+  for(const m of f.mov){const o=m.o;if(m.k==='bubbles'){o.position.y+=.004*m.sp;if(o.position.y>.5*f.r){o.position.y=-.55*f.r;o.position.x=rand(-.5,.5)*f.r}}else if(m.k==='petals'){o.rotation.x+=.01*m.sp;o.rotation.y+=.008}}
   if(f.upd)f.upd(tt);
   if(f.C.fx!=null){const u=f.coreMat.uniforms;u.uTime.value=tt;u.uCt.value.set(c.x,c.y);u.uR.value=f.r;u.uTilt.value=clamp(f.slosh||0,-.5,.5);u.uWave.value=Math.min(1,Math.abs(f.sv||0)*.6)}
   for(const w of f.tw){const k=.5+.5*Math.sin(tt*w.sp+w.ph);w.o.scale.setScalar(w.b*(w.spark?Math.pow(k,3)*1.3+.05:.6+.6*k))}
   f.grp.position.set(c.x,c.y,0);f.grp.scale.set(sx,sy,dz/f.d0);
   const ex=f.expr,grab=f.grabs.length;
-  for(const e of f.eyes){e.scale.y=ex==='squeeze'||ex==='happy'?.15:Math.max(.08,f.blink)}
-  const o=grab||(!f.wasG&&Math.abs(f.vy)>3);const mt=f.frozen>0?MT.o:grab>=2?MT.wail:o?MT.o:ex==='happy'?MT.happy:MT.smile;if(f.mouthMat.map!==mt){f.mouthMat.map=mt;f.mouthMat.needsUpdate=true}
+  for(const e of f.eyes){e.scale.y=ex==='squeeze'||ex==='happy'||f.press>.05?.15:Math.max(.08,f.blink)}
+  f.cheekMat.opacity=Math.min(1,.7+f.love*.3+f.press*.3);
+  const o=grab||(!f.wasG&&Math.abs(f.vy)>3);const mt=f.frozen>0?MT.o:grab>=2||f.press>.3?MT.wail:f.press>0?MT.o:ex==='happy'?MT.happy:o?MT.o:MT.smile;if(f.mouthMat.map!==mt){f.mouthMat.map=mt;f.mouthMat.needsUpdate=true}
   const h=Math.max(0,y0),k=clamp(1-h/3,0,1),w=(x1-x0);
   f.shadow.position.set(c.x+.12,.003,.1);f.shadow.scale.set(w*1.3*(1+h*.2),f.d0*2.4,1);f.shadow.material.opacity=.85*k;f.shadow.visible=f.jst!=='in';
   f.caustic.position.set(c.x+w*.35,.005,f.d0*.9);f.caustic.scale.set(w*1.3,f.d0*2.2,1);f.caustic.material.opacity=.75*k;f.caustic.visible=f.jst!=='in';
   f.mat.thickness=f.r*1.3*dz/f.d0;
 }
 
-const _c=new THREE.Color(),_d=new THREE.Color(),WHITE=new THREE.Color(1,1,1),NEB1=new THREE.Color(.55,.22,.85),NEB2=new THREE.Color(.12,.3,.75),NEB3=new THREE.Color(.95,.4,.75);
-const AUR=[new THREE.Color('#3df2c4'),new THREE.Color('#5ab8ff'),new THREE.Color('#a072ff'),new THREE.Color('#ff7ad1')];
-function paintGrad(f,c0,P){const bc=f.body.geometry.attributes.color,cc=f.core.geometry.attributes.color,B=bc.array,Cc=cc.array,t=performance.now()/1000,G=f.C.grad;
-  for(let q=0;q<=2*LV;q++)for(let i=0;i<M;i++){const o=(q*M+i)*3,v=q/(2*LV),y=clamp((P[o+1]-c0.y)/f.r,-1,1),xx=clamp((P[o]-c0.x)/f.r,-1.2,1.2);
-    if(G==='rainbow'){const h=((y*.5+.5)*.8+xx*.08+t*.06+f.seed)%1;_c.setHSL(h,.75,.8);_d.setHSL(h,.95,.58)}
-    else if(G==='aurora'){const u=(((y*.5+.5)+.25*Math.sin(t*.6+xx*2+v*3)+f.seed)%1+1)%1*4,k=Math.floor(u),fr=u-k;_d.copy(AUR[k%4]).lerp(AUR[(k+1)%4],fr);_c.copy(_d).lerp(WHITE,.55)}
-    else if(G==='duo'){const k=clamp(.5-y*.5,0,1);_c.set(f.C.duo[0]).lerp(_d.set(f.C.duo[1]),k);_d.copy(_c).multiplyScalar(.9);_c.lerp(WHITE,.25)}
-    else if(G==='lava'){const n=fbm(xx*2+t*.25+f.seed*5,y*2-t*.15,3);_d.setRGB(1,.25+Math.max(0,n)*1.1,.04).multiplyScalar(.6+Math.max(0,n)*1.4);_c.setRGB(1,.62,.48)}
-    else{const n=fbm(xx*1.3+f.seed*9+t*.05,y*1.3+v*1.6,3);_d.setRGB(.06,.05,.22).lerp(n>0?NEB1:NEB2,Math.min(1,Math.abs(n)*2.4));if(n>.25)_d.lerp(NEB3,Math.min(1,(n-.25)*2));_c.setRGB(.78,.74,1)}
-    B[o]=_c.r;B[o+1]=_c.g;B[o+2]=_c.b;Cc[o]=_d.r;Cc[o+1]=_d.g;Cc[o+2]=_d.b}
-  bc.needsUpdate=true;cc.needsUpdate=true}
-
 /* ================= 游戏层 ================= */
-const TIER_R=[.42,.5,.6,.7,.82],TIER_N=['豆丁','小胖','圆滚','大胖','巨胖'];
+const TIER_R=[.42,.5,.6,.7,.82],TIER_N=['豆丁','小只','中只','大只','巨无霸'],MAXF=12;
 const POOL={c:COLORS.filter(c=>!c.rare),r:COLORS.filter(c=>c.rare==='稀有'),l:COLORS.filter(c=>c.rare==='传说')};
-const RW=[[.75,.22,.03],[.58,.33,.09],[.45,.4,.15],[.33,.45,.22],[.22,.48,.3]];
-function pickType(tier){const w=RW[clamp(tier,1,5)-1],x=Math.random();const pool=x<w[0]?POOL.c:x<w[0]+w[1]?POOL.r:POOL.l;return pool[Math.random()*pool.length|0]}
+// 合成：同色同大小 → 保持颜色、长大一级；越大越容易变异出稀有/传说（撸满爱心的蛙更容易）
+function mergeColor(C,tier,luck){const x=Math.random()/(1+luck);
+  if(!C.rare){const pl=.02*tier,pr=.08+.035*tier;return x<pl?pick(POOL.l):x<pl+pr?pick(POOL.r):C}
+  if(C.rare==='稀有')return x<.06+.035*tier?pick(POOL.l):C;return C}
+// 体型：同体型保留；不同则随机继承一个；约 22% 概率变异成别的体型
+function mergeShape(a,b,luck){let s=a===b?a:Math.random()<.5?a:b;if(Math.random()<.22*(1+luck)){const o=SHAPE_K.filter(k=>k!==s&&k!=='normal');s=pick(o)}return s}
 const PC={'牛奶白':'#fff4e6','草莓牛奶':'#ffb3c6','珍珠奶茶':'#d9ad7c','彩虹糖':'#ff9ad0','星空蛙':'#6b4cff','火焰蛙':'#ff7a24','熔岩蛙':'#ff4a10','极光蛙':'#4fe6c2','夜光蛙':'#7dff9a','钻石蛙':'#e3f1ff','金箔蛙':'#ffcf5a','琥珀蛙':'#e88a1a','雪花球':'#e6f4ff','鱼缸蛙':'#6fd6ff'};
 const colorOf=C=>PC[C.name]||(C.core&&C.core!=='#ffffff'?C.core:C.att);
 function swatch(C){if(C.name==='彩虹糖')return'conic-gradient(#ff8fb0,#ffd36b,#8ff0c8,#8fc8ff,#c4a2ff,#ff8fb0)';if(C.name==='极光蛙')return'linear-gradient(160deg,#3df2c4,#7a8cff,#ff7ad1)';
@@ -511,21 +543,32 @@ function swatch(C){if(C.name==='彩虹糖')return'conic-gradient(#ff8fb0,#ffd36b
   if(C.name==='熔岩蛙')return'radial-gradient(circle at 40% 60%,#ffd23a 0 8%,#ff3c00 25%,#3a0800 70%)';if(C.name==='钻石蛙')return'conic-gradient(from 30deg,#fff,#cfe8ff,#fff,#ffe3f3,#fff,#d8fff3,#fff)';
   if(C.name==='雪花球')return'radial-gradient(circle at 50% 80%,#fff 0 25%,#9fc4f5 50%,#2a3c7a)';if(C.name==='鱼缸蛙')return'radial-gradient(circle at 50% 85%,#f2d9a6 0 20%,#3fb7e0 45%,#0d4f7a)';
   if(C.name==='夜光蛙')return'radial-gradient(circle,#e8ffd8,#7dff9a 45%,#1d8a4a)';const k=colorOf(C);return`radial-gradient(circle at 35% 30%,#fff 0 8%,${C.color} 30%,${k} 85%)`}
-let seen={},collection=[];
+let seen={},seenS={},collection=[];
 try{seen=JSON.parse(localStorage.getItem('jf3d.seen')||'{}')||{}}catch(e){}
+try{seenS=JSON.parse(localStorage.getItem('jf3d.shapes')||'{}')||{}}catch(e){}
 try{collection=JSON.parse(localStorage.getItem('jf3d.col')||'[]')||[]}catch(e){}
-function save(){try{localStorage.setItem('jf3d.seen',JSON.stringify(seen));localStorage.setItem('jf3d.col',JSON.stringify(collection))}catch(e){}}
-function hud(){$('sCnt').textContent=frogs.length;$('sDex').textContent=Object.keys(seen).filter(k=>COLORS.some(c=>c.name===k)).length+'/'+COLORS.length;$('sCol').textContent=collection.length}
-let toastT=0;function toast(text,tag,ms=1500){const el=$('toast');el.textContent='';if(tag){const s=document.createElement('small');s.textContent=tag;s.style.background=tag==='传说'?'linear-gradient(90deg,#b98cff,#ff7ad1)':tag==='稀有'?'#4fb6ff':tag==='新发现'?'#ff7d93':'#9a8a92';el.appendChild(s)}el.appendChild(document.createTextNode(text));el.hidden=false;el.style.animation='none';void el.offsetWidth;el.style.animation='';clearTimeout(toastT);toastT=setTimeout(()=>el.hidden=true,ms)}
-function newFrog(C,tier,x,y,scale=1){const f=makeFrog(C,x,y,TIER_R[tier-1]);f.tier=tier;f.frozen=0;
+function save(){try{localStorage.setItem('jf3d.seen',JSON.stringify(seen));localStorage.setItem('jf3d.shapes',JSON.stringify(seenS));localStorage.setItem('jf3d.col',JSON.stringify(collection))}catch(e){}}
+function hud(){$('sCnt').textContent=frogs.length+'/'+MAXF;$('sDex').textContent=Object.keys(seen).filter(k=>COLORS.some(c=>c.name===k)).length+'/'+COLORS.length;$('sCol').textContent=collection.length}
+let toastT=0;function toast(text,tag,ms=1500){const el=$('toast');el.textContent='';if(tag){const s=document.createElement('small');s.textContent=tag;s.style.background=tagBg(tag);el.appendChild(s)}el.appendChild(document.createTextNode(text));el.hidden=false;el.style.animation='none';void el.offsetWidth;el.style.animation='';clearTimeout(toastT);toastT=setTimeout(()=>el.hidden=true,ms)}
+const tagBg=tag=>tag==='传说'?'linear-gradient(90deg,#b98cff,#ff7ad1)':tag==='稀有'?'#4fb6ff':tag==='新发现'?'#ff7d93':tag==='新体型'?'#ffa94d':'#9a8a92';
+const shapeLabel=(sh,tier)=>(sh==='normal'?'':SHAPES[sh].name+' · ')+TIER_N[tier-1];
+// 蛙头顶飘字
+function floatText(x,y,text,tag,cls){const s=toScreen(x,y),el=document.createElement('div');el.className='float'+(cls?' '+cls:'');
+  if(tag){const t=document.createElement('small');t.textContent=tag;t.style.background=tagBg(tag);el.appendChild(t)}el.appendChild(document.createTextNode(text));
+  el.style.left=s.x+'px';el.style.top=s.y+'px';document.body.appendChild(el);setTimeout(()=>el.remove(),1500)}
+function bump(id){const el=$(id);el.classList.remove('bump');void el.offsetWidth;el.classList.add('bump')}
+function newFrog(C,tier,x,y,scale=1,shape='normal'){const f=makeFrog(C,x,y,TIER_R[tier-1],shape);f.tier=tier;f.frozen=0;
   if(scale!==1){const c=centroid(f);for(const p of f.pts){p.x=c.x+(p.x-c.x)*scale;p.y=c.y+(p.y-c.y)*scale;p.px=p.x;p.py=p.y}}
-  const nw=!seen[C.name];seen[C.name]=1;save();hud();return{f,nw}}
-function killFrog(f){if(f.ice){scene.remove(f.ice);f.ice=null}for(const P of pointers.values())if(P.frog===f)P.frog=null;for(const m of merges.slice())if(m.a===f||m.b===f)merges.splice(merges.indexOf(m),1);removeFrog(f);hud()}
+  const nw=!seen[C.name];seen[C.name]=1;const ss=seenS[C.name]||(seenS[C.name]={}),nwS=!ss[shape];ss[shape]=1;save();hud();return{f,nw,nwS}}
+function killFrog(f){if(f.ice){scene.remove(f.ice);f.ice=null}for(const P of pointers.values())if(P.frog===f)P.frog=null;for(const m of merges.slice())if(m.a===f||m.b===f)endMerge(m);removeFrog(f);hud()}
 
 /* ---------- 音效补充 ---------- */
 let NB=null;function noiseB(dur,vol,type,f0,f1,delay=0){if(!AC)return;if(!NB){NB=AC.createBuffer(1,AC.sampleRate,AC.sampleRate);const d=NB.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1}
   const t=AC.currentTime+delay,s=AC.createBufferSource(),fl=AC.createBiquadFilter(),g=AC.createGain();s.buffer=NB;fl.type=type;fl.frequency.setValueAtTime(f0,t);fl.frequency.exponentialRampToValueAtTime(Math.max(30,f1),t+dur);g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.0001,t+dur);s.connect(fl);fl.connect(g);g.connect(master);s.start(t,Math.random()*.5);s.stop(t+dur+.03)}
-const sfx={pop(){tone(220,900,.09,.3);noiseB(.07,.2,'highpass',1800,5000)},merge(){tone(170,540,.2,.4);tone(540,1080,.14,.22,'sine',.06);for(let i=0;i<5;i++)tone(rand(1200,2200),rand(1800,2800),.08,.05,'triangle',.12+i*.05)},
+const sfx={pop(){tone(220,900,.09,.3);noiseB(.07,.2,'highpass',1800,5000)},merge(k=1){tone(170*k,540*k,.2,.4);tone(540*k,1080*k,.14,.22,'sine',.06);for(let i=0;i<5;i++)tone(rand(1200,2200)*k,rand(1800,2800)*k,.08,.05,'triangle',.12+i*.05)},
+  land(f,v){const S=f.shape,p=1/(1+.15*(f.tier-1));if(S==='round'){tone(380*p,900*p,.16,v*.7);tone(700*p,1200*p,.08,v*.25,'triangle',.05)}else if(S==='fat'){tone(150*p,55,.32,v*1.3);noiseB(.18,v*.5,'lowpass',500,80)}else if(S==='floppy'){noiseB(.22,v*.7,'lowpass',1300,160);tone(240*p,110,.22,v*.6)}else{tone(300*p,130,.25,v);tone(220,110,.2,v*.4,'triangle',.02)}},
+  purr(){for(let i=0;i<4;i++)tone(rand(85,105),rand(70,90),.07,.07,'triangle',i*.06)},heart(){tone(1050,1500,.08,.06,'sine');tone(1580,1980,.07,.04,'triangle',.05)},
+  boing(p){tone(180,500+p*900,.28,.32);tone(360,900+p*1200,.2,.12,'triangle',.03)},jump(){tone(520,1100,.12,.12)},
   boom(){noiseB(.7,.6,'lowpass',900,50);tone(130,32,.55,.55)},bonk(){tone(1100,380,.07,.08,'square');tone(700,1400,.09,.15,'sine',.02);tone(420,160,.2,.3)},
   freeze(){noiseB(.35,.18,'highpass',4000,8000);for(let i=0;i<4;i++)tone(rand(2000,3200),rand(2400,3600),.08,.05,'sine',i*.06)},shatter(){for(let i=0;i<7;i++)tone(rand(1800,4200),rand(1200,3000),.12,.06,'triangle',i*.025);noiseB(.2,.25,'highpass',3000,6000)},
   squeak(p){tone(300+p*500,340+p*600,.05,.03,'square')},cork(){tone(1400,500,.06,.25);noiseB(.05,.2,'bandpass',2000,800)},win(){[523,659,784,1046].forEach((f,i)=>tone(f,f,.18,.16,'triangle',i*.11))},splat(){noiseB(.25,.2,'lowpass',1600,180)}};
@@ -544,7 +587,7 @@ function addPart(o){if(parts.length>=PMAX)parts.shift();parts.push(o)}
 function burst(f,power=1){const c=centroid(f),col=new THREE.Color(colorOf(f.C)),col2=new THREE.Color(f.C.color);
   for(let k=0;k<36;k++){const p=f.pts[k%N],dx=p.x-c.x,dy=p.y-c.y,d=Math.hypot(dx,dy)||1,sp=rand(3,7.5)*power;
     addPart({x:p.x,y:p.y,z:rand(-.4,.4)*f.r,vx:dx/d*sp+(f.vx||0)*.3,vy:dy/d*sp+rand(1,4),vz:rand(-2.5,2.5),s:rand(.05,.11)*f.r/.5,life:3,col:k%3?col:col2,kind:'jelly'})}
-  reforms.push({C:f.C,tier:f.tier,x:clamp(c.x,-Xw+1,J.x-J.bw-.8),t:2.6});killFrog(f);sfx.pop();setTimeout(()=>sfx.splat(),90);shake=Math.max(shake,.18);buzz(25)}
+  reforms.push({C:f.C,tier:f.tier,shape:f.shape,x:clamp(c.x,-Xw+1,J.on?J.x-J.bw-.8:Xw-1),t:2.6});killFrog(f);sfx.pop();setTimeout(()=>sfx.splat(),90);shake=Math.max(shake,.18);buzz(25)}
 function updParts(dt){
   for(const p of parts){p.life-=dt;p.vx*=.995;p.vz*=.99;p.vy+=GY*dt;p.vx+=GX*dt*.6;p.x+=p.vx*dt;p.y+=p.vy*dt;p.z+=p.vz*dt;
     if(p.kind==='star'){p.vy-=GY*dt*.9}
@@ -561,7 +604,7 @@ function updParts(dt){
 const glowTex=canTex(128,128,(x,w)=>{const g=x.createRadialGradient(w/2,w/2,0,w/2,w/2,w/2);g.addColorStop(0,'rgba(255,255,255,1)');g.addColorStop(.3,'rgba(255,255,255,.45)');g.addColorStop(1,'rgba(255,255,255,0)');x.fillStyle=g;x.fillRect(0,0,w,w)});
 let flashes=[];function flash(x,y,z,col,size,dur){const s=new THREE.Sprite(new THREE.SpriteMaterial({map:glowTex,color:new THREE.Color(col).multiplyScalar(2.2),transparent:true,depthWrite:false,blending:THREE.AdditiveBlending}));s.position.set(x,y,z);scene.add(s);flashes.push({s,t:0,dur,size})}
 function stars(x,y,n=7){for(let i=0;i<n;i++){const s=new THREE.Sprite(new THREE.SpriteMaterial({map:flareTex,color:new THREE.Color('#ffd76a').multiplyScalar(2.4),transparent:true,depthWrite:false,blending:THREE.AdditiveBlending}));s.position.set(x,y,.9);scene.add(s);const a=rand(0,6.28),sp=rand(2,4);flashes.push({s,t:0,dur:.6,size:.35,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp+1.5})}}
-function updFlashes(dt){for(const f of flashes){f.t+=dt;const k=f.t/f.dur;if(f.vx!=null){f.s.position.x+=f.vx*dt;f.s.position.y+=f.vy*dt;f.vy-=6*dt;f.s.scale.setScalar(f.size*(1-k))}else f.s.scale.setScalar(f.size*(.3+k));f.s.material.opacity=1-k*k}
+function updFlashes(dt){for(const f of flashes){f.t+=dt;const k=f.t/f.dur;if(f.up){f.s.position.x+=f.vx*dt;f.s.position.y+=f.vy*dt;f.vx*=.97;f.s.scale.setScalar(f.size*(k<.15?k/.15:1-.4*k))}else if(f.vx!=null){f.s.position.x+=f.vx*dt;f.s.position.y+=f.vy*dt;f.vy-=6*dt;f.s.scale.setScalar(f.size*(1-k))}else f.s.scale.setScalar(f.size*(.3+k));f.s.material.opacity=1-k*k}
   for(const f of flashes)if(f.t>=f.dur){scene.remove(f.s);f.s.material.dispose()}flashes=flashes.filter(f=>f.t<f.dur)}
 
 /* ---------- 屏幕果冻渍（2D 覆盖层，自己化掉） ---------- */
@@ -628,34 +671,73 @@ function updIce(f){if(!f.ice)return;let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;for(const 
 
 /* ---------- 合成 ---------- */
 let merges=[],touch=new Map(),reforms=[];
-function canMerge(f){return !f.merge&&f.frozen<=0&&f.grabs.length<2&&f.tier<5}
+// 按两只蛙的静止宽高判断是否贴在一起（体型宽扁的也能合）
+function touching(a,b,ca,cb,k){const ex=(a.rw+b.rw)*.46*k,ey=(a.rh+b.rh)*.55*k,dx=(ca.x-cb.x)/ex,dy=(ca.y-cb.y)/ey;return dx*dx+dy*dy<1}
+function canMerge(f){return !f.merge&&!f.fly&&f.frozen<=0&&f.grabs.length<2&&f.tier<5}
 function checkMerges(dt){const live=new Set();
   for(let i=0;i<frogs.length;i++)for(let j=i+1;j<frogs.length;j++){const a=frogs[i],b=frogs[j];if(a.C!==b.C||a.tier!==b.tier||!canMerge(a)||!canMerge(b))continue;
-    const ca=centroid(a),cb=centroid(b);if(Math.hypot(ca.x-cb.x,ca.y-cb.y)<(a.r+b.r)*1.04){const k=a.id+'-'+b.id;live.add(k);const v=(touch.get(k)||0)+dt;touch.set(k,v);if(v>.22){touch.delete(k);startMerge(a,b)}}}
+    const ca=centroid(a),cb=centroid(b);if(touching(a,b,ca,cb,1)){const k=a.id+'-'+b.id;live.add(k);const v=(touch.get(k)||0)+dt;touch.set(k,v);if(v>.22){touch.delete(k);startMerge(a,b)}}}
   for(const k of [...touch.keys()])if(!live.has(k))touch.delete(k)}
-function startMerge(a,b){const m={a,b,t:0,dur:1.35,sq:0};a.merge=b.merge=m;m.res=pickType(a.tier+1);m.glow=new THREE.Sprite(new THREE.SpriteMaterial({map:glowTex,color:new THREE.Color(colorOf(m.res)).multiplyScalar(1.6),transparent:true,opacity:0,depthWrite:false,blending:THREE.AdditiveBlending}));scene.add(m.glow);merges.push(m);sfx.squeak(.1)}
+function startMerge(a,b){const m={a,b,t:0,dur:1.35,sq:0};a.merge=b.merge=m;const luck=(a.lucky?.5:0)+(b.lucky?.5:0);m.res=mergeColor(a.C,a.tier+1,luck);m.shape=mergeShape(a.shape,b.shape,luck);m.glow=new THREE.Sprite(new THREE.SpriteMaterial({map:glowTex,color:new THREE.Color(colorOf(m.res)).multiplyScalar(1.6),transparent:true,opacity:0,depthWrite:false,blending:THREE.AdditiveBlending}));scene.add(m.glow);merges.push(m);sfx.squeak(.1)}
 function updMerges(dt){for(const m of merges.slice()){const{a,b}=m;if(!frogs.includes(a)||!frogs.includes(b)){endMerge(m);continue}m.t+=dt;
-    const ca=centroid(a),cb=centroid(b),mx=(ca.x+cb.x)/2,my=(ca.y+cb.y)/2;if((a.grabs.length||b.grabs.length)&&Math.hypot(ca.x-cb.x,ca.y-cb.y)>(a.r+b.r)*1.45){endMerge(m);a.expr=b.expr='squeeze';a.exprT=b.exprT=.5;tone(760,190,.12,.2,'triangle');continue}
+    const ca=centroid(a),cb=centroid(b),mx=(ca.x+cb.x)/2,my=(ca.y+cb.y)/2;if((a.grabs.length||b.grabs.length)&&!touching(a,b,ca,cb,1.4)){endMerge(m);a.expr=b.expr='squeeze';a.exprT=b.exprT=.5;tone(760,190,.12,.2,'triangle');continue}
     const k=m.t<.6?.03:.08+m.t*.03;for(const [f,c] of [[a,ca],[b,cb]]){const dx=(mx-c.x)*k,dy=(my-c.y)*k*.6;const amp=(.004+m.t*.02)*f.r;for(const p of f.pts){p.x+=dx+rand(-amp,amp);p.y+=dy+rand(-amp,amp)*.6;p.px+=dx*.85;p.py+=dy*.85}if(m.t>.55){f.expr='squeeze';f.exprT=.1}}
     m.glow.position.set(mx,my,.8);const g=clamp((m.t-.4)/(m.dur-.4),0,1);m.glow.scale.setScalar((a.r+b.r)*(1.2+g*1.8));m.glow.material.opacity=g*.9;
     m.sq-=dt;if(m.sq<=0){m.sq=.13;sfx.squeak(m.t/m.dur);if(m.t>.5)buzz(4)}
     if(m.t>=m.dur)finishMerge(m,mx,my)}}
 function endMerge(m){merges.splice(merges.indexOf(m),1);for(const f of [m.a,m.b])if(f.merge===m)f.merge=null;scene.remove(m.glow)}
 function finishMerge(m,mx,my){const tier=m.a.tier+1,jin=m.a.jst==='in'||m.b.jst==='in';endMerge(m);killFrog(m.a);killFrog(m.b);
-  const r=TIER_R[tier-1],{f,nw}=newFrog(m.res,tier,mx,Math.max(my,r*.9),.5);if(jin)f.jst='in';addVel(f,0,4,.2);f.expr='happy';f.exprT=1.2;
+  combo=clock-lastMerge<3.2?combo+1:1;lastMerge=clock;const ck=Math.pow(2,SCALE[Math.min(combo-1,SCALE.length-1)]/12);
+  const r=TIER_R[tier-1],{f,nw,nwS}=newFrog(m.res,tier,mx,Math.max(my,r*.9),.5,m.shape);if(jin)f.jst='in';addVel(f,0,4,.2);f.expr='happy';f.exprT=1.2;
   flash(mx,my,.8,colorOf(m.res),r*5,.5);const col=new THREE.Color(colorOf(m.res));for(let i=0;i<24;i++){const a=rand(0,6.28),sp=rand(2.5,6);addPart({x:mx,y:my,z:rand(-.3,.5),vx:Math.cos(a)*sp,vy:Math.sin(a)*sp+1.5,vz:rand(-2,2),s:rand(.03,.06),life:.8,col:i%3?col:new THREE.Color('#ffffff'),kind:'spark'})}
-  sfx.merge();buzz([12,30,18]);toast(`${m.res.name} · ${TIER_N[tier-1]}`,nw?'新发现':m.res.rare||'',nw?2000:1300)}
+  sfx.merge(ck);buzz([12,30,18]);const tag=nw?'新发现':nwS&&m.shape!=='normal'?'新体型':m.res.rare||'';
+  floatText(mx,my+r*1.3,`${m.res.name} · ${shapeLabel(m.shape,tier)}`,tag);if(combo>1)setTimeout(()=>floatText(mx,my+r*2.1,`连击 ×${combo}`,'','combo'),180);
+  if(nw)toast(`${m.res.name}`,'新发现',1800);else if(nwS&&m.shape!=='normal')toast(`${m.res.name} · ${SHAPES[m.shape].name}`,'新体型',1600)}
+let combo=0,lastMerge=-9;const SCALE=[0,2,4,5,7,9,11,12,14,16];
 
-/* ---------- 封瓶收藏 ---------- */
-let jarFly=null;
-function sealAvail(){return !J.sealed&&J.lidT<=0&&!jarFly&&frogs.some(f=>f.inJar)&&!frogs.some(f=>f.jst==='in'&&!f.inJar)}
+/* ---------- 装瓶模式：点「装瓶」才出现罐子 ---------- */
+let jarFly=null,jarAnim=null;const JAR_CAP=3;
+const jarBusy=()=>!!(jarFly||jarAnim||J.lidT>0||J.sealed);
+function jarFill(){let a=0;for(const f of frogs)if(f.jst==='in'||(f.fly&&f.fly.mode==='in'))a+=f.A0;return a/JAR_CAP}
+function sealAvail(){return J.on&&!jarBusy()&&!frogs.some(f=>f.fly)&&frogs.some(f=>f.inJar)&&!frogs.some(f=>f.jst==='in'&&!f.inJar)&&jarFill()<=1.02}
+function enterJar(){if(J.on||jarAnim||jarFly)return;J.sealed=false;J.lidT=0;jarGroup.visible=cork.visible=true;jarGroup.scale.setScalar(1);cork.scale.setScalar(1);cork.rotation.set(0,0,0);jarAnim={k:'in',t:0};
+  // 站在落点的蛙赶紧跳开
+  for(const f of frogs){const c=centroid(f);if(!f.fly&&Math.abs(c.x-J.x)<J.bw+f.hx+.25){flyOut(f);f.expr='squeeze';f.exprT=.8}}
+  $('mainBar').hidden=true;$('jarBar').hidden=false;updJarUI(true);tone(600,320,.18,.12)}
+function cancelJar(){if(!J.on||jarBusy())return;let d=0;for(const f of frogs)if(f.jst==='in'||(f.fly&&f.fly.mode==='in')){const ff=f;setTimeout(()=>{if(frogs.includes(ff))flyOut(ff)},d*90);d++}
+  jarAnim={k:'out',t:-(d?.6+d*.09:0)};tone(420,260,.12,.1)}
+function exitJarUI(){J.on=false;J.sealed=false;J.lidT=0;jarGroup.visible=cork.visible=false;$('jarBar').hidden=true;$('mainBar').hidden=false;for(const f of frogs){f.jst='out';f.inJar=false}}
+function updJarAnim(dt){if(!jarAnim)return;jarAnim.t+=dt;const t=jarAnim.t;
+  if(jarAnim.k==='in'){// 从上方掉下来，弹两下，木塞蹦到桌上
+    if(t<.45){const k=t/.45;jarGroup.position.set(J.x,lerp(Ytop+1.5,0,k*k),0)}else{const u=t-.45;jarGroup.position.set(J.x,Math.abs(Math.sin(u*14))*.22*Math.exp(-u*7),0);if(!J.on){J.on=true;shake=Math.max(shake,.12);tone(160,70,.18,.25);buzz(15)}}
+    const top=new THREE.Vector3(J.x,jarGroup.position.y+J.H+.12,0);
+    if(t<.62)cork.position.copy(top);else{const k=Math.min(1,(t-.62)/.38),a=corkHome();cork.position.lerpVectors(top,a,k);cork.position.y+=Math.sin(k*Math.PI)*1.1;cork.rotation.z=k*Math.PI*2;if(!jarAnim.pop){jarAnim.pop=1;sfx.cork()}}
+    if(t>=1){cork.rotation.z=0;placeCork();jarGroup.position.set(J.x,0,0);jarAnim=null}}
+  else if(t>=0){// 取消：蛙先跳出来，罐子再飞走
+    if(J.on){J.on=false;for(const f of frogs)if(!f.fly){f.jst='out';f.inJar=false}}
+    const k=Math.min(1,t/.4);jarGroup.position.set(J.x,k*k*(Ytop+1.5),0);const ch=corkHome();cork.position.set(ch.x,ch.y+k*k*(Ytop+1.5),ch.z);
+    if(k>=1){jarAnim=null;exitJarUI()}}}
 function seal(){if(!sealAvail())return;J.lidT=.001;sfx.squeak(.6)}
-function collectJar(){const inside=frogs.filter(f=>f.jst==='in');const rec={t:Date.now(),frogs:inside.map(f=>({n:f.C.name,tier:f.tier}))};collection.unshift(rec);save();
-  for(const f of inside)killFrog(f);jarFly={t:0};sfx.win();buzz([15,40,15]);toast(`收进展柜 · 第 ${collection.length} 瓶`,'',1600);hud()}
+function jarName(fs){const cnt=(arr)=>{const m={};for(const v of arr)m[v]=(m[v]||0)+1;return Object.entries(m).sort((a,b)=>b[1]-a[1])};
+  const cs=cnt(fs.map(f=>f.n)),ss=cnt(fs.map(f=>f.s).filter(s=>s!=='normal'));const leg=fs.some(f=>(COLORS.find(c=>c.name===f.n)||{}).rare==='传说');
+  const col=cs.length>=3&&cs[0][1]===1?'什锦':cs[0][0];const sh=ss.length&&ss[0][1]*2>=fs.length?SHAPES[ss[0][0]].name:'';return(leg?'✨':'')+sh+col+'瓶'}
+function collectJar(){const inside=frogs.filter(f=>f.jst==='in');const fr=inside.map(f=>({n:f.C.name,tier:f.tier,s:f.shape}));const rec={t:Date.now(),name:jarName(fr),frogs:fr};collection.unshift(rec);save();
+  for(const f of inside)killFrog(f);jarFly={t:0};sfx.win();buzz([15,40,15]);toast(`「${rec.name}」收进展柜 · 第 ${collection.length} 瓶`,'',1800);hud()}
 function updJarFly(dt){if(!jarFly)return;jarFly.t+=dt;const t=jarFly.t;
   if(t<.7){const k=t/.7,e=k*k;jarGroup.position.set(lerp(J.x,Xw*.85,e),lerp(0,Ytop,e)+Math.sin(k*Math.PI)*.8,0);jarGroup.scale.setScalar(1-e*.85);cork.position.set(jarGroup.position.x,jarGroup.position.y+J.H*jarGroup.scale.x+.12,0);cork.scale.setScalar(jarGroup.scale.x)}
-  else if(t<1.1){jarGroup.visible=cork.visible=false}
-  else{if(!jarGroup.visible){jarGroup.visible=cork.visible=true;J.sealed=false;J.lidT=0;placeCork();jarGroup.position.set(J.x,0,0)}const k=Math.min(1,(t-1.1)/.4),s=k<1?1.15*Math.sin(k*Math.PI/2)-.15*k:1;jarGroup.scale.setScalar(Math.max(.01,s));cork.scale.setScalar(Math.max(.01,s));if(k>=1){jarGroup.scale.setScalar(1);cork.scale.setScalar(1);jarFly=null}}}
+  else{jarFly=null;exitJarUI();bump('openCab')}}
+// 让蛙沿弧线跳进/跳出罐子（期间不做罐子碰撞）
+function flyTo(f,x1,y1,mode,dur,arc){const c=centroid(f),mid=(c.y+y1)/2;f.fly={t:0,dur,x0:c.x,y0:c.y,x1,y1,mode,arc:arc??Math.max(.6,J.H+f.hy+.9-mid)};f.noJar=true;f.expr='happy';f.exprT=dur+.3;
+  for(const P of pointers.values())if(P.frog===f)P.frog=null;f.grabs=[];sfx.jump();buzz(6)}
+function flyIn(f){const c=centroid(f);flyTo(f,J.x,J.H+f.hy+.2,'in',clamp(.42+Math.abs(c.x-J.x)*.05,.42,.7))}
+function flyOut(f){f.jst='out';f.inJar=false;flyTo(f,rand(-Xw+1,J.x-J.bw-1.1),f.hy+.05,'out',.62)}
+function updFly(f,c,dt){const F=f.fly;F.t+=dt;const k=Math.min(1,F.t/F.dur),ex=F.mode==='in'?1-(1-k)*(1-k):k*k;
+  const x=lerp(F.x0,F.x1,ex),y=lerp(F.y0,F.y1,k)+F.arc*4*k*(1-k);let vx=0,vy=0;for(const p of f.pts){vx+=p.x-p.px;vy+=p.y-p.py}vx/=N;vy/=N;
+  const dx=x-c.x,dy=y-c.y;for(const p of f.pts){p.px+=vx;p.py+=vy;p.x+=dx;p.y+=dy;p.px+=dx;p.py+=dy}
+  if(k>=1){f.fly=null;f.noJar=false;if(F.mode==='in')addVel(f,0,-4,0);else{f.jst='out';addVel(f,0,-1,0)}}}
+let jarUI='';function updJarUI(force){if(!J.on&&!force)return;const n=frogs.filter(f=>f.jst==='in'||(f.fly&&f.fly.mode==='in')).length,fill=jarFill();
+  const txt=J.lidT>0||J.sealed||jarFly?'封瓶中…':jarAnim?'瓶子来啦～':n===0?'点蛙，它会自己跳进瓶子':fill>1.02?'太满啦，点瓶里的蛙拿出来':frogs.some(f=>f.jst==='in'&&!f.inJar)?'等蛙落到瓶底…':`${n} 只 · ${Math.min(100,Math.round(fill*100))}%`,can=sealAvail(),key=txt+can+fill.toFixed(2);if(key===jarUI)return;jarUI=key;
+  $('meterT').textContent=txt;$('meterB').style.width=Math.min(100,fill*100)+'%';$('meter').classList.toggle('full',fill>=.95);$('jarSeal').disabled=!can;$('jarCancel').disabled=jarBusy()}
 
 /* ---------- 手机重力 ---------- */
 let GX=0,GY=-15,tilt=null,motionAsked=false,lastA=null,lastShake=0,clock=0;
@@ -669,60 +751,111 @@ addEventListener('devicemotion',e=>{const a=e.accelerationIncludingGravity;if(!a
 /* ---------- 每帧逻辑 ---------- */
 function logic(dt){clock+=dt;
   GX=lerp(GX,tilt?tilt.x*15:0,.08);GY=lerp(GY,tilt?tilt.y*15:-15,.08);
-  for(const f of frogs.slice()){if(!frogs.includes(f))continue;const c=centroid(f);
+  updPress(dt);
+  for(const f of frogs.slice()){if(!frogs.includes(f))continue;const c=centroid(f),S=f.S;
     const ax=((c.x-f.cx)/dt-(f.vx||0))/dt;f.ax=ax;f.ay=((c.y-f.cy)/dt-(f.vy||0))/dt;f.sv=(f.sv||0)+((clamp(-ax*.004,-.5,.5)-(f.slosh||0))*70-(f.sv||0)*3.2)*dt;f.slosh=(f.slosh||0)+f.sv*dt;
     f.vx=(c.x-f.cx)/dt;f.vy=(c.y-f.cy)/dt;f.cx=c.x;f.cy=c.y;const onG=f.ground>2;
-    if(onG&&!f.wasG&&f.impact<-3){const v=clamp(-f.impact/12,.05,.35);if(f.frozen>0)tone(2600,2500,.25,.06);else{tone(300/(1+.15*(f.tier-1)),130,.25,v);tone(220,110,.2,v*.4,'triangle',.02)}if(f.exprT<=0){f.expr='squeeze';f.exprT=.2}}
+    if(onG&&!f.wasG&&f.impact<-3){const v=clamp(-f.impact/12,.05,.35);if(f.frozen>0)tone(2600,2500,.25,.06);else{sfx.land(f,v);if(f.shape==='fat'&&f.tier>=3)shake=Math.max(shake,.06*f.tier*v*3)}if(f.exprT<=0){f.expr='squeeze';f.exprT=.2}}
     f.impact=onG?0:Math.min(f.impact||0,f.vy);f.wasG=onG;
-    if(f.sq>0)f.sq=Math.max(0,f.sq-dt*2.4);if(f.exprT>0){f.exprT-=dt;if(f.exprT<=0)f.expr='idle'}
+    if(f.sq>0&&f.press<=0)f.sq=Math.max(0,f.sq-dt*2.4);if(f.exprT>0){f.exprT-=dt;if(f.exprT<=0)f.expr='idle'}
     f.blinkT-=dt;if(f.blinkT<0){f.blink=Math.max(0,f.blink-dt*14);if(f.blink<=0)f.blinkT=rand(1.8,4.5)}else f.blink=Math.min(1,f.blink+dt*10);
+    f.sagK=lerp(f.sagK,onG&&!f.grabs.length&&f.frozen<=0&&!f.fly?1:0,Math.min(1,dt*(onG?2.5:8)));
+    if(!f.lucky&&clock-(f.petT||-9)>1.5)f.love=Math.max(0,f.love-dt*.05);
+    if(f.lucky&&Math.random()<dt*.6)hearts(c.x+rand(-.3,.3)*f.r,c.y+f.hy,1,.18);
+    if(f.fly){updFly(f,c,dt);continue}
     if(f.frozen>0){f.frozen-=dt;updIce(f);if(f.frozen<=0)shatter(f)}
-    const pl=f.r*2.2;let stretch=1;if(f.grabs.length>=2){const p1=f.pts[f.grabs[0].i],p2=f.pts[f.grabs[1].i];stretch=Math.hypot(p1.x-p2.x,p1.y-p2.y)/pl;if(stretch>2.6){if(f.frozen>0)shatter(f);burst(f,1.1);continue}}
+    const pl=f.r*2.2;let stretch=1;if(f.grabs.length>=2){const p1=f.pts[f.grabs[0].i],p2=f.pts[f.grabs[1].i];stretch=Math.hypot(p1.x-p2.x,p1.y-p2.y)/pl;if(stretch>(f.frozen>0?2.6:S.pop)){if(f.frozen>0)shatter(f);burst(f,1.1);continue}}
     jarState(f,c);
     if(f.jst==='in'&&!f.inJar&&GY<-8)addVel(f,0,-24*dt,0);
     if(f.grabs.length===1&&f.frozen<=0&&Math.random()<dt*2.5){for(const p of f.pts)if(Math.random()<.3){p.px-=rand(-1,1)*1.2*H2;p.py-=rand(-.4,1)*1.2*H2}}
-    if(!f.grabs.length&&onG&&f.frozen<=0&&!f.merge){f.hopT-=dt;if(f.hopT<=0){f.hopT=rand(1.6,3.8);
-      if(f.jst==='in'){if(!J.sealed&&Math.random()<.35)addVel(f,rand(-.3,.3),rand(5,6.2),.35)}
+    if(!f.grabs.length&&onG&&f.frozen<=0&&!f.merge&&f.press<=0){f.hopT-=dt;if(f.hopT<=0){f.hopT=f.shape==='round'?rand(1,2.4):f.shape==='floppy'?rand(2.6,5):rand(1.6,3.8);
+      if(f.jst==='in'){if(!J.sealed&&Math.random()<.35)addVel(f,rand(-.3,.3),rand(5,6.2)*S.hop,.35)}
       else{let dir=Math.random()<.5?-1:1;const mate=frogs.find(o=>o!==f&&o.C===f.C&&o.tier===f.tier&&o.jst!=='in');if(mate&&Math.random()<.55)dir=Math.sign(centroid(mate).x-c.x)||dir;
-        if(c.x<-Xw+f.r*2)dir=1;if(c.x>Xw-f.r*2)dir=-1;if(Math.abs(c.x-J.x)<J.bw+f.r*1.8&&!(mate&&centroid(mate).jst))dir=Math.sign(c.x-J.x)||-1;
-        addVel(f,dir*rand(.8,2),rand(5,7)*(1-.06*(f.tier-1))*(f.C.soft>.08?1.15:1),.35);tone(420/(1+.12*(f.tier-1)),760,.1,.07)}}}}
+        if(c.x<-Xw+f.r*2)dir=1;if(c.x>Xw-f.r*2)dir=-1;if(J.on&&Math.abs(c.x-J.x)<J.bw+f.r*1.8)dir=Math.sign(c.x-J.x)||-1;
+        addVel(f,dir*rand(.8,2)*S.hopX,rand(5,7)*(1-.06*(f.tier-1))*(f.C.soft>.08?1.15:1)*S.hop,.35);tone(420*S.pitch/(1+.12*(f.tier-1)),760*S.pitch,.1,.07)}}}}
   checkMerges(dt);updMerges(dt);
-  for(const r of reforms)r.t-=dt;for(const r of reforms.filter(r=>r.t<=0)){if(frogs.length<14){const{f}=newFrog(r.C,r.tier,r.x,Math.min(Ytop-1,2.2),.35);addVel(f,0,3,.2);tone(300,700,.1,.2)}}reforms=reforms.filter(r=>r.t>0);
+  for(const r of reforms)r.t-=dt;for(const r of reforms.filter(r=>r.t<=0)){if(frogs.length<MAXF+2){const{f}=newFrog(r.C,r.tier,r.x,Math.min(Ytop-1,2.2),.35,r.shape);addVel(f,0,3,.2);tone(300,700,.1,.2)}}reforms=reforms.filter(r=>r.t>0);
   if(J.lidT>0&&J.lidT<1){J.lidT=Math.min(1,J.lidT+dt*2.2);const t=1-Math.pow(1-J.lidT,3),a=corkHome(),b=new THREE.Vector3(J.x,J.H+.12,0);cork.position.lerpVectors(a,b,t);cork.position.y+=Math.sin(t*Math.PI)*1.4;cork.rotation.z=(1-t)*3;
     if(J.lidT>=1){J.sealed=true;J.sealT=1.1;cork.position.copy(b);cork.rotation.z=0;sfx.cork();for(const f of frogs)if(f.inJar){f.expr='happy';f.exprT=1.2}}}
   if(J.sealed&&J.sealT>0&&!jarFly){J.sealT-=dt;if(J.sealT<=0)collectJar()}
-  updJarFly(dt);updBombs(dt);updHammers(dt);updParts(dt);updFlashes(dt);shake=Math.max(0,shake-dt);
+  updJarAnim(dt);updJarFly(dt);updJarUI();updBombs(dt);updHammers(dt);updParts(dt);updFlashes(dt);shake=Math.max(0,shake-dt);
 }
+
+/* ---------- 撸蛙 / 长按捏扁 ---------- */
+const heartTex=canTex(64,64,(x,w)=>{x.translate(w/2,w/2+3);x.fillStyle='#fff';x.beginPath();x.moveTo(0,18);x.bezierCurveTo(-30,-2,-16,-26,0,-10);x.bezierCurveTo(16,-26,30,-2,0,18);x.fill()});
+function hearts(x,y,n=1,size=.3){for(let i=0;i<n;i++){const s=new THREE.Sprite(new THREE.SpriteMaterial({map:heartTex,color:new THREE.Color(pick(['#ff6f91','#ff8fb0','#ff5c8a'])).multiplyScalar(1.3),transparent:true,depthWrite:false}));
+  s.position.set(x+rand(-.15,.15),y,1);scene.add(s);flashes.push({s,t:0,dur:1.1,size:size*rand(.8,1.2),vx:rand(-.6,.6)*(n>1?2:1),vy:rand(.8,1.6),up:1})}}
+function petFrog(f,d,w){const c=centroid(f);f.petT=clock;f.love=Math.min(1,f.love+d*.09);f.petAcc=(f.petAcc||0)+d;f.expr='happy';f.exprT=.45;f.sq=Math.max(f.sq,.2);
+  if(f.petAcc>.75){f.petAcc=0;hearts(w.x,Math.max(w.y,c.y)+.15,1);sfx.heart()}
+  if(clock-(f.purrT||-9)>.55){f.purrT=clock;sfx.purr();buzz(4)}
+  if(f.love>=1&&!f.lucky){f.lucky=true;hearts(c.x,c.y+f.hy,6,.36);floatText(c.x,c.y+f.hy+.25,'好舒服～ 合成更容易变异','');sfx.win()}}
+function updPress(dt){const now=performance.now();
+  for(const [pid,P] of pointers){if(P.pressF){const f=P.pressF;if(!frogs.includes(f)||f.fly){P.pressF=null;continue}P.pt+=dt;const k=Math.min(1,P.pt/1.1);f.press=k;f.sq=Math.max(f.sq,k*.95);
+      if(k>.5){const a=(k-.5)*.012*f.r;for(const p of f.pts){p.x+=rand(-a,a);p.y+=rand(-a,a)}}
+      P.sqT=(P.sqT||0)-dt;if(P.sqT<=0){P.sqT=.16;sfx.squeak(k*.8);buzz(3)}}
+    else if(P.frog&&tool==='hand'&&P.moved<.08&&now-P.t>320&&P.frog.frozen<=0&&!P.frog.fly&&!P.frog.merge&&P.frog.grabs.length===1){const f=P.frog;f.grabs=f.grabs.filter(g=>g.pid!==pid);P.frog=null;P.pressF=f;P.pt=0;f.expr='squeeze';f.exprT=99}}}
+function releasePress(P){const f=P.pressF;P.pressF=null;if(!frogs.includes(f))return;const k=f.press;f.press=0;f.sq=0;f.exprT=0;
+  if(k<.12){f.expr='idle';return}addVel(f,rand(-.4,.4),3.5+k*10*f.S.hop,.35);f.expr='happy';f.exprT=1;sfx.boing(k);buzz(15);const c=centroid(f);if(k>.8){stars(c.x,c.y,5);floatText(c.x,c.y+f.hy+.2,'啵嘤～','')}}
 
 /* ---------- 输入 ---------- */
 const ray=new THREE.Raycaster(),ndc=new THREE.Vector2(),plane=new THREE.Plane(new THREE.Vector3(0,0,1),0),hit=new THREE.Vector3();
 let tool='hand',interactions=0;
 function toWorld(e){ndc.set(e.clientX/innerWidth*2-1,-(e.clientY/innerHeight)*2+1);ray.setFromCamera(ndc,camera);ray.ray.intersectPlane(plane,hit);return{x:hit.x,y:hit.y}}
+function useTool(t,w){if(t==='bomb')dropBomb(w.x,w.y);else if(t==='hammer')hammerAt(w.x,w.y);
+  else if(t==='freeze'){const f=frogNear(w.x,w.y,1.5);if(f&&!f.fly)freeze(f);else{sfx.freeze();for(let i=0;i<10;i++)addPart({x:w.x,y:Math.max(.1,w.y),z:.4,vx:rand(-2,2),vy:rand(0,2.5),vz:rand(-1,1),s:rand(.025,.045),life:.5,col:new THREE.Color('#e8f8ff'),kind:'spark'})}}}
 canvas.addEventListener('pointerdown',e=>{audio();askMotion();e.preventDefault();try{canvas.setPointerCapture(e.pointerId)}catch(_){}
-  const w=toWorld(e),P={x:w.x,y:w.y,t:performance.now(),moved:0,frog:null};pointers.set(e.pointerId,P);if(++interactions===4)$('hint').classList.add('fade');
-  if(tool==='bomb'){dropBomb(w.x,w.y);return}if(tool==='hammer'){hammerAt(w.x,w.y);return}
-  if(tool==='freeze'){const f=frogNear(w.x,w.y,1.5);if(f)freeze(f);else{sfx.freeze();for(let i=0;i<10;i++)addPart({x:w.x,y:Math.max(.1,w.y),z:.4,vx:rand(-2,2),vy:rand(0,2.5),vz:rand(-1,1),s:rand(.025,.045),life:.5,col:new THREE.Color('#e8f8ff'),kind:'spark'})}return}
+  const w=toWorld(e),P={x:w.x,y:w.y,t:performance.now(),moved:0,frog:null};pointers.set(e.pointerId,P);if(++interactions===6)$('hint').classList.add('fade');
+  if(tool!=='hand'){useTool(tool,w);return}
   ndc.set(e.clientX/innerWidth*2-1,-(e.clientY/innerHeight)*2+1);ray.setFromCamera(ndc,camera);
-  if(cork&&cork.visible&&J.lidT<=0&&ray.intersectObject(cork).length){if(sealAvail())seal();else{toast(frogs.some(f=>f.jst==='in')?'等蛙完全进去再封':'先把蛙塞进罐子','',1200);tone(300,200,.1,.1)}return}
+  if(J.on&&cork.visible&&J.lidT<=0&&!jarAnim&&ray.intersectObject(cork).length){if(sealAvail())seal();else{toast(frogs.some(f=>f.jst==='in')?'等蛙完全进去再封':'先把蛙放进罐子','',1200);tone(300,200,.1,.1)}return}
   const best=frogNear(w.x,w.y,1.35);
+  if(best&&best.fly)return;
   if(best){let bi=0,b2=1e9;best.pts.forEach((p,i)=>{const d=(p.x-w.x)**2+(p.y-w.y)**2;if(d<b2){b2=d;bi=i}});const cl=[];for(const k of [-1,0,1]){const i=(bi+k+N)%N;cl.push({i,ox:(best.rest[i].x-best.rest[bi].x)*.9,oy:(best.rest[i].y-best.rest[bi].y)*.9})}
-    best.grabs.push({pid:e.pointerId,i:bi,cl});P.frog=best;tone(380,240,.09,.12);buzz(8)}},{passive:false});
-canvas.addEventListener('pointermove',e=>{const P=pointers.get(e.pointerId);if(!P)return;const w=toWorld(e);P.moved+=Math.abs(w.x-P.x)+Math.abs(w.y-P.y);P.x=w.x;P.y=w.y});
-function up(e){const P=pointers.get(e.pointerId);if(!P)return;pointers.delete(e.pointerId);if(P.frog){const f=P.frog;f.grabs=f.grabs.filter(g=>g.pid!==e.pointerId);
-  if(performance.now()-P.t<230&&P.moved<.08&&f.frozen<=0){addVel(f,rand(-.4,.4),rand(4.5,6),.35);f.expr='happy';f.exprT=.7;tone(620,980,.08,.15)}}}
+    best.grabs.push({pid:e.pointerId,i:bi,cl});P.frog=best;tone(380,240,.09,.12);buzz(8)}
+  else P.pet=true},{passive:false});
+canvas.addEventListener('pointermove',e=>{const P=pointers.get(e.pointerId);if(!P)return;const w=toWorld(e),d=Math.abs(w.x-P.x)+Math.abs(w.y-P.y);P.moved+=d;P.x=w.x;P.y=w.y;
+  if(P.pet&&d>0){const f=frogNear(w.x,w.y,1.05);if(f&&!f.fly&&f.frozen<=0)petFrog(f,Math.min(d,.4),w)}});
+function up(e){const P=pointers.get(e.pointerId);if(!P)return;pointers.delete(e.pointerId);if(P.pressF){releasePress(P);return}
+  if(!P.frog)return;const f=P.frog;f.grabs=f.grabs.filter(g=>g.pid!==e.pointerId);if(!frogs.includes(f))return;
+  const tap=performance.now()-P.t<260&&P.moved<.1;
+  if(J.on&&!jarBusy()&&f.frozen<=0&&!f.fly&&!f.merge&&!f.grabs.length){const c=centroid(f),room=jarFill()+f.A0/JAR_CAP<=1.02;
+    if(tap){if(f.jst==='in'){flyOut(f);return}if(!room){toast('装不下啦，先拿出来一只','',1100);f.expr='squeeze';f.exprT=.4;tone(300,200,.1,.1);return}flyIn(f);return}
+    // 拖到瓶口附近松手：吸进去
+    if(f.jst!=='in'&&room&&Math.abs(c.x-J.x)<J.bw+.7&&c.y>J.H-.4&&c.y<J.H+2.4){flyTo(f,J.x,J.H+f.hy+.2,'in',.3,.15);return}}
+  if(tap&&f.frozen<=0){addVel(f,rand(-.4,.4),rand(4.5,6)*f.S.hop,.35);f.expr='happy';f.exprT=.7;tone(620*f.S.pitch,980*f.S.pitch,.08,.15)}}
 canvas.addEventListener('pointerup',up);canvas.addEventListener('pointercancel',up);canvas.addEventListener('lostpointercapture',up);
 function buzz(ms){try{navigator.vibrate&&navigator.vibrate(ms)}catch(e){}}
-document.querySelectorAll('.tool').forEach(b=>b.addEventListener('click',()=>{audio();tool=b.dataset.tool;document.querySelectorAll('.tool').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
-  const tips={bomb:'点任意位置扔炸弹',hammer:'点青蛙敲一下，冰冻的会被敲碎',freeze:'点青蛙冻成冰块'};if(tips[tool])toast(tips[tool],'',1000)}));
-$('spawn').addEventListener('click',()=>{audio();askMotion();if(frogs.length>=12){toast('桌上挤满啦，先合成或装瓶','',1300);return}
+// 按钮果冻回弹
+document.querySelectorAll('.tool,.spawn,.jarbtn,.bbtn,.stat').forEach(b=>{b.addEventListener('click',()=>{b.classList.remove('jelly');void b.offsetWidth;b.classList.add('jelly')});b.addEventListener('animationend',()=>b.classList.remove('jelly'))});
+// 工具：点一下 = 切换模式；直接拖到桌上 = 在松手处用一次
+const TIPS={bomb:'点任意位置扔炸弹',hammer:'点青蛙敲一下，冰冻的会被敲碎',freeze:'点青蛙冻成冰块'};
+function setTool(t){tool=t;document.querySelectorAll('.tool').forEach(x=>x.setAttribute('aria-pressed',x.dataset.tool===t?'true':'false'))}
+let dragT=null;
+document.querySelectorAll('.tool').forEach(b=>{
+  b.addEventListener('pointerdown',e=>{if(b.dataset.tool==='hand')return;dragT={t:b.dataset.tool,b,x:e.clientX,y:e.clientY,id:e.pointerId,on:false};try{b.releasePointerCapture(e.pointerId)}catch(_){}});
+  b.addEventListener('click',()=>{audio();if(b.dataset.dragged){delete b.dataset.dragged;return}setTool(b.dataset.tool);if(TIPS[tool])toast(TIPS[tool]+'（也可以直接拖到桌上）','',1300)})});
+addEventListener('pointermove',e=>{const d=dragT;if(!d||e.pointerId!==d.id)return;if(!d.on&&Math.hypot(e.clientX-d.x,e.clientY-d.y)>12){d.on=true;d.g=document.createElement('div');d.g.className='ghost-tool glass';d.g.innerHTML=d.b.querySelector('svg').outerHTML;document.body.appendChild(d.g)}
+  if(d.on){d.g.style.left=e.clientX+'px';d.g.style.top=e.clientY+'px'}});
+function dropTool(e){const d=dragT;if(!d||e.pointerId!==d.id)return;dragT=null;if(!d.on)return;d.g.remove();d.b.dataset.dragged='1';setTimeout(()=>delete d.b.dataset.dragged,50);
+  if(e.type==='pointerup'&&document.elementFromPoint(e.clientX,e.clientY)===canvas){audio();useTool(d.t,toWorld(e))}}
+addEventListener('pointerup',dropTool);addEventListener('pointercancel',dropTool);
+$('spawn').addEventListener('click',()=>{audio();askMotion();if(frogs.length>=MAXF){toast('桌上挤满啦，先合成或装瓶','',1300);return}
   const commons=POOL.c,lone=commons.filter(c=>frogs.filter(f=>f.C===c&&f.tier===1).length%2===1);const C=lone.length&&Math.random()<.65?pick(lone):pick(commons);
-  const{f,nw}=newFrog(C,1,rand(-Xw+1,J.x-J.bw-1),Ytop-.8);addVel(f,rand(-1,1),0);tone(420,760,.12,.1);if(nw)toast(C.name,'新发现',1400)});
-$('seal').addEventListener('click',()=>{audio();seal()});
-function renderDex(){const B=$('dexBody');B.textContent='';for(const [tier,lab,col] of [[undefined,'普通','#9a8a92'],['稀有','稀有','#4fb6ff'],['传说','传说','#b98cff']]){const h=document.createElement('div');h.className='tier';h.style.color=col;h.textContent=lab;B.appendChild(h);
-  const g=document.createElement('div');g.className='grid';COLORS.filter(c=>c.rare===tier).forEach(C=>{const d=document.createElement('div');const ok=!!seen[C.name];d.className='dx'+(ok?'':' lock');const ball=document.createElement('div');ball.className='ball';if(ok)ball.style.background=swatch(C);const b=document.createElement('b');b.textContent=ok?C.name:'？？？';d.append(ball,b);g.appendChild(d)});B.appendChild(g)}}
-function renderCab(){const B=$('cabBody');B.textContent='';if(!collection.length){const e=document.createElement('div');e.className='empty';e.textContent='还没有收藏。把蛙塞进玻璃罐，点「封瓶收藏」。';B.appendChild(e);return}
-  const g=document.createElement('div');g.className='jars';collection.forEach((r,i)=>{const d=document.createElement('div');d.className='jar';const b=document.createElement('b');b.textContent=`No.${String(collection.length-i).padStart(3,'0')}`;
-    const dots=document.createElement('div');dots.className='dots';for(const fr of r.frogs){const C=COLORS.find(c=>c.name===fr.n);const k=document.createElement('i');if(C)k.style.background=swatch(C);k.title=fr.n+' · '+TIER_N[fr.tier-1];const sz=12+fr.tier*3;k.style.width=sz+'px';k.style.height=sz*.86+'px';dots.appendChild(k)}
+  const{f,nw}=newFrog(C,1,rand(-Xw+1,J.on?J.x-J.bw-1:Xw-1),Ytop-.8);addVel(f,rand(-1,1),0);tone(420,760,.12,.1);if(nw)toast(C.name,'新发现',1400)});
+$('jarBtn').addEventListener('click',()=>{audio();setTool('hand');enterJar()});
+$('jarCancel').addEventListener('click',()=>{audio();cancelJar()});
+$('jarSeal').addEventListener('click',()=>{audio();seal()});
+function renderDex(){const B=$('dexBody');B.textContent='';
+  let nS=0;for(const k in seenS)if(COLORS.some(c=>c.name===k))nS+=SHAPE_K.filter(s=>seenS[k][s]).length;
+  const lg=document.createElement('div');lg.className='legend-row';lg.innerHTML=SHAPE_K.map(s=>`<span><i class="s-${s}"></i>${SHAPES[s].name}</span>`).join('')+`<span style="margin-left:auto">体型 ${nS}/${COLORS.length*SHAPE_K.length}</span>`;B.appendChild(lg);
+  for(const [tier,lab,col] of [[undefined,'普通','#9a8a92'],['稀有','稀有','#4fb6ff'],['传说','传说','#b98cff']]){const h=document.createElement('div');h.className='tier';h.style.color=col;h.textContent=lab;B.appendChild(h);
+  const g=document.createElement('div');g.className='grid';COLORS.filter(c=>c.rare===tier).forEach(C=>{const d=document.createElement('div');const ok=!!seen[C.name],ss=seenS[C.name]||{},all=SHAPE_K.every(s=>ss[s]);d.className='dx'+(ok?'':' lock')+(all?' gold':'');
+    const ball=document.createElement('div');ball.className='ball';if(ok)ball.style.background=swatch(C);const b=document.createElement('b');b.textContent=ok?C.name:'？？？';
+    const sh=document.createElement('div');sh.className='shapes';sh.style.setProperty('--c',colorOf(C));for(const s of SHAPE_K){const i=document.createElement('i');i.className='s-'+s+(ss[s]?' on':'');i.title=SHAPES[s].name;sh.appendChild(i)}
+    d.append(ball,b,sh);g.appendChild(d)});B.appendChild(g)}}
+function renderCab(){const B=$('cabBody');B.textContent='';if(!collection.length){const e=document.createElement('div');e.className='empty';e.textContent='还没有收藏。点右下角「装瓶」，把蛙放进瓶子再封瓶。';B.appendChild(e);return}
+  const g=document.createElement('div');g.className='jars';collection.forEach((r,i)=>{const d=document.createElement('div');d.className='jar';const b=document.createElement('b');b.textContent=`No.${String(collection.length-i).padStart(3,'0')}`+(r.name?` · ${r.name}`:'');
+    const dots=document.createElement('div');dots.className='dots';for(const fr of r.frogs){const C=COLORS.find(c=>c.name===fr.n);const k=document.createElement('i');k.className='s-'+(fr.s||'normal');if(C)k.style.background=swatch(C);k.title=fr.n+' · '+shapeLabel(fr.s||'normal',fr.tier);const sz=12+fr.tier*3;k.style.width=sz+'px';k.style.height=sz*.86+'px';dots.appendChild(k)}
     const names=document.createElement('small');names.textContent=r.frogs.map(f=>f.n).join('、');const dt=document.createElement('small');const D=new Date(r.t);dt.textContent=`${D.getMonth()+1}/${D.getDate()} ${String(D.getHours()).padStart(2,'0')}:${String(D.getMinutes()).padStart(2,'0')}`;
     d.append(b,dots,names,dt);g.appendChild(d)});B.appendChild(g)}
 $('openDex').addEventListener('click',()=>{renderDex();$('dexSheet').hidden=false});$('openCab').addEventListener('click',()=>{renderCab();$('cabSheet').hidden=false});
@@ -731,18 +864,21 @@ document.querySelectorAll('.sheet').forEach(s=>s.addEventListener('pointerdown',
 
 /* ---------- 启动 ---------- */
 buildJar();
-function fit(){resize();DPR=Math.min(2,devicePixelRatio||1);fxc.width=innerWidth*DPR|0;fxc.height=innerHeight*DPR|0}
+let PR=Math.min(2,window.devicePixelRatio||1);
+function fit(){renderer.setPixelRatio(PR);composer.setPixelRatio(PR);resize();DPR=Math.min(2,devicePixelRatio||1);fxc.width=innerWidth*DPR|0;fxc.height=innerHeight*DPR|0}
 fit();addEventListener('resize',fit);
-for(const [i,C] of [POOL.c[0],POOL.c[0],POOL.c[1],POOL.c[1],POOL.c[2],POOL.c[2]].entries())newFrog(C,1,lerp(-Xw+1.2,J.x-J.bw-1.2,i/5),1+(i%2)*1.2);
-hud();setTimeout(()=>$('hint').classList.add('fade'),12000);
-let last=performance.now(),acc=0;
-function frame(t){requestAnimationFrame(frame);const dt=Math.min(.05,(t-last)/1000);last=t;acc+=dt;
+for(const [i,C] of [POOL.c[0],POOL.c[0],POOL.c[1],POOL.c[1],POOL.c[2],POOL.c[2]].entries())newFrog(C,1,lerp(-Xw+1.2,Xw-1.2,i/5),1+(i%2)*1.2);
+hud();setTimeout(()=>$('hint').classList.add('fade'),14000);
+let last=performance.now(),acc=0,errShown=false,perfT=0,perfN=0;
+function frame(t){requestAnimationFrame(frame);const raw=(t-last)/1000,dt=Math.min(.05,raw);last=t;acc+=dt;
+  // 自适应清晰度：持续掉帧就降低像素比
+  perfT+=raw;perfN++;if(perfT>2){const fps=perfN/perfT;perfT=0;perfN=0;if(fps<45&&PR>1&&!document.hidden){PR=Math.max(1,PR-.25);fit()}}
   try{let n=0;while(acc>=1/60&&n<3){physics();logic(1/60);acc-=1/60;n++}if(n===3)acc=0;for(const f of frogs)syncFrog(f);
+    const tt=performance.now()/1000;for(const m of gemMats)m.uniforms.uTime.value=tt;
     camera.position.copy(camBase);if(shake>0){camera.position.x+=rand(-1,1)*shake*.18;camera.position.y+=rand(-1,1)*shake*.18}
-    const sb=$('seal');if(sealAvail()){const s=toScreen(J.x,J.H+.35);sb.hidden=false;sb.style.left=s.x+'px';sb.style.top=s.y+'px'}else sb.hidden=true;
-    composer.render();drawSplats(dt)}catch(err){console.error(err)}}
+    composer.render();drawSplats(dt)}catch(err){if(!errShown){errShown=true;console.error(err)}}}
 requestAnimationFrame(frame);
-window.__g={camBase,camera,frogs:()=>frogs,J,centroid,newFrog,COLORS,explode,freeze,hammerAt,burst,seal,setTool:t=>{tool=t}};
+window.__g={kill:f=>killFrog(f),step:n=>{for(let i=0;i<n;i++){physics();logic(1/60)}},collection:()=>collection,seenS:()=>seenS,camBase,camera,frogs:()=>frogs,J,centroid,newFrog,COLORS,SHAPES,explode,freeze,hammerAt,burst,seal,enterJar,cancelJar,flyIn,jarFill,sealAvail,petFrog,toScreen,setTool};
 </script>
 
 
