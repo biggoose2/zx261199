@@ -94,7 +94,7 @@ body{touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-c
 .stat.bump{animation:jelly .5s}
 /* 拖出工具时的幽灵图标 */
 .ghost-tool{position:fixed;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:50%;display:grid;place-items:center;color:var(--accent);pointer-events:none;z-index:20;transform:scale(1.1)}
-.ghost-tool svg{width:30px;height:30px}
+.ghost-tool svg,.ghost-tool img{width:34px;height:34px;object-fit:contain}
 /* 蛙头顶飘字 */
 .float{position:fixed;transform:translate(-50%,-100%);pointer-events:none;white-space:nowrap;font-weight:900;font-size:15px;color:var(--ink);text-shadow:0 1px 0 #fff,0 0 8px rgba(255,255,255,.9);animation:floatUp 1.5s ease-out forwards;z-index:5}
 .float small{display:inline-block;font-size:11px;padding:2px 7px;border-radius:999px;color:#fff;margin-right:6px;vertical-align:2px;text-shadow:none}
@@ -112,8 +112,52 @@ body{touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-c
 .legend-row{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--ink-soft);margin:6px 0 2px}
 .legend-row span{display:flex;align-items:center;gap:5px}
 .legend-row i{width:14px;height:12px;background:#ff98aa;display:inline-block}
+.chips{display:flex;flex-wrap:wrap;gap:6px;max-width:min(560px,62vw)}
+.chip{border:1px solid rgba(74,60,69,.12);background:#fff;border-radius:999px;padding:6px 11px;font:700 12px var(--font);color:var(--ink-soft);cursor:pointer}
+.chip[aria-pressed="true"]{background:#ffe3ea;border-color:#ffb3c3;color:var(--ink)}
+.res-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(74,60,69,.08);font-weight:700}
+.res-row i{width:22px;height:22px;border-radius:50%;box-shadow:inset 0 -3px 5px rgba(0,0,0,.15)}
+.res-row span{margin-left:auto;font-family:var(--latin);font-size:18px;font-variant-numeric:tabular-nums}
 #err{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center;font-size:14px}
 @media (prefers-reduced-motion:reduce){.toast,.card,.jelly,.float{animation:none}}
+/* ===== 素材皮肤：棕金胶囊 + 奶油底座 + 蝴蝶结（覆盖上面的玻璃风格） ===== */
+.stats{gap:8px}
+.pill{position:relative;width:156px;height:48px;padding:0 10px 0 52px;border:0;background:url(assets/ui_hud_pill.webp) center/100% 100% no-repeat;box-shadow:none;color:#fff7ea;font:900 14px var(--font);gap:6px;text-shadow:0 1px 2px rgba(70,25,0,.6);border-radius:0}
+.pill img{position:absolute;left:5px;top:5px;width:38px;height:38px;object-fit:contain}
+.pill span{font-size:16px}
+.roundb{position:relative;width:48px;height:48px;padding:0;border:0;border-radius:50%;background:url(assets/ui_round_btn.webp) center/100% 100% no-repeat;box-shadow:none;justify-content:center}
+.roundb img{width:30px;height:30px;object-fit:contain}
+.roundb[aria-pressed="false"] img{opacity:.4;filter:grayscale(1)}
+.banner{background:none;border-style:solid;border-width:0 30px;border-image:url(assets/ui_banner_body.webp) 0 61 fill / 0 30px stretch;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;color:#7a4a2a;font-weight:700}
+.hint{padding:14px 6px 12px;top:calc(env(safe-area-inset-top,0px) + 92px);font-size:12.5px}
+.hint .bow{position:absolute;left:50%;top:-38px;width:128px;transform:translateX(-50%)}
+.toast{background:none;border-style:solid;border-width:0 24px;border-image:url(assets/ui_btn_cream.webp) 0 89 fill / 0 24px stretch;padding:12px 4px;color:#7a4a2a;box-shadow:none}
+.dock-wrap{align-items:center}
+.dock{gap:2px;padding:6px 4px;border-radius:0;background:none;border-style:solid;border-width:0 36px;border-image:url(assets/ui_dock.webp) 0 63 fill / 0 36px stretch;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;margin:0 -24px}
+.tool{width:58px;height:62px;gap:1px;color:#8a5a33;font-size:11.5px}
+.tool img{width:34px;height:34px;object-fit:contain;transition:transform .15s}
+.tool[aria-pressed="true"]{background:rgba(255,255,255,.85);color:#e5577a;box-shadow:0 3px 10px rgba(150,90,40,.2)}
+.tool[aria-pressed="true"] img{transform:scale(1.1)}
+.dock .sep{width:2px;height:40px;margin:0 4px;background:linear-gradient(transparent,rgba(170,110,50,.35),transparent)}
+.spawn{width:88px;height:88px;padding:0;background:url(assets/ui_big_btn.webp) center/100% 100% no-repeat;box-shadow:0 8px 18px rgba(230,80,110,.35);border-radius:50%;text-shadow:0 1px 2px rgba(180,30,70,.6);gap:0;z-index:1}
+.spawn img{width:30px;height:30px;object-fit:contain}
+.jarbar{background:none;border-style:solid;border-width:0 36px;border-image:url(assets/ui_dock.webp) 0 63 fill / 0 36px stretch;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;padding:10px 0;border-radius:0;color:#7a4a2a}
+.meter i{position:relative;height:22px;background:url(assets/ui_progress.webp) center/100% 100% no-repeat;border-radius:0;overflow:visible}
+.meter i b{position:absolute;left:5%;top:32%;bottom:32%;border-radius:99px}
+.bbtn{height:48px;padding:0 6px;border-style:solid;border-width:0 24px;background:none;box-shadow:none;border-radius:0}
+.bbtn.go{border-image:url(assets/ui_btn_pink.webp) 0 89 fill / 0 24px stretch;color:#fff;text-shadow:0 1px 2px rgba(180,30,70,.6);background:none;box-shadow:none}
+.bbtn.go:disabled{filter:grayscale(.85) opacity(.7);background:none}
+.bbtn.ghost{border-image:url(assets/ui_btn_cream.webp) 0 89 fill / 0 24px stretch;color:#7a4a2a;background:none}
+.card{background:#fdf3e4;border:4px solid #e2ab50;box-shadow:inset 0 0 0 3px #f8dc9c,0 24px 60px rgba(60,30,40,.3);border-radius:30px;overflow:visible}
+.card-h{position:relative;background:linear-gradient(180deg,#ffb7c4,#ff92a8);border-bottom:3px solid #e2ab50;border-radius:26px 26px 0 0;padding:26px 20px 12px;color:#fff}
+.card-h .bow{position:absolute;left:50%;top:-30px;width:120px;transform:translateX(-50%);pointer-events:none}
+.card-h h2{text-shadow:0 1px 2px rgba(180,40,80,.5)}.card-h p{color:rgba(255,255,255,.92)}
+.x{background:url(assets/ui_round_btn.webp) center/100% 100%;color:#fff;font-weight:900}
+.card-b{padding-top:12px}
+.chip{background:#fffaf2;border-color:rgba(170,110,50,.25);color:#9a7050}
+.chip[aria-pressed="true"]{background:#ffe0e8;border-color:#f3a3b6;color:#c4466a}
+@media (orientation:portrait){.pill{width:120px;height:37px;padding-left:40px;font-size:12px}.pill img{width:29px;height:29px;left:4px;top:4px}.roundb{width:37px;height:37px}.tool{width:46px}.tool img{width:28px;height:28px}.spawn{width:72px;height:72px}}
+@media (max-height:420px){.hint{top:calc(env(safe-area-inset-top,0px) + 74px)}}
 </style>
 </head>
 <body>
@@ -121,24 +165,32 @@ body{touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-c
 
 <canvas id="gl"></canvas><canvas id="fxc"></canvas>
 <header class="top">
-  <div class="brand glass"><div class="logo"></div><div><b>果冻蛙瓶</b><i>JELLY FROG</i></div></div>
+  <div></div>
   <div class="stats">
-    <button class="stat glass" id="openDex" type="button"><em style="background:#8b7bff">鉴</em>图鉴 <span id="sDex">0/0</span></button>
-    <button class="stat glass" id="openCab" type="button"><em style="background:#4fcf9f">瓶</em>展柜 <span id="sCol">0</span></button>
+    <button class="stat pill" id="openDex" type="button"><img src="assets/ico_book.webp" alt="">图鉴 <span id="sDex">0/0</span></button>
+    <button class="stat pill" id="openCab" type="button"><img src="assets/ico_jar.webp" alt="">展柜 <span id="sCol">0</span></button>
+    <button class="stat pill" id="openRes" type="button"><img src="assets/cur_milk.webp" alt="">材料 <span id="sRes">0</span></button>
+    <button class="stat roundb" id="helpBtn" type="button" aria-label="玩法说明"><img src="assets/ico_help.webp" alt=""></button>
+    <button class="stat roundb" id="soundBtn" type="button" aria-label="声音开关" aria-pressed="true"><img src="assets/ico_settings.webp" alt=""></button>
   </div>
 </header>
-<div class="hint glass" id="hint">拖动甩飞 · 同色同大小挤一起会合成 · 在蛙身上来回滑动可以撸蛙 · 长按捏扁再松手</div>
-<div class="rot glass">横过来玩更舒服</div>
-<div class="toast glass" id="toast" hidden></div>
+<div class="hint banner" id="hint"><img class="bow" src="assets/ui_bow.webp" alt="">拖动甩飞 · 同色同大小挤一起会合成 · 滑动撸蛙 · 长按捏扁（牛奶、果汁蛙会被挤出东西）<br>点壁灯开关灯 · 点秋千推一把 · 摆件可以拖 · 每只蛙有自己的性格</div>
+<div class="rot banner">横过来玩更舒服</div>
+<div class="toast" id="toast" hidden></div>
 <div class="dock-wrap" id="mainBar">
-  <nav class="dock glass" aria-label="工具（点选或拖到桌上）">
-    <button class="tool" data-tool="hand" aria-pressed="true" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V11m0-1.5V4a1.5 1.5 0 0 1 3 0v6m0-4.5a1.5 1.5 0 0 1 3 0V12m0-3.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1.5a6 6 0 0 1-4.6-2.2L4.2 15a1.6 1.6 0 0 1 2.4-2.1L8 14.5"/></svg>拖拽</button>
-    <button class="tool" data-tool="bomb" aria-pressed="false" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10.5" cy="14" r="6.5"/><path d="M15 9.5l2-2M17.5 4.5l.5-1.5M20 7l1.5-.5"/></svg>炸弹</button>
-    <button class="tool" data-tool="hammer" aria-pressed="false" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="12" height="7" rx="3" transform="rotate(-30 9 7.5)"/><path d="M11.5 10.5L19 21"/></svg>小锤</button>
-    <button class="tool" data-tool="freeze" aria-pressed="false" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9M9.5 4.5L12 6l2.5-1.5M9.5 19.5L12 18l2.5 1.5"/></svg>冰冻</button>
+  <button class="spawn" id="spawn" type="button" aria-label="来只蛙"><img src="assets/ico_plus.webp" alt="">来只蛙<small id="sCnt">0/12</small></button>
+  <nav class="dock" aria-label="工具（点选或拖到桌上）">
+    <button class="tool" data-tool="hand" aria-pressed="true" type="button"><img src="assets/ico_hand.webp" alt="">拖拽</button>
+    <button class="tool" data-tool="bomb" aria-pressed="false" type="button"><img src="assets/ico_bomb.webp" alt="">炸弹</button>
+    <button class="tool" data-tool="hammer" aria-pressed="false" type="button"><img src="assets/ico_hammer.webp" alt="">小锤</button>
+    <button class="tool" data-tool="freeze" aria-pressed="false" type="button"><img src="assets/ico_snow.webp" alt="">冰冻</button>
+    <i class="sep"></i>
+    <button class="tool" id="decorBtn" type="button"><img src="assets/ico_storage.webp" alt="">布置</button>
+    <button class="tool" id="jarBtn" type="button"><img src="assets/ico_jar.webp" alt="">装瓶</button>
   </nav>
-  <button class="spawn" id="spawn" type="button" aria-label="来只蛙"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>来只蛙<small id="sCnt">0/12</small></button>
-  <button class="jarbtn glass" id="jarBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M9.5 3v3.2c0 .6-.3 1.1-.8 1.4C6.5 9 5.5 10.5 5.5 12.5V19a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-6.5c0-2-1-3.5-3.2-4.9-.5-.3-.8-.8-.8-1.4V3"/><path d="M8.5 15.5c1 .8 2.2 1.2 3.5 1.2s2.5-.4 3.5-1.2"/></svg>装瓶</button>
+</div>
+<div class="dock-wrap" id="decorBar" hidden>
+  <div class="jarbar glass"><div class="chips" id="propChips"></div><button class="bbtn go" id="decorDone" type="button">完成</button></div>
 </div>
 <div class="dock-wrap" id="jarBar" hidden>
   <div class="jarbar glass">
@@ -147,8 +199,9 @@ body{touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-c
     <button class="bbtn go" id="jarSeal" type="button" disabled>封瓶</button>
   </div>
 </div>
-<div class="sheet" id="dexSheet" hidden><div class="card" role="dialog" aria-labelledby="dexT"><div class="card-h"><div><h2 id="dexT">果冻蛙图鉴</h2><p>同色合成会变大，偶尔变异出稀有款或新体型；集齐一种颜色的 4 种体型会镶金边</p></div><button class="x" type="button" data-close>×</button></div><div class="card-b" id="dexBody"></div></div></div>
-<div class="sheet" id="cabSheet" hidden><div class="card" role="dialog" aria-labelledby="cabT"><div class="card-h"><div><h2 id="cabT">我的展柜</h2><p>封好的每一瓶都在这里</p></div><button class="x" type="button" data-close>×</button></div><div class="card-b" id="cabBody"></div></div></div>
+<div class="sheet" id="dexSheet" hidden><div class="card" role="dialog" aria-labelledby="dexT"><div class="card-h"><img class="bow" src="assets/ui_bow_pink.webp" alt=""><div><h2 id="dexT">果冻蛙图鉴</h2><p>同色合成会变大，偶尔变异出稀有款或新体型；集齐一种颜色的 4 种体型会镶金边</p></div><button class="x" type="button" data-close>×</button></div><div class="card-b" id="dexBody"></div></div></div>
+<div class="sheet" id="cabSheet" hidden><div class="card" role="dialog" aria-labelledby="cabT"><div class="card-h"><img class="bow" src="assets/ui_bow_pink.webp" alt=""><div><h2 id="cabT">我的展柜</h2><p>封好的每一瓶都在这里</p></div><button class="x" type="button" data-close>×</button></div><div class="card-b" id="cabBody"></div></div></div>
+<div class="sheet" id="resSheet" hidden><div class="card" role="dialog" aria-labelledby="resT" style="width:min(420px,100%)"><div class="card-h"><img class="bow" src="assets/ui_bow_pink.webp" alt=""><div><h2 id="resT">材料</h2><p>长按牛奶、果汁类的蛙会挤出来；以后用来换家具和道具</p></div><button class="x" type="button" data-close>×</button></div><div class="card-b" id="resBody"></div></div></div>
 <div id="err" hidden>这台设备的浏览器不支持 WebGL，无法显示 3D 效果。</div>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <script type="module">
@@ -196,7 +249,7 @@ const flareTex=canTex(128,128,(x,w)=>{const c=w/2;x.translate(c,c);x.globalCompo
 const cheekTex=canTex(64,64,(x,w)=>{const g=x.createRadialGradient(w/2,w/2,0,w/2,w/2,w/2);g.addColorStop(0,'rgba(255,90,130,.75)');g.addColorStop(1,'rgba(255,90,130,0)');x.fillStyle=g;x.fillRect(0,0,w,w)});
 
 /* ---------- 场景：墙 + 原木桌 + 装饰 ---------- */
-const DESK_Z0=-2.6,DESK_Z1=1.6;
+const DESK_Z0=-1.35,DESK_Z1=1.6;
 plasterTex.repeat.set(4,3);
 const wall=new THREE.Mesh(new THREE.PlaneGeometry(60,30),new THREE.MeshStandardMaterial({map:plasterTex,roughness:.95,envMapIntensity:.32}));wall.position.set(0,14.4,DESK_Z0);wall.receiveShadow=true;scene.add(wall);
 woodTex.repeat.set(2,1);woodRough.repeat.set(2,1);
@@ -221,9 +274,9 @@ const bloom=new UnrealBloomPass(new THREE.Vector2(1,1),.16,.4,.96);composer.addP
 let Xw=3,Ytop=6,shake=0;const camBase=new THREE.Vector3();
 function resize(){const w=innerWidth,h=innerHeight;if(w<20||h<20)return;renderer.setSize(w,h,false);composer.setSize(w,h);bloom.setSize(w,h);
   const aspect=w/h,tan=Math.tan(THREE.MathUtils.degToRad(15));camera.aspect=aspect;camera.fov=30;
-  const halfW=aspect>1?5.2:3.3,halfH=2.7;const dist=Math.max(halfW/(aspect*tan),halfH/tan);
-  camBase.set(0,1.5+dist*.15,dist);camera.position.copy(camBase);camera.lookAt(0,1.5,0);camera.updateProjectionMatrix();
-  Xw=Math.min(dist*tan*aspect*.95,9);Ytop=1.5+dist*tan*.85;layoutJar()}
+  const halfW=aspect>1?5.6:3.4,halfH=3.25,LY=2.45;const dist=Math.max(halfW/(aspect*tan),halfH/tan);
+  camBase.set(0,LY+dist*.1,dist);camera.position.copy(camBase);camera.lookAt(0,LY,0);camera.updateProjectionMatrix();
+  Xw=Math.min(dist*tan*aspect*.95,9);Ytop=LY+dist*tan*.9;layoutJar();if(room){buildShell();layoutRoom()}}
 /* ---------- 音效 ---------- */
 let AC=null,master=null;function audio(){if(!AC){try{AC=new(window.AudioContext||window.webkitAudioContext)();master=AC.createGain();master.gain.value=.5;master.connect(AC.destination)}catch(e){}}if(AC&&AC.state==='suspended')AC.resume()}
 function tone(f0,f1,dur,vol,type='sine',delay=0){if(!AC)return;const t=AC.currentTime+delay,o=AC.createOscillator(),g=AC.createGain();o.type=type;o.frequency.setValueAtTime(f0,t);o.frequency.exponentialRampToValueAtTime(Math.max(20,f1),t+dur);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(vol,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+dur);o.connect(g);g.connect(master);o.start(t);o.stop(t+dur+.02)}
@@ -480,16 +533,22 @@ function internal(f){let cx=0,cy=0;for(const p of f.pts){cx+=p.x;cy+=p.y}cx/=N;c
   const A=area(f.pts);let per=0;for(let i=0;i<N;i++){const a=f.pts[i],b=f.pts[(i+1)%N];per+=Math.hypot(b.x-a.x,b.y-a.y)}const amt=(f.A0-A)/per*.6;
   for(let i=0;i<N;i++){const a=f.pts[i],b=f.pts[(i+1)%N],dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy)||1e-5,nx=dy/d*amt*.5,ny=-dx/d*amt*.5;a.x+=nx;a.y+=ny;b.x+=nx;b.y+=ny}}
 function world(f){for(const p of f.pts){const vx=p.x-p.px,vy=p.y-p.py;
-  if(p.y<0){p.y=0;p.py=vy*f.S.bounce;p.px=p.x-vx*(f.frozen>0?.98:f.S.fric);f.ground++}else if(p.y>Ytop){p.y=Ytop;p.py=Ytop+vy*.2}
+  if(p.y<0){p.y=0;p.py=vy*f.S.bounce;p.px=p.x-vx*(f.frozen>0?.98:f.S.fric);f.ground++;f.floorT=clock}else if(p.y>Ytop){p.y=Ytop;p.py=Ytop+vy*.2}else for(const pl of plats){if(p.x>=pl.x0&&p.x<=pl.x1&&p.y<pl.y&&p.y>pl.y-.45&&p.py>=pl.py-.03){platContact(p,f,pl);break}}
   if(p.x<-Xw){p.x=-Xw;p.px=-Xw+vx*.3}else if(p.x>Xw){p.x=Xw;p.px=Xw+vx*.3}
   jarConstrain(p,f)}}
-function pair(a,b){if(a.merge&&a.merge===b.merge)return;const ca=centroid(a),cb=centroid(b);if(Math.hypot(ca.x-cb.x,ca.y-cb.y)>(Math.max(a.hx,a.hy)+Math.max(b.hx,b.hy))*1.15)return;
-  for(const [A,B,cB] of [[a,b,cb],[b,a,ca]]){let sx=0,sy=0;for(const p of A.pts){const dx=p.x-cB.x,dy=p.y-cB.y,d=Math.hypot(dx,dy)||1e-4,nx=dx/d,ny=dy/d,R=lerp(B.hy*.95,B.hx*.93,Math.abs(nx));if(d<R){const pen=R-d;p.x+=nx*pen*.5;p.y+=ny*pen*.5;sx-=nx*pen*.5;sy-=ny*pen*.5}}
-    if(sx||sy)for(const q of B.pts){q.x+=sx/N*1.2;q.y+=sy/N*1.2}}}
+function bbox(f){let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;for(const p of f.pts){if(p.x<x0)x0=p.x;if(p.x>x1)x1=p.x;if(p.y<y0)y0=p.y;if(p.y>y1)y1=p.y}f.bx0=x0;f.bx1=x1;f.by0=y0;f.by1=y1}
+function inPoly(x,y,P){let s=false;for(let i=0,k=P.length-1;i<P.length;k=i++){const a=P[i],b=P[k];if((a.y>y)!==(b.y>y)&&x<(b.x-a.x)*(y-a.y)/(b.y-a.y)+a.x)s=!s}return s}
+function sepPoints(A,B){const P=B.pts;for(const p of A.pts){if(p.x<B.bx0||p.x>B.bx1||p.y<B.by0||p.y>B.by1||!inPoly(p.x,p.y,P))continue;
+    let best=1e9,bi=0,bt=0,qx=0,qy=0;for(let i=0;i<N;i++){const a=P[i],b=P[(i+1)%N],ex=b.x-a.x,ey=b.y-a.y,l2=ex*ex+ey*ey||1e-9,t=clamp(((p.x-a.x)*ex+(p.y-a.y)*ey)/l2,0,1),cx=a.x+ex*t,cy=a.y+ey*t,d=(p.x-cx)**2+(p.y-cy)**2;if(d<best){best=d;bi=i;bt=t;qx=cx;qy=cy}}
+    const dx=(qx-p.x)*.5,dy=(qy-p.y)*.5,a=P[bi],b=P[(bi+1)%N];p.x+=dx;p.y+=dy;a.x-=dx*(1-bt);a.y-=dy*(1-bt);b.x-=dx*bt;b.y-=dy*bt}}
+function pair(a,b){if(a.merge&&a.merge===b.merge)return;bbox(a);bbox(b);if(a.bx1<b.bx0||b.bx1<a.bx0||a.by1<b.by0||b.by1<a.by0)return;
+  sepPoints(a,b);sepPoints(b,a);
+  const ca=centroid(a),cb=centroid(b);if(inPoly(ca.x,ca.y,b.pts)||inPoly(cb.x,cb.y,a.pts)){let dx=ca.x-cb.x,dy=ca.y-cb.y,d=Math.hypot(dx,dy);if(d<1e-4){dx=rand(-.5,.5);dy=.5;d=Math.hypot(dx,dy)}
+    const k=.03*(a.r+b.r)/d;for(const p of a.pts){p.x+=dx*k;p.y+=dy*k}for(const p of b.pts){p.x-=dx*k;p.y-=dy*k}}}
 const pointers=new Map();
 function applyGrabs(f){for(const g of f.grabs){const P=pointers.get(g.pid);if(!P)continue;for(const o of g.cl){const p=f.pts[o.i];p.x+=(P.x+o.ox-p.x)*.7;p.y+=(P.y+o.oy-p.y)*.7;jarConstrain(p,f)}}
   if(f.grabs.length===1){const g=f.grabs[0],P=pointers.get(g.pid);if(P){const r0=f.rest[g.i];for(let i=0;i<N;i++){const p=f.pts[i];p.x+=(P.x-r0.x+f.rest[i].x-p.x)*.012;p.y+=(P.y-r0.y+f.rest[i].y-p.y)*.012}}}}
-function physics(){for(const f of frogs)f.ground=0;
+function physics(){for(const f of frogs){f.ground=0;f.plat=null}
   for(let s=0;s<SUB;s++){for(const f of frogs)for(const p of f.pts){let vx=(p.x-p.px)*.994,vy=(p.y-p.py)*.994;p.px=p.x;p.py=p.y;p.x+=vx+GX*H2*H2;p.y+=vy+GY*H2*H2}
     for(let it=0;it<2;it++){for(const f of frogs)internal(f);for(let i=0;i<frogs.length;i++)for(let j=i+1;j<frogs.length;j++)pair(frogs[i],frogs[j]);for(const f of frogs){world(f);applyGrabs(f)}}}}
 
@@ -512,19 +571,19 @@ function syncFrog(f){
     const F=R2*GM*3;gp[F]=c.x;gp[F+1]=c.y+f.r*.05;gp[F+2]=dz*1.02;gp[F+3]=c.x;gp[F+4]=c.y;gp[F+5]=-dz*1.02;f.gem.geometry.attributes.position.needsUpdate=true}
   f.body.geometry.attributes.position.needsUpdate=true;f.body.geometry.attributes.normal.needsUpdate=true;f.core.geometry.attributes.position.needsUpdate=true;f.core.geometry.attributes.normal.needsUpdate=true;
   const tt=performance.now()/1000;
-  for(const m of f.mov){const o=m.o;if(m.k==='bubbles'){o.position.y+=.004*m.sp;if(o.position.y>.5*f.r){o.position.y=-.55*f.r;o.position.x=rand(-.5,.5)*f.r}}else if(m.k==='petals'){o.rotation.x+=.01*m.sp;o.rotation.y+=.008}}
+  for(const m of f.mov){const o=m.o;if(m.k==='bubbles'){o.position.y+=.004*m.sp*(1+(f.fizz||0)*5);if(o.position.y>.5*f.r){o.position.y=-.55*f.r;o.position.x=rand(-.5,.5)*f.r}}else if(m.k==='petals'){o.rotation.x+=.01*m.sp;o.rotation.y+=.008}}
   if(f.upd)f.upd(tt);
   if(f.C.fx!=null){const u=f.coreMat.uniforms;u.uTime.value=tt;u.uCt.value.set(c.x,c.y);u.uR.value=f.r;u.uTilt.value=clamp(f.slosh||0,-.5,.5);u.uWave.value=Math.min(1,Math.abs(f.sv||0)*.6)}
   for(const w of f.tw){const k=.5+.5*Math.sin(tt*w.sp+w.ph);w.o.scale.setScalar(w.b*(w.spark?Math.pow(k,3)*1.3+.05:.6+.6*k))}
   f.grp.position.set(c.x,c.y,0);f.grp.scale.set(sx,sy,dz/f.d0);
   const ex=f.expr,grab=f.grabs.length;
-  for(const e of f.eyes){e.scale.y=ex==='squeeze'||ex==='happy'||f.press>.05?.15:Math.max(.08,f.blink)}
+  for(const e of f.eyes){e.scale.y=ex==='squeeze'||ex==='happy'||ex==='sleep'||ex==='sour'||f.press>.05?.15:Math.max(.08,f.blink)}
   f.cheekMat.opacity=Math.min(1,.7+f.love*.3+f.press*.3);
   const o=grab||(!f.wasG&&Math.abs(f.vy)>3);const mt=f.frozen>0?MT.o:grab>=2||f.press>.3?MT.wail:f.press>0?MT.o:ex==='happy'?MT.happy:o?MT.o:MT.smile;if(f.mouthMat.map!==mt){f.mouthMat.map=mt;f.mouthMat.needsUpdate=true}
-  const h=Math.max(0,y0),k=clamp(1-h/3,0,1),w=(x1-x0);
-  f.shadow.position.set(c.x+.12,.003,.1);f.shadow.scale.set(w*1.3*(1+h*.2),f.d0*2.4,1);f.shadow.material.opacity=.85*k;f.shadow.visible=f.jst!=='in';
-  f.caustic.position.set(c.x+w*.35,.005,f.d0*.9);f.caustic.scale.set(w*1.3,f.d0*2.2,1);f.caustic.material.opacity=.75*k;f.caustic.visible=f.jst!=='in';
-  f.mat.thickness=f.r*1.3*dz/f.d0;
+  const gy=onPlat(f)?f.lastPlat.y:0,h=Math.max(0,y0-gy),k=clamp(1-h/3,0,1),w=(x1-x0);
+  f.shadow.position.set(c.x+.12,gy+.003,.1);f.shadow.scale.set(w*1.3*(1+h*.2),f.d0*2.4,1);f.shadow.material.opacity=.85*k;f.shadow.visible=f.jst!=='in';
+  f.caustic.position.set(c.x+w*.35,gy+.005,f.d0*.9);f.caustic.scale.set(w*1.3,f.d0*2.2,1);f.caustic.material.opacity=.75*k;f.caustic.visible=f.jst!=='in';
+  f.mat.thickness=f.r*1.3*dz/f.d0;syncExtras(f,c);
 }
 
 /* ================= 游戏层 ================= */
@@ -548,7 +607,7 @@ try{seen=JSON.parse(localStorage.getItem('jf3d.seen')||'{}')||{}}catch(e){}
 try{seenS=JSON.parse(localStorage.getItem('jf3d.shapes')||'{}')||{}}catch(e){}
 try{collection=JSON.parse(localStorage.getItem('jf3d.col')||'[]')||[]}catch(e){}
 function save(){try{localStorage.setItem('jf3d.seen',JSON.stringify(seen));localStorage.setItem('jf3d.shapes',JSON.stringify(seenS));localStorage.setItem('jf3d.col',JSON.stringify(collection))}catch(e){}}
-function hud(){$('sCnt').textContent=frogs.length+'/'+MAXF;$('sDex').textContent=Object.keys(seen).filter(k=>COLORS.some(c=>c.name===k)).length+'/'+COLORS.length;$('sCol').textContent=collection.length}
+function hud(){$('sCnt').textContent=frogs.length+'/'+MAXF;$('sRes').textContent=(res.milk||0)+(res.juice||0)+(res.pearl||0);$('sDex').textContent=Object.keys(seen).filter(k=>COLORS.some(c=>c.name===k)).length+'/'+COLORS.length;$('sCol').textContent=collection.length}
 let toastT=0;function toast(text,tag,ms=1500){const el=$('toast');el.textContent='';if(tag){const s=document.createElement('small');s.textContent=tag;s.style.background=tagBg(tag);el.appendChild(s)}el.appendChild(document.createTextNode(text));el.hidden=false;el.style.animation='none';void el.offsetWidth;el.style.animation='';clearTimeout(toastT);toastT=setTimeout(()=>el.hidden=true,ms)}
 const tagBg=tag=>tag==='传说'?'linear-gradient(90deg,#b98cff,#ff7ad1)':tag==='稀有'?'#4fb6ff':tag==='新发现'?'#ff7d93':tag==='新体型'?'#ffa94d':'#9a8a92';
 const shapeLabel=(sh,tier)=>(sh==='normal'?'':SHAPES[sh].name+' · ')+TIER_N[tier-1];
@@ -557,10 +616,10 @@ function floatText(x,y,text,tag,cls){const s=toScreen(x,y),el=document.createEle
   if(tag){const t=document.createElement('small');t.textContent=tag;t.style.background=tagBg(tag);el.appendChild(t)}el.appendChild(document.createTextNode(text));
   el.style.left=s.x+'px';el.style.top=s.y+'px';document.body.appendChild(el);setTimeout(()=>el.remove(),1500)}
 function bump(id){const el=$(id);el.classList.remove('bump');void el.offsetWidth;el.classList.add('bump')}
-function newFrog(C,tier,x,y,scale=1,shape='normal'){const f=makeFrog(C,x,y,TIER_R[tier-1],shape);f.tier=tier;f.frozen=0;
+function newFrog(C,tier,x,y,scale=1,shape='normal',trait){const f=makeFrog(C,x,y,TIER_R[tier-1],shape);f.tier=tier;f.frozen=0;f.trait=trait||pick(TRAIT_K);f.face=1;f.ai={co:null,next:rand(1,3),energy:rand(.55,1),fun:rand(.2,.7),bonkCd:rand(4,10)};
   if(scale!==1){const c=centroid(f);for(const p of f.pts){p.x=c.x+(p.x-c.x)*scale;p.y=c.y+(p.y-c.y)*scale;p.px=p.x;p.py=p.y}}
   const nw=!seen[C.name];seen[C.name]=1;const ss=seenS[C.name]||(seenS[C.name]={}),nwS=!ss[shape];ss[shape]=1;save();hud();return{f,nw,nwS}}
-function killFrog(f){if(f.ice){scene.remove(f.ice);f.ice=null}for(const P of pointers.values())if(P.frog===f)P.frog=null;for(const m of merges.slice())if(m.a===f||m.b===f)endMerge(m);removeFrog(f);hud()}
+function killFrog(f){if(f.ai)stopAI(f);for(const o of [f.emo,f.glow])if(o){scene.remove(o);o.material.dispose()}if(f.ice){scene.remove(f.ice);f.ice=null}for(const P of pointers.values())if(P.frog===f)P.frog=null;for(const m of merges.slice())if(m.a===f||m.b===f)endMerge(m);removeFrog(f);hud()}
 
 /* ---------- 音效补充 ---------- */
 let NB=null;function noiseB(dur,vol,type,f0,f1,delay=0){if(!AC)return;if(!NB){NB=AC.createBuffer(1,AC.sampleRate,AC.sampleRate);const d=NB.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1}
@@ -587,11 +646,11 @@ function addPart(o){if(parts.length>=PMAX)parts.shift();parts.push(o)}
 function burst(f,power=1){const c=centroid(f),col=new THREE.Color(colorOf(f.C)),col2=new THREE.Color(f.C.color);
   for(let k=0;k<36;k++){const p=f.pts[k%N],dx=p.x-c.x,dy=p.y-c.y,d=Math.hypot(dx,dy)||1,sp=rand(3,7.5)*power;
     addPart({x:p.x,y:p.y,z:rand(-.4,.4)*f.r,vx:dx/d*sp+(f.vx||0)*.3,vy:dy/d*sp+rand(1,4),vz:rand(-2.5,2.5),s:rand(.05,.11)*f.r/.5,life:3,col:k%3?col:col2,kind:'jelly'})}
-  reforms.push({C:f.C,tier:f.tier,shape:f.shape,x:clamp(c.x,-Xw+1,J.on?J.x-J.bw-.8:Xw-1),t:2.6});killFrog(f);sfx.pop();setTimeout(()=>sfx.splat(),90);shake=Math.max(shake,.18);buzz(25)}
+  reforms.push({C:f.C,tier:f.tier,shape:f.shape,trait:f.trait,x:clamp(c.x,-Xw+1,J.on?J.x-J.bw-.8:Xw-1),t:2.6});killFrog(f);sfx.pop();setTimeout(()=>sfx.splat(),90);shake=Math.max(shake,.18);buzz(25)}
 function updParts(dt){
   for(const p of parts){p.life-=dt;p.vx*=.995;p.vz*=.99;p.vy+=GY*dt;p.vx+=GX*dt*.6;p.x+=p.vx*dt;p.y+=p.vy*dt;p.z+=p.vz*dt;
     if(p.kind==='star'){p.vy-=GY*dt*.9}
-    if(p.y<p.s){if(p.kind==='jelly'){if(decals.length>=DMAX)decals.shift();decals.push({x:p.x,z:clamp(p.z,DESK_Z0+.2,DESK_Z1-.1),s:p.s*rand(1.4,2.2),life:2.8,col:p.col});p.life=0}else{p.y=p.s;p.vy*=-.3;p.vx*=.6}}
+    if(p.y<p.s){if(p.kind==='jelly'){if(decals.length>=DMAX)decals.shift();decals.push({x:p.x,z:clamp(p.z,DESK_Z0+.2,DESK_Z1-.1),s:p.s*rand(1.4,2.2),life:p.dl||8,col:p.col});p.life=0}else{p.y=p.s;p.vy*=p.kind==='pearl'?-.5:-.3;p.vx*=.6}}
     if(Math.abs(p.x)>Xw+1)p.life=0}
   parts=parts.filter(p=>p.life>0);
   pMesh.count=parts.length;parts.forEach((p,i)=>{const k=p.kind==='ice'?Math.min(1,p.life*1.5):1;_o.position.set(p.x,p.y,p.z);_o.scale.set(p.s*k,p.s*k*(p.kind==='ice'?.5:1),p.s*k);_o.rotation.set(p.life*3,p.life*2,0);_o.updateMatrix();pMesh.setMatrixAt(i,_o.matrix);pMesh.setColorAt(i,p.col)});
@@ -688,7 +747,7 @@ function updMerges(dt){for(const m of merges.slice()){const{a,b}=m;if(!frogs.inc
 function endMerge(m){merges.splice(merges.indexOf(m),1);for(const f of [m.a,m.b])if(f.merge===m)f.merge=null;scene.remove(m.glow)}
 function finishMerge(m,mx,my){const tier=m.a.tier+1,jin=m.a.jst==='in'||m.b.jst==='in';endMerge(m);killFrog(m.a);killFrog(m.b);
   combo=clock-lastMerge<3.2?combo+1:1;lastMerge=clock;const ck=Math.pow(2,SCALE[Math.min(combo-1,SCALE.length-1)]/12);
-  const r=TIER_R[tier-1],{f,nw,nwS}=newFrog(m.res,tier,mx,Math.max(my,r*.9),.5,m.shape);if(jin)f.jst='in';addVel(f,0,4,.2);f.expr='happy';f.exprT=1.2;
+  const r=TIER_R[tier-1],{f,nw,nwS}=newFrog(m.res,tier,mx,Math.max(my,r*.9),.5,m.shape,Math.random()<.5?m.a.trait:m.b.trait);if(jin)f.jst='in';addVel(f,0,4,.2);f.expr='happy';f.exprT=1.2;
   flash(mx,my,.8,colorOf(m.res),r*5,.5);const col=new THREE.Color(colorOf(m.res));for(let i=0;i<24;i++){const a=rand(0,6.28),sp=rand(2.5,6);addPart({x:mx,y:my,z:rand(-.3,.5),vx:Math.cos(a)*sp,vy:Math.sin(a)*sp+1.5,vz:rand(-2,2),s:rand(.03,.06),life:.8,col:i%3?col:new THREE.Color('#ffffff'),kind:'spark'})}
   sfx.merge(ck);buzz([12,30,18]);const tag=nw?'新发现':nwS&&m.shape!=='normal'?'新体型':m.res.rare||'';
   floatText(mx,my+r*1.3,`${m.res.name} · ${shapeLabel(m.shape,tier)}`,tag);if(combo>1)setTimeout(()=>floatText(mx,my+r*2.1,`连击 ×${combo}`,'','combo'),180);
@@ -731,13 +790,13 @@ function flyTo(f,x1,y1,mode,dur,arc){const c=centroid(f),mid=(c.y+y1)/2;f.fly={t
   for(const P of pointers.values())if(P.frog===f)P.frog=null;f.grabs=[];sfx.jump();buzz(6)}
 function flyIn(f){const c=centroid(f);flyTo(f,J.x,J.H+f.hy+.2,'in',clamp(.42+Math.abs(c.x-J.x)*.05,.42,.7))}
 function flyOut(f){f.jst='out';f.inJar=false;flyTo(f,rand(-Xw+1,J.x-J.bw-1.1),f.hy+.05,'out',.62)}
-function updFly(f,c,dt){const F=f.fly;F.t+=dt;const k=Math.min(1,F.t/F.dur),ex=F.mode==='in'?1-(1-k)*(1-k):k*k;
+function updFly(f,c,dt){const F=f.fly;F.t+=dt;const k=Math.min(1,F.t/F.dur),ex=F.mode==='in'?1-(1-k)*(1-k):F.mode==='hop'?k:k*k;
   const x=lerp(F.x0,F.x1,ex),y=lerp(F.y0,F.y1,k)+F.arc*4*k*(1-k);let vx=0,vy=0;for(const p of f.pts){vx+=p.x-p.px;vy+=p.y-p.py}vx/=N;vy/=N;
   const dx=x-c.x,dy=y-c.y;for(const p of f.pts){p.px+=vx;p.py+=vy;p.x+=dx;p.y+=dy;p.px+=dx;p.py+=dy}
-  if(k>=1){f.fly=null;f.noJar=false;if(F.mode==='in')addVel(f,0,-4,0);else{f.jst='out';addVel(f,0,-1,0)}}}
+  if(k>=1){f.fly=null;f.noJar=false;if(F.mode==='in')addVel(f,0,-4,0);else if(F.mode==='hop')addVel(f,0,-1.5,0);else{f.jst='out';addVel(f,0,-1,0)}}}
 let jarUI='';function updJarUI(force){if(!J.on&&!force)return;const n=frogs.filter(f=>f.jst==='in'||(f.fly&&f.fly.mode==='in')).length,fill=jarFill();
   const txt=J.lidT>0||J.sealed||jarFly?'封瓶中…':jarAnim?'瓶子来啦～':n===0?'点蛙，它会自己跳进瓶子':fill>1.02?'太满啦，点瓶里的蛙拿出来':frogs.some(f=>f.jst==='in'&&!f.inJar)?'等蛙落到瓶底…':`${n} 只 · ${Math.min(100,Math.round(fill*100))}%`,can=sealAvail(),key=txt+can+fill.toFixed(2);if(key===jarUI)return;jarUI=key;
-  $('meterT').textContent=txt;$('meterB').style.width=Math.min(100,fill*100)+'%';$('meter').classList.toggle('full',fill>=.95);$('jarSeal').disabled=!can;$('jarCancel').disabled=jarBusy()}
+  $('meterT').textContent=txt;$('meterB').style.width=Math.min(100,fill*100)*.9+'%';$('meter').classList.toggle('full',fill>=.95);$('jarSeal').disabled=!can;$('jarCancel').disabled=jarBusy()}
 
 /* ---------- 手机重力 ---------- */
 let GX=0,GY=-15,tilt=null,motionAsked=false,lastA=null,lastShake=0,clock=0;
@@ -746,10 +805,405 @@ function askMotion(){if(motionAsked)return;motionAsked=true;try{if(typeof Device
 addEventListener('devicemotion',e=>{const a=e.accelerationIncludingGravity;if(!a||a.x==null)return;let gx=-a.x,gy=-a.y;if(isIOS){gx=a.x;gy=a.y}
   const ang=((screen.orientation&&screen.orientation.angle)||window.orientation||0)*Math.PI/180,sx=gx*Math.cos(ang)-gy*Math.sin(ang),sy=gx*Math.sin(ang)+gy*Math.cos(ang),m=Math.hypot(sx,sy);
   tilt=m/9.8<.25?null:{x:sx/m,y:sy/m};
-  if(lastA){const j=Math.hypot(a.x-lastA.x,a.y-lastA.y,(a.z||0)-(lastA.z||0));if(j>16&&clock-lastShake>.35){lastShake=clock;const k=Math.min(1,(j-16)/20);for(const f of frogs){if(f.frozen>0)continue;addVel(f,rand(-3,3)*k,rand(3,6)*k,.3);f.expr='squeeze';f.exprT=.3}sfx.squeak(.5)}}lastA={x:a.x,y:a.y,z:a.z||0}});
+  if(lastA){const j=Math.hypot(a.x-lastA.x,a.y-lastA.y,(a.z||0)-(lastA.z||0));if(j>16&&clock-lastShake>.35){lastShake=clock;const k=Math.min(1,(j-16)/20);for(const f of frogs){if(f.frozen>0)continue;if(f.C.name==='可乐')f.fizz=Math.min(1,(f.fizz||0)+.3+k*.4);addVel(f,rand(-3,3)*k,rand(3,6)*k,.3);f.expr='squeeze';f.exprT=.3}sfx.squeak(.5)}}lastA={x:a.x,y:a.y,z:a.z||0}});
+
+/* ================= 房间外观：全部用 3D 建模（粉墙 + 护墙板线框 + 木地板） ================= */
+scene.remove(wall,desk,edge,ao,aoD);
+// 常用材质
+const M3={
+  wall:new THREE.MeshStandardMaterial({map:plasterTex,color:'#ffc4c0',roughness:.95,envMapIntensity:.35}),
+  wains:new THREE.MeshStandardMaterial({color:'#fff3ec',roughness:.6,envMapIntensity:.45}),
+  mold:new THREE.MeshStandardMaterial({color:'#fffaf6',roughness:.45,envMapIntensity:.55}),
+  wood:new THREE.MeshPhysicalMaterial({map:woodTex,color:'#f6c995',roughness:.45,clearcoat:.5,clearcoatRoughness:.25,envMapIntensity:.6}),
+  cream:new THREE.MeshPhysicalMaterial({color:'#fff4e6',roughness:.42,clearcoat:.5,clearcoatRoughness:.2,envMapIntensity:.6}),
+  pink:new THREE.MeshPhysicalMaterial({color:'#ff9db2',roughness:.4,clearcoat:.6,clearcoatRoughness:.2,envMapIntensity:.6}),
+  pinkSoft:new THREE.MeshPhysicalMaterial({color:'#ffb8c6',roughness:.75,sheen:1,sheenColor:new THREE.Color('#fff0f4'),sheenRoughness:.5}),
+  gold:new THREE.MeshStandardMaterial({color:'#efc77d',metalness:.85,roughness:.24,envMapIntensity:1.3}),
+  leaf:new THREE.MeshPhysicalMaterial({color:'#5fbf6a',roughness:.42,clearcoat:.6,side:THREE.DoubleSide,envMapIntensity:.6}),
+  leaf2:new THREE.MeshPhysicalMaterial({color:'#8ad37a',roughness:.42,clearcoat:.6,side:THREE.DoubleSide,envMapIntensity:.6}),
+  stem:new THREE.MeshStandardMaterial({color:'#4c9a57',roughness:.6}),
+  petal:new THREE.MeshPhysicalMaterial({color:'#ffc2d3',roughness:.4,clearcoat:.5}),
+  rope:new THREE.MeshStandardMaterial({color:'#e9d3aa',roughness:.85}),
+  velvet:new THREE.MeshPhysicalMaterial({color:'#ffb1a2',roughness:.9,sheen:1,sheenColor:new THREE.Color('#fff2ea'),sheenRoughness:.45}),
+  glass:new THREE.MeshPhysicalMaterial({color:'#ffffff',transmission:.95,thickness:.08,roughness:.03,ior:1.45,clearcoat:1,envMapIntensity:1.2}),
+  shade:new THREE.MeshPhysicalMaterial({color:'#fff8ee',roughness:.35,transmission:.35,thickness:.05,emissive:'#ffc074',emissiveIntensity:0,side:THREE.DoubleSide,clearcoat:.6})};
+// 木地板：错缝长条板 + 细木纹
+const plankTex=canTex(1024,512,(x,w,h)=>{const rows=8,rh=h/rows;for(let r=0;r<rows;r++){let px=-Math.random()*300;while(px<w){const pw=rand(260,420),l=rand(-14,10);x.fillStyle=`rgb(${236+l},${190+l},${138+l})`;x.fillRect(px,r*rh,pw,rh);
+      x.globalAlpha=.09;for(let k=0;k<7;k++){x.strokeStyle=Math.random()<.5?'#a8692e':'#fff3dc';x.lineWidth=rand(1,2.5);x.beginPath();const yy=r*rh+rand(4,rh-4);x.moveTo(px,yy);x.bezierCurveTo(px+pw*.3,yy+rand(-5,5),px+pw*.7,yy+rand(-5,5),px+pw,yy+rand(-3,3));x.stroke()}x.globalAlpha=1;
+      x.fillStyle='rgba(120,70,30,.35)';x.fillRect(px,r*rh,2,rh);px+=pw}x.fillStyle='rgba(120,70,30,.28)';x.fillRect(0,r*rh,w,2);x.fillStyle='rgba(255,255,255,.18)';x.fillRect(0,r*rh+2,w,2)}});
+plankTex.wrapS=plankTex.wrapT=THREE.RepeatWrapping;plankTex.anisotropy=renderer.capabilities.getMaxAnisotropy();
+M3.floor=new THREE.MeshPhysicalMaterial({map:plankTex,roughness:.38,clearcoat:.55,clearcoatRoughness:.18,envMapIntensity:.5});
+// —— 建模小工具 ——
+function rrShape(w,h,r){const s=new THREE.Shape(),x=-w/2,y=-h/2;r=Math.min(r,w/2,h/2);s.moveTo(x+r,y);s.lineTo(x+w-r,y);s.quadraticCurveTo(x+w,y,x+w,y+r);s.lineTo(x+w,y+h-r);s.quadraticCurveTo(x+w,y+h,x+w-r,y+h);s.lineTo(x+r,y+h);s.quadraticCurveTo(x,y+h,x,y+h-r);s.lineTo(x,y+r);s.quadraticCurveTo(x,y,x+r,y);return s}
+// 圆角方块：w 宽 h 高 d 深，r 倒角
+function rbox(w,h,d,r,mat){const b=Math.min(r,w/2-.001,h/2-.001,d/2-.001),g=new THREE.ExtrudeGeometry(rrShape(w-2*b,h-2*b,b*.6),{depth:Math.max(.001,d-2*b),bevelEnabled:true,bevelThickness:b,bevelSize:b,bevelSegments:3,curveSegments:5});g.center();const m=new THREE.Mesh(g,mat);m.castShadow=true;return m}
+const V3=(x,y,z)=>new THREE.Vector3(x,y,z);
+function tube(pts,r,mat,seg=40,closed=false){return new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts.map(p=>V3(...p)),closed),seg,r,8,closed),mat)}
+// 圆角矩形线框（墙板线条、画框）
+function frameLoop(w,h,r,t,mat){const pts=rrShape(w,h,r).getSpacedPoints(120).map(p=>V3(p.x,p.y,0));pts.pop();return new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts,true,'catmullrom',.1),240,t,6,true),mat)}
+// 心形叶片（略微卷曲）
+const leafGeo=(()=>{const s=new THREE.Shape();s.moveTo(0,0);s.bezierCurveTo(.55,.12,.5,.78,0,1);s.bezierCurveTo(-.5,.78,-.55,.12,0,0);const g=new THREE.ShapeGeometry(s,10),p=g.attributes.position;for(let i=0;i<p.count;i++){const x=p.getX(i),y=p.getY(i);p.setZ(i,x*x*.6+Math.sin(y*3)*.04)}g.computeVertexNormals();return g})();
+function leaf(s,mat){const m=new THREE.Mesh(leafGeo,mat||(Math.random()<.5?M3.leaf:M3.leaf2));m.scale.setScalar(s);return m}
+function flower(s){const g=new THREE.Group();for(let i=0;i<5;i++){const p=new THREE.Mesh(sphereGeo,M3.petal),a=i/5*Math.PI*2;p.scale.set(.5*s,.32*s,.18*s);p.position.set(Math.cos(a)*.42*s,Math.sin(a)*.42*s,0);p.rotation.z=a;g.add(p)}
+  const c=new THREE.Mesh(sphereGeo,M3.gold);c.scale.setScalar(.2*s);c.position.z=.08*s;g.add(c);return g}
+// 墙/地/线条：屏幕宽度变化时重建
+let shell=null;
+function buildShell(){if(shell)scene.remove(shell);shell=new THREE.Group();const W=Math.max(32,Xw*2+8),Z=DESK_Z0,top=Ytop+.62;
+  const wallM=new THREE.Mesh(new THREE.PlaneGeometry(W,16),M3.wall);wallM.position.set(0,8,Z);wallM.receiveShadow=true;shell.add(wallM);
+  // 护墙板：奶白下半截 + 腰线 + 踢脚线
+  const wn=new THREE.Mesh(new THREE.BoxGeometry(W,1.2,.05),M3.wains);wn.position.set(0,.6,Z+.025);wn.receiveShadow=true;shell.add(wn);
+  const rail=rbox(W,.09,.12,.03,M3.mold);rail.position.set(0,1.22,Z+.06);shell.add(rail);const rail2=rbox(W,.04,.07,.015,M3.mold);rail2.position.set(0,1.14,Z+.06);shell.add(rail2);
+  const base=rbox(W,.2,.1,.03,M3.mold);base.position.set(0,.1,Z+.05);shell.add(base);
+  const crown=rbox(W,.24,.2,.06,M3.mold);crown.position.set(0,top,Z+.1);shell.add(crown);const cove=new THREE.Mesh(new THREE.CylinderGeometry(.07,.07,W,10),M3.mold);cove.rotation.z=Math.PI/2;cove.position.set(0,top-.16,Z+.06);shell.add(cove);
+  // 下排护墙板线框
+  const n=Math.max(4,Math.round(Xw*2/1.7)),pw=(Xw*2+1.2)/n;for(let i=0;i<n;i++){const f=frameLoop(pw-.26,.66,.06,.016,M3.mold);f.position.set(-Xw-.6+pw*(i+.5),.62,Z+.06);shell.add(f)}
+  // 上墙大线框：中间一块大的，两边各一块窄的
+  const h=top-.25-1.55,cy=1.55+h/2,side=Math.min(1.5,Xw*.26),mid=Xw*2-side*2-.9;
+  for(const [x,w] of [[0,mid],[-(mid/2+.3+side/2),side],[mid/2+.3+side/2,side]]){const f=frameLoop(w,h,.16,.02,M3.mold);f.position.set(x,cy,Z+.03);shell.add(f);const f2=frameLoop(w-.14,h-.14,.12,.008,M3.mold);f2.position.set(x,cy,Z+.03);shell.add(f2)}
+  // 地板
+  const fl=new THREE.Mesh(new THREE.PlaneGeometry(W,10),M3.floor);fl.rotation.x=-Math.PI/2;fl.position.set(0,0,Z+5);fl.receiveShadow=true;plankTex.repeat.set(W/4.2,10/2.4);shell.add(fl);
+  scene.add(shell)}
+// 天空（窗外）：白天 / 夜晚
+const skyDay=canTex(256,320,(x,w,h)=>{const g=x.createLinearGradient(0,0,0,h);g.addColorStop(0,'#7cc4ff');g.addColorStop(1,'#d8f0ff');x.fillStyle=g;x.fillRect(0,0,w,h);x.fillStyle='rgba(255,255,255,.95)';x.filter='blur(2px)';
+  for(const [cx,cy,s] of [[70,200,1],[190,140,.8],[150,260,1.2]])for(let i=0;i<5;i++){x.beginPath();x.arc(cx+(i-2)*18*s,cy-Math.sin(i/4*Math.PI)*16*s,20*s,0,7);x.fill()}});
+const skyNight=canTex(256,320,(x,w,h)=>{const g=x.createLinearGradient(0,0,0,h);g.addColorStop(0,'#141a45');g.addColorStop(1,'#3b3a7c');x.fillStyle=g;x.fillRect(0,0,w,h);
+  for(let i=0;i<60;i++){x.fillStyle=`rgba(255,250,220,${rand(.4,1)})`;x.beginPath();x.arc(rand(0,w),rand(0,h*.8),rand(.6,1.8),0,7);x.fill()}
+  x.fillStyle='#fff3c4';x.shadowColor='#fff3c4';x.shadowBlur=20;x.beginPath();x.arc(180,80,26,0,7);x.fill();x.shadowBlur=0;x.fillStyle='#141a45';x.beginPath();x.arc(194,70,24,0,7);x.fill()});
+// 画框里的小画：一只果冻蛙
+const frogPic=canTex(256,192,(x,w,h)=>{const g=x.createLinearGradient(0,0,0,h);g.addColorStop(0,'#fff1f4');g.addColorStop(1,'#ffd9e2');x.fillStyle=g;x.fillRect(0,0,w,h);x.fillStyle='#bfe8c6';x.fillRect(0,h*.72,w,h);
+  x.fillStyle='#7fd39a';x.beginPath();x.ellipse(128,120,62,46,0,0,7);x.fill();for(const s of [-1,1]){x.beginPath();x.arc(128+s*32,82,20,0,7);x.fill();x.fillStyle='#2a1b28';x.beginPath();x.arc(128+s*32,82,9,0,7);x.fill();x.fillStyle='#fff';x.beginPath();x.arc(124+s*32,78,3.5,0,7);x.fill();x.fillStyle='#7fd39a'}
+  x.strokeStyle='#5a1029';x.lineWidth=4;x.lineCap='round';x.beginPath();x.arc(128,118,14,.2,Math.PI-.2);x.stroke();x.fillStyle='rgba(255,120,150,.6)';for(const s of [-1,1]){x.beginPath();x.ellipse(128+s*44,118,9,6,0,0,7);x.fill()}});
+
+/* ================= 房间：家具 · 平台 · 摆件 ================= */
+// 家具用代码画的占位模型，素材到了换成贴图；物理上墙面家具和地面家具都是"单向平台"（从上面落下能站住，从下面能穿过去）
+const STEP=1/60;
+let plats=[],climbs=[],room=null,decor=false,night=0,nightApplied=-1,nightT=0;
+const PROP_DEF={
+  shelfL:{name:'长隔板',kind:'shelf',w:2.6,fx:-.6,y:2.0},
+  shelfS:{name:'短隔板',kind:'shelf',w:1.5,fx:-.16,y:3.3},
+  ladder:{name:'小木梯',kind:'ladder',fx:-.82},
+  vine:{name:'藤蔓',kind:'vine',fx:-.04},
+  lamp1:{name:'左壁灯',kind:'lamp',fx:-.9,y:4.3},
+  lamp2:{name:'右壁灯',kind:'lamp',fx:.42,y:4.3},
+  window:{name:'窗户',kind:'decor',fx:.78,y:3.4},
+  clock:{name:'挂钟',kind:'clock',fx:-.5,y:3.75},
+  bunting:{name:'彩旗',kind:'decor',w:2.4,fx:-.05,y:5.0},
+  frame:{name:'相框',kind:'decor',fx:.2,y:4.0,off:1},
+  swing:{name:'秋千',kind:'swing',fx:.08},
+  tramp:{name:'蹦床',kind:'tramp',fx:.37},
+  beanbag:{name:'豆袋沙发',kind:'beanbag',fx:-.36}};
+let layout={};
+try{layout=JSON.parse(localStorage.getItem('jf3d.room')||'{}')||{}}catch(e){}
+for(const id in PROP_DEF){const d=PROP_DEF[id];layout[id]=Object.assign({on:!d.off,fx:d.fx,y:d.y,lit:true},layout[id]||{})}
+function saveRoom(){try{localStorage.setItem('jf3d.room',JSON.stringify(layout))}catch(e){}}
+const goldMat=new THREE.MeshStandardMaterial({color:'#e2c27a',metalness:.75,roughness:.3});
+const ropeMat=new THREE.MeshStandardMaterial({color:'#e8d6b4',roughness:.9});
+const pinkMat=new THREE.MeshPhysicalMaterial({color:'#ff9fb4',roughness:.45,clearcoat:.4});
+const creamMat=new THREE.MeshStandardMaterial({color:'#fff4e8',roughness:.6});
+const leafMat=new THREE.MeshStandardMaterial({color:'#5fae6a',roughness:.55,side:THREE.DoubleSide});
+// 固定数量的点光源（2 盏壁灯 + 3 个发光蛙），数量不变就不会触发着色器重编译
+const lampLights=[0,1].map(()=>{const l=new THREE.PointLight('#ffc27a',0,7,1.6);scene.add(l);return l});
+const glowLights=[0,1,2].map(()=>{const l=new THREE.PointLight('#ffffff',0,3.6,2);scene.add(l);return l});
+function propMesh(id,P){const d=PROP_DEF[id],g=new THREE.Group();g.userData.prop=id;const Z=DESK_Z0;
+  if(d.kind==='shelf'){// 圆角木板（从墙伸出）+ 金色卷草支架
+    const dep=.75-Z,b=rbox(d.w,.13,dep,.04,M3.wood);b.position.set(0,-.065,Z+dep/2);b.receiveShadow=true;g.add(b);
+    const lip=rbox(d.w+.02,.05,.06,.02,M3.cream);lip.position.set(0,-.13,.74);g.add(lip);
+    for(const s of [-1,1]){const x=s*d.w*.33,sc=tube([[x,-.14,.5],[x+s*.01,-.32,.48],[x+s*.12,-.42,.47],[x+s*.22,-.33,.47],[x+s*.15,-.25,.47],[x+s*.08,-.3,.47]],.022,M3.gold,40);g.add(sc);
+      const up=tube([[x,-.14,.5],[x-s*.05,-.2,.5],[x-s*.12,-.17,.5]],.018,M3.gold,16);g.add(up);const ball=new THREE.Mesh(sphereGeo,M3.gold);ball.scale.setScalar(.035);ball.position.set(x+s*.08,-.3,.47);g.add(ball)}}
+  else if(d.kind==='ladder'){const h=P.top+.12;for(const s of [-1,1]){const r=new THREE.Mesh(new THREE.CylinderGeometry(.04,.045,h,12),M3.cream);r.position.set(s*.22,h/2,-.7);r.castShadow=true;g.add(r);
+      const cap=new THREE.Mesh(sphereGeo,M3.cream);cap.scale.setScalar(.05);cap.position.set(s*.22,h,-.7);g.add(cap);const hook=new THREE.Mesh(new THREE.TorusGeometry(.06,.014,8,16,Math.PI),M3.gold);hook.position.set(s*.22,h+.02,-.66);hook.rotation.y=Math.PI/2;g.add(hook)}
+    for(let y=.32;y<h-.1;y+=.32){const r=new THREE.Mesh(new THREE.CylinderGeometry(.034,.034,.48,12),M3.wood);r.rotation.z=Math.PI/2;r.position.set(0,y,-.7);r.castShadow=true;g.add(r);for(const s of [-1,1]){const n=new THREE.Mesh(sphereGeo,M3.gold);n.scale.setScalar(.022);n.position.set(s*.22,y,-.65);g.add(n)}}}
+  else if(d.kind==='vine'){const top=P.top-.05,bot=.35,pts=[];for(let i=0;i<=10;i++){const t=i/10;pts.push([Math.sin(t*8)*.09,top-(top-bot)*t,-.72+Math.sin(t*5)*.04])}g.add(tube(pts,.026,M3.stem,60));
+    const curve=new THREE.CatmullRomCurve3(pts.map(p=>V3(...p)));for(let i=1;i<26;i++){const t=i/26,p=curve.getPoint(t),s=i%2?1:-1,l=leaf(rand(.15,.24));l.position.set(p.x+s*.03,p.y,p.z+.03);l.rotation.set(rand(-.3,.3),rand(-.4,.4),s*rand(.9,1.6));g.add(l);
+      if(i%6===3){const f=flower(.12);f.position.set(p.x-s*.08,p.y-.04,p.z+.08);g.add(f)}}}
+  else if(d.kind==='lamp'){// 金色椭圆墙座 + 卷曲灯臂 + 郁金香形灯罩
+    const plate=new THREE.Mesh(new THREE.CylinderGeometry(.13,.13,.04,28),M3.gold);plate.scale.set(.8,1,1.25);plate.rotation.x=Math.PI/2;plate.position.set(-.3,.05,Z+.03);g.add(plate);
+    g.add(tube([[-.3,.05,Z+.05],[-.28,.2,Z+.18],[-.12,.32,Z+.32],[.06,.28,Z+.42],[.12,.12,Z+.45],[.12,-.02,Z+.45]],.025,M3.gold,40));
+    const cur=tube([[-.28,.2,Z+.18],[-.36,.26,Z+.2],[-.38,.18,Z+.2],[-.32,.16,Z+.19]],.016,M3.gold,16);g.add(cur);
+    const cap=new THREE.Mesh(new THREE.CylinderGeometry(.04,.07,.07,20),M3.gold);cap.position.set(.12,-.05,Z+.45);g.add(cap);
+    const lg=new THREE.LatheGeometry([[.03,.0],[.08,-.02],[.15,-.08],[.19,-.18],[.22,-.27],[.25,-.33],[.24,-.35]].map(p=>new THREE.Vector2(p[0],p[1])),40),lp=lg.attributes.position;
+    for(let i=0;i<lp.count;i++){const y=lp.getY(i);if(y<-.25){const a=Math.atan2(lp.getZ(i),lp.getX(i)),k=1+Math.sin(a*6)*.07*((-.25-y)/.1);lp.setX(i,lp.getX(i)*k);lp.setZ(i,lp.getZ(i)*k);lp.setY(i,y+Math.cos(a*6)*.015)}}lg.computeVertexNormals();
+    const shade=new THREE.Mesh(lg,M3.shade.clone());shade.position.set(.12,-.08,Z+.45);g.add(shade);
+    const bulb=new THREE.Sprite(new THREE.SpriteMaterial({map:glowTex,color:new THREE.Color('#ffc27a').multiplyScalar(1.4),transparent:true,depthWrite:false,blending:THREE.AdditiveBlending}));bulb.position.set(.12,-.3,Z+.5);bulb.scale.setScalar(1.6);g.add(bulb);
+    Object.assign(g.userData,{shade,bulb,lx:.12,ly:-.3})}
+  else if(d.kind==='swing'){// 原木 A 字架 + 横梁 + 绿叶，粉色软垫秋千座
+    const H=3.05;for(const s of [-1,1])for(const z of [-1,1]){const leg=new THREE.Mesh(new THREE.CylinderGeometry(.07,.085,H+.15,12),M3.wood);leg.position.set(s*1.15,H/2,z*.3);leg.rotation.x=-z*.18;leg.castShadow=true;g.add(leg)}
+    const beam=new THREE.Mesh(new THREE.CylinderGeometry(.075,.075,2.6,14),M3.wood);beam.rotation.z=Math.PI/2;beam.position.set(0,H,0);beam.castShadow=true;g.add(beam);for(const s of [-1,1]){const e=new THREE.Mesh(sphereGeo,M3.wood);e.scale.setScalar(.085);e.position.set(s*1.3,H,0);g.add(e)}
+    for(const [x,y] of [[-1.15,H],[1.15,H],[-1.18,1.2],[1.12,1.6],[.5,H+.04]])for(let i=0;i<4;i++){const l=leaf(rand(.13,.2));l.position.set(x+rand(-.1,.1),y+rand(-.06,.08),.1+rand(0,.08));l.rotation.set(rand(-.4,.4),rand(-.4,.4),rand(0,6.28));g.add(l)}
+    for(const s of [-1,1]){const ring=new THREE.Mesh(new THREE.TorusGeometry(.06,.015,8,20),M3.gold);ring.position.set(s*.42,H-.08,0);g.add(ring)}
+    const seat=new THREE.Group(),bd=rbox(1.0,.07,.46,.03,M3.wood);seat.add(bd);for(let i=0;i<3;i++){const c=rbox(.3,.1,.4,.05,M3.pinkSoft);c.position.set((i-1)*.32,.075,0);seat.add(c)}g.add(seat);
+    const ropes=[];for(let i=0;i<2;i++){const r=new THREE.Mesh(new THREE.CylinderGeometry(.02,.02,1,8),M3.rope);g.add(r);ropes.push(r)}Object.assign(g.userData,{seat,ropes,H})}
+  else if(d.kind==='tramp'){// 圆形迷你蹦床：奶白软边 + 粉色弹力垫 + 金色球脚
+    const ring=new THREE.Mesh(new THREE.TorusGeometry(.8,.1,14,48),M3.cream);ring.rotation.x=Math.PI/2;ring.position.y=.42;ring.castShadow=true;g.add(ring);
+    const mat=new THREE.Mesh(new THREE.CircleGeometry(.72,48),new THREE.MeshPhysicalMaterial({color:'#ff9fb4',roughness:.6,sheen:.8,sheenColor:new THREE.Color('#ffe6ee')}));mat.rotation.x=-Math.PI/2;mat.position.y=.4;g.add(mat);
+    for(let i=0;i<16;i++){const a=i/16*Math.PI*2,st=new THREE.Mesh(new THREE.BoxGeometry(.03,.02,.09),M3.mold);st.position.set(Math.cos(a)*.7,.41,Math.sin(a)*.7);st.rotation.y=-a;g.add(st)}
+    for(const a of [.6,2.5,3.8,5.6]){const l=new THREE.Mesh(new THREE.CylinderGeometry(.035,.035,.38,10),M3.gold);l.position.set(Math.cos(a)*.66,.2,Math.sin(a)*.5);g.add(l);const ft=new THREE.Mesh(sphereGeo,M3.gold);ft.scale.setScalar(.06);ft.position.set(Math.cos(a)*.66,.04,Math.sin(a)*.5);g.add(ft)}
+    g.userData.mat=mat}
+  else if(d.kind==='beanbag'){// 天鹅绒豆袋：鼓鼓的，有褶皱和坐出来的凹陷
+    const bg=new THREE.SphereGeometry(1,48,32),p=bg.attributes.position;for(let i=0;i<p.count;i++){let x=p.getX(i),y=p.getY(i),z=p.getZ(i);const a=Math.atan2(z,x),k=1+Math.sin(a*7+y*2)*.035*(1-Math.abs(y));
+      y=y<0?y*.55:y*(1-.5*Math.exp(-(x*x+z*z)*2.5));p.setXYZ(i,x*k,y,z*k)}bg.computeVertexNormals();
+    const b=new THREE.Mesh(bg,M3.velvet);b.scale.set(.78,.62,.62);b.position.y=.34;b.castShadow=true;g.add(b)}
+  else if(d.kind==='decor'&&id==='window'){// 拱形窗：奶白窗框 + 窗外天空 + 粉色纱帘 + 金色爱心
+    const w=1.35,h=1.75,sh=new THREE.Shape();sh.moveTo(-w/2,-h/2);sh.lineTo(w/2,-h/2);sh.lineTo(w/2,h/2-w/2);sh.absarc(0,h/2-w/2,w/2,0,Math.PI,false);sh.lineTo(-w/2,-h/2);
+    const sky=new THREE.Mesh(new THREE.ShapeGeometry(sh,24),new THREE.MeshBasicMaterial({map:skyDay}));{const uv=sky.geometry.attributes.uv,ps=sky.geometry.attributes.position;for(let i=0;i<uv.count;i++)uv.setXY(i,ps.getX(i)/w+.5,ps.getY(i)/h+.5)}sky.position.z=Z+.02;g.add(sky);
+    const outer=new THREE.Shape();outer.moveTo(-w/2-.1,-h/2-.1);outer.lineTo(w/2+.1,-h/2-.1);outer.lineTo(w/2+.1,h/2-w/2);outer.absarc(0,h/2-w/2,w/2+.1,0,Math.PI,false);outer.lineTo(-w/2-.1,-h/2-.1);outer.holes.push(sh);
+    const fr=new THREE.Mesh(new THREE.ExtrudeGeometry(outer,{depth:.08,bevelEnabled:true,bevelThickness:.025,bevelSize:.025,bevelSegments:2,curveSegments:24}),M3.cream);fr.position.z=Z+.02;g.add(fr);
+    for(const [x,y,ww,hh] of [[0,-.1,.045,h-.1],[0,-.05,w,.045]]){const m=rbox(ww,hh,.05,.015,M3.cream);m.position.set(x,y,Z+.08);g.add(m)}
+    const sill=rbox(w+.5,.09,.32,.03,M3.cream);sill.position.set(0,-h/2-.12,Z+.16);g.add(sill);
+    for(const s of [-1,1]){const cg=new THREE.PlaneGeometry(.55,h+.15,10,20),cp=cg.attributes.position;for(let i=0;i<cp.count;i++){const x=cp.getX(i),y=cp.getY(i),t=(y+h/2)/(h+.15),pinch=1-.55*Math.exp(-Math.pow((t-.35)/.12,2));cp.setX(i,x*pinch-s*.06*(1-pinch)*3);cp.setZ(i,Math.sin(x*28)*.025)}cg.computeVertexNormals();
+      const c=new THREE.Mesh(cg,new THREE.MeshPhysicalMaterial({color:'#ffc3d0',roughness:.7,sheen:1,sheenColor:new THREE.Color('#fff'),side:THREE.DoubleSide,transmission:.15,thickness:.02}));c.position.set(s*(w/2-.08),.02,Z+.2);g.add(c);
+      const tie=new THREE.Mesh(new THREE.TorusGeometry(.07,.018,8,16),M3.pink);tie.position.set(s*(w/2-.08)-s*.06,-h/2+(h+.15)*.35-.02,Z+.24);g.add(tie)}
+    const hs=new THREE.Shape();hs.moveTo(0,-.08);hs.bezierCurveTo(-.14,.02,-.07,.12,0,.05);hs.bezierCurveTo(.07,.12,.14,.02,0,-.08);const ht=new THREE.Mesh(new THREE.ExtrudeGeometry(hs,{depth:.03,bevelEnabled:true,bevelThickness:.015,bevelSize:.015,bevelSegments:2}),M3.gold);ht.position.set(0,h/2+.13,Z+.08);g.add(ht);
+    g.userData.sky=sky}
+  else if(d.kind==='clock'){// 粉色圆钟：金色刻度、会走的指针、随重力摆动的钟摆
+    const r=.38,body=new THREE.Mesh(new THREE.TorusGeometry(r,.075,16,48),M3.pink);body.position.z=Z+.16;g.add(body);
+    const face=new THREE.Mesh(new THREE.CylinderGeometry(r,r,.05,48),M3.cream);face.rotation.x=Math.PI/2;face.position.z=Z+.14;g.add(face);
+    for(let i=0;i<12;i++){const a=i/12*Math.PI*2,t=new THREE.Mesh(sphereGeo,M3.gold);t.scale.setScalar(i%3?.016:.028);t.position.set(Math.cos(a)*r*.8,Math.sin(a)*r*.8,Z+.18);g.add(t)}
+    const hand=(len,wd)=>{const m=new THREE.Group(),b=rbox(wd,len,.02,.008,M3.gold);b.position.y=len/2;m.add(b);m.position.z=Z+.19;g.add(m);return m};const hh=hand(r*.48,.035),mh=hand(r*.7,.025);const pin=new THREE.Mesh(sphereGeo,M3.gold);pin.scale.setScalar(.03);pin.position.z=Z+.21;g.add(pin);
+    const crown=new THREE.Mesh(sphereGeo,M3.gold);crown.scale.set(.07,.06,.05);crown.position.set(0,r+.1,Z+.16);g.add(crown);
+    const pend=new THREE.Group(),rod=new THREE.Mesh(new THREE.CylinderGeometry(.012,.012,.5,8),M3.gold);rod.position.y=-.25;pend.add(rod);const bob=new THREE.Mesh(new THREE.CylinderGeometry(.08,.08,.03,24),M3.gold);bob.rotation.x=Math.PI/2;bob.position.y=-.52;pend.add(bob);
+    pend.position.set(0,-r*.55,Z+.08);g.add(pend);Object.assign(g.userData,{pend,hh,mh})}
+  else if(d.kind==='decor'&&id==='bunting'){// 三角彩旗串
+    const sp=d.w,pts=[];for(let i=0;i<=12;i++){const t=i/12;pts.push([(t-.5)*sp,-Math.sin(t*Math.PI)*.22,Z+.12])}g.add(tube(pts,.008,M3.rope,40));const curve=new THREE.CatmullRomCurve3(pts.map(p=>V3(...p))),flags=[];
+    const cols=['#ff9db2','#9fe3c4','#ffe28e'];for(let i=0;i<7;i++){const p=curve.getPoint((i+.5)/7),s=new THREE.Shape();s.moveTo(-.13,0);s.lineTo(.13,0);s.lineTo(0,-.3);s.lineTo(-.13,0);
+      const f=new THREE.Mesh(new THREE.ExtrudeGeometry(s,{depth:.01,bevelEnabled:true,bevelThickness:.008,bevelSize:.008,bevelSegments:1}),new THREE.MeshPhysicalMaterial({color:cols[i%3],roughness:.6,sheen:.6}));f.position.set(p.x,p.y,p.z);g.add(f);flags.push(f)}g.userData.flags=flags}
+  else if(d.kind==='decor'&&id==='frame'){const w=1.0,h=.76,f=frameLoop(w,h,.08,.045,M3.gold);f.position.z=Z+.08;g.add(f);const f2=frameLoop(w-.14,h-.14,.05,.02,M3.pink);f2.position.z=Z+.08;g.add(f2);
+    const pic=new THREE.Mesh(new THREE.PlaneGeometry(w-.16,h-.16),new THREE.MeshStandardMaterial({map:frogPic,roughness:.6}));pic.position.z=Z+.05;g.add(pic);
+    for(const [x,y] of [[-w/2,h/2],[w/2,h/2],[-w/2,-h/2],[w/2,-h/2]]){const o=flower(.07);o.position.set(x,y,Z+.12);g.add(o)}}
+  g.traverse(o=>{if(o.isMesh){o.castShadow=o.castShadow||false}});return g}
+// 依据布局重建家具（拖动、收起后调用）
+function layoutRoom(){if(!room)room={props:{},seat:null};const old=room.props;room.props={};plats=[];climbs=[];
+  const shelves=[];
+  for(const id in PROP_DEF){const d=PROP_DEF[id],L=layout[id];if(old[id])scene.remove(old[id].g);if(!L.on)continue;
+    const P={id,d,L,x:clamp(L.fx,-.97,.97)*Xw};
+    if(d.kind==='shelf'){P.y=clamp(L.y,1.1,Ytop-1.3);P.x=clamp(P.x,-Xw+d.w/2,Xw-d.w/2);P.plat={x0:P.x-d.w/2,x1:P.x+d.w/2,y:P.y,py:P.y,vx:0,vy:0,kind:'shelf',prop:id};plats.push(P.plat);shelves.push(P)}
+    room.props[id]=P}
+  for(const id in room.props){const P=room.props[id],d=P.d;
+    if(d.kind==='ladder'||d.kind==='vine'){// 顶端挂在头顶最近的隔板上
+      const sh=shelves.filter(s=>P.x>=s.plat.x0-.05&&P.x<=s.plat.x1+.05).sort((a,b)=>a.y-b.y)[d.kind==='ladder'?0:0];P.top=sh?sh.y:2.6;P.shelf=sh||null;
+      if(sh)climbs.push({x:P.x,y1:sh.y,plat:sh.plat,kind:d.kind})}
+    if(d.kind==='lamp'){P.y=clamp(P.L.y,2.6,Ytop-.35)}
+    if(d.kind==='decor'||d.kind==='clock'){P.y=clamp(P.L.y,1.6,Ytop+.25);P.ph=0;P.pw=.6}
+    if(d.kind==='swing'){P.pivot={x:P.x,y:2.97};P.Lr=2.22;P.th=P.th||0;P.w=0;P.plat={x0:0,x1:0,y:.8,py:.8,vx:0,vy:0,kind:'seat',prop:id};plats.push(P.plat)}
+    if(d.kind==='tramp'){P.plat={x0:P.x-.74,x1:P.x+.74,y:.44,py:.44,vx:0,vy:0,kind:'tramp',prop:id,hit:0};plats.push(P.plat);P.dip=0}
+    if(d.kind==='beanbag'){P.plat={x0:P.x-.55,x1:P.x+.55,y:.6,py:.6,vx:0,vy:0,kind:'soft',fric:.45,prop:id};plats.push(P.plat)}
+    P.g=propMesh(id,P);P.g.position.set(P.x,P.y||0,0);scene.add(P.g)}
+  room.lamps=Object.values(room.props).filter(P=>P.d.kind==='lamp');updSwing(0)}
+const prop=k=>Object.values(room.props).find(P=>P.d.kind===k);
+function platContact(p,f,pl){const vx=p.x-p.px,vy=p.y-p.py,pvx=pl.vx*H2,pvy=pl.vy*H2,rvy=vy-pvy;p.y=pl.y;let nvy=pvy-rvy*f.S.bounce;
+  if(pl.kind==='tramp'&&rvy<-.8*H2){nvy=pvy+(f.bouncing?Math.max(-rvy,10*H2):-rvy*.82);pl.hit=Math.max(pl.hit,-rvy/H2)}
+  p.py=p.y-nvy;p.px=p.x-(pvx+(vx-pvx)*(f.frozen>0?.98:f.S.fric*(pl.fric??1)));f.ground++;f.plat=pl;f.lastPlat=pl;f.platT=clock}
+function updSwing(dt){const P=prop('swing');if(!P)return;const L=P.Lr;
+  P.w+=((GX*Math.cos(P.th)+GY*Math.sin(P.th))/L)*dt;P.w*=1-.12*dt;P.th=clamp(P.th+P.w*dt,-1.35,1.35);
+  const sx=P.pivot.x+L*Math.sin(P.th),sy=P.pivot.y-L*Math.cos(P.th),pl=P.plat,ud=P.g.userData;pl.py=pl.y;pl.x0=sx-.48;pl.x1=sx+.48;pl.y=sy+.12;pl.vx=L*P.w*Math.cos(P.th);pl.vy=L*P.w*Math.sin(P.th);
+  ud.seat.position.set(sx-P.x,sy,0);ud.ropes.forEach((r,i)=>{const s=i?1:-1,ax=P.pivot.x-P.x+s*.42,ay=P.pivot.y-.12,bx=sx-P.x+s*.44,by=sy+.03,len=Math.hypot(bx-ax,by-ay);r.position.set((ax+bx)/2,(ay+by)/2,0);r.scale.y=len;r.rotation.z=Math.atan2(bx-ax,ay-by)})}
+function updRoom(dt){if(!room)return;updSwing(dt);const T=prop('tramp');if(T){const pl=T.plat;if(pl.hit>0){T.dip=Math.min(.16,T.dip+pl.hit*.012);if(pl.hit>4)tone(140+pl.hit*8,90,.12,.08);pl.hit=0}T.dip*=.86;T.g.userData.mat.position.y=.4-T.dip}
+  // 壁灯与夜晚
+  const ls=room.lamps,on=ls.filter(P=>P.L.lit).length,target=ls.length?1-on/ls.length:0;night+=(target-night)*Math.min(1,dt*2.2);
+  ls.forEach((P,i)=>{const ud=P.g.userData,k=P.L.lit?1:0;P.lv=lerp(P.lv??k,k,Math.min(1,dt*6));ud.shade.material.emissiveIntensity=P.lv*(.8+night*1.2);ud.bulb.material.opacity=P.lv*(.35+.65*night);
+    if(lampLights[i]){lampLights[i].intensity=P.lv*(1.2+night*1.8);lampLights[i].position.set(P.x+ud.lx,P.y+ud.ly,.6)}});
+  // 挂钟钟摆随重力摆；窗户天黑换夜景
+  for(const P of Object.values(room.props)){const ud=P.g.userData;if(ud.pend){P.pw+=((GX*Math.cos(P.ph)+GY*Math.sin(P.ph))/.75)*dt;if(Math.abs(P.ph)<.05)P.pw+=Math.sign(P.pw||1)*.08;P.pw*=1-.25*dt;P.ph=clamp(P.ph+P.pw*dt,-1.2,1.2);ud.pend.rotation.z=P.ph}
+    if(ud.hh){const d=new Date(),m=d.getMinutes()+d.getSeconds()/60;ud.mh.rotation.z=-m/60*Math.PI*2;ud.hh.rotation.z=-((d.getHours()%12)+m/60)/12*Math.PI*2}
+    if(ud.sky){const m=night>.5?skyNight:skyDay;if(ud.sky.material.map!==m){ud.sky.material.map=m;ud.sky.material.needsUpdate=true}}
+    if(ud.flags)ud.flags.forEach((f,i)=>{f.rotation.z=Math.sin(clock*1.6+i)*.06-GX*.012;f.rotation.x=Math.sin(clock*1.3+i*.7)*.12})}
+  for(let i=ls.length;i<lampLights.length;i++)lampLights[i].intensity=0;
+  // 天黑了：不是夜猫子的蛙放下手头的事去睡觉；天亮了夜猫子去睡
+  const nn=isNight();if(nn!==room.wasNight){room.wasNight=nn;for(const f of frogs){if(!f.ai||f.sleeping===!(nn^(f.trait==='owl')))continue;if((f.trait==='owl')!==nn){stopAI(f);f.ai.next=rand(.2,1.6);if(!nn)f.ai.energy=Math.min(f.ai.energy,.3)}}}}
+// 夜晚：压暗环境光和反射，让发光的蛙亮起来
+const SUN_DAY=new THREE.Color('#ffe6c4'),SUN_NIGHT=new THREE.Color('#7f8fd6'),BG_DAY=new THREE.Color('#eadccd'),BG_NIGHT=new THREE.Color('#2a2236');
+function applyNight(force){if(!force&&Math.abs(night-nightApplied)<.004)return;nightApplied=night;const n=night;
+  sun.intensity=lerp(2.3,.35,n);sun.color.lerpColors(SUN_DAY,SUN_NIGHT,n);hemi.intensity=lerp(.42,.05,n);fill.intensity=lerp(.35,.03,n);renderer.toneMappingExposure=lerp(.82,.76,n);bloom.strength=lerp(.16,.55,n);scene.background.lerpColors(BG_DAY,BG_NIGHT,n);
+  scene.traverse(o=>{const m=o.material;if(!m||Array.isArray(m)||m.envMapIntensity===undefined)return;if(m.userData.env0===undefined)m.userData.env0=m.envMapIntensity;m.envMapIntensity=m.userData.env0*(1-.85*n)})}
+const GLOW=new Set(['夜光蛙','星空蛙','极光蛙','熔岩蛙','火焰蛙','钻石蛙','柠檬黄','雪花球','鱼缸蛙']);
+const isNight=()=>night>.55;
+
+/* ---------- 摆件：会随重力滑动、掉落，蛙能撞掉，勤劳的蛙会搬回去 ---------- */
+const ITEM_DEF={book:{name:'书',w:.3,h:.5},jar:{name:'糖果罐',w:.4,h:.46},crystal:{name:'水晶球',w:.36,h:.44},stick:{name:'小木棒',w:.72,h:.14,tool:1},mop:{name:'拖把',w:.95,h:.16,tool:1}};
+let items=[];
+function itemMesh(type,col){const g=new THREE.Group();
+  if(type==='book'){const mat=new THREE.MeshPhysicalMaterial({color:{pink:'#ff9fb4',mint:'#8fdcb8',yellow:'#ffd77a'}[col],roughness:.45,clearcoat:.5});g.add(rbox(.3,.5,.12,.025,mat));
+    const pg=new THREE.Mesh(new THREE.BoxGeometry(.03,.44,.1),M3.cream);pg.position.x=.14;g.add(pg);for(const y of [-.17,.17]){const b=new THREE.Mesh(new THREE.BoxGeometry(.3,.025,.125),M3.gold);b.position.y=y;g.add(b)}
+    const em=flower(.07);em.position.set(0,0,.065);g.add(em)}
+  else if(type==='jar'){const prof=[[0,-.22],[.15,-.22],[.19,-.17],[.2,-.05],[.19,.08],[.15,.14],[.13,.16],[.13,.19]].map(p=>new THREE.Vector2(p[0],p[1]));g.add(new THREE.Mesh(new THREE.LatheGeometry(prof,32),M3.glass));
+    const lid=new THREE.Mesh(new THREE.CylinderGeometry(.15,.16,.06,32),M3.gold);lid.position.y=.21;g.add(lid);const kn=new THREE.Mesh(sphereGeo,M3.gold);kn.scale.setScalar(.045);kn.position.y=.27;g.add(kn);
+    for(let i=0;i<16;i++){const c=new THREE.Mesh(sphereGeo,new THREE.MeshPhysicalMaterial({color:pick(['#ff8fb0','#ffd36b','#fff6ea','#9fe3c4']),roughness:.25,clearcoat:1}));c.scale.set(.05,.032,.032);c.rotation.set(rand(0,3),rand(0,3),rand(0,3));const a=rand(0,6.28),rr=rand(0,.13);c.position.set(Math.cos(a)*rr,rand(-.18,.05),Math.sin(a)*rr);g.add(c)}}
+  else if(type==='crystal'){const s=new THREE.Mesh(sphereGeo,new THREE.MeshPhysicalMaterial({color:'#f6dcff',transmission:.92,thickness:.3,roughness:.03,iridescence:.8,iridescenceIOR:1.5,clearcoat:1}));s.scale.setScalar(.16);s.position.y=.05;g.add(s);
+    const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:sparkTex,color:new THREE.Color('#ffe9ff').multiplyScalar(2),transparent:true,depthWrite:false,blending:THREE.AdditiveBlending}));sp.scale.setScalar(.16);sp.position.y=.06;g.add(sp);
+    g.add(new THREE.Mesh(new THREE.LatheGeometry([[0,-.22],[.13,-.22],[.14,-.19],[.1,-.15],[.11,-.1],[.06,-.08]].map(p=>new THREE.Vector2(p[0],p[1])),28),M3.gold))}
+  else if(type==='stick'){const b=new THREE.Mesh(new THREE.LatheGeometry([[0,-.36],[.045,-.36],[.05,-.33],[.035,-.3],[.04,-.05],[.065,.2],[.07,.32],[.055,.36],[0,.37]].map(p=>new THREE.Vector2(p[0],p[1])),20),M3.wood);b.rotation.z=-Math.PI/2;g.add(b);
+    const gr=new THREE.Mesh(new THREE.CylinderGeometry(.043,.043,.16,16),M3.pink);gr.rotation.z=Math.PI/2;gr.position.x=-.22;g.add(gr)}
+  else if(type==='mop'){const h=new THREE.Mesh(new THREE.CylinderGeometry(.025,.025,.8,10),M3.wood);h.rotation.z=Math.PI/2;h.position.x=.1;g.add(h);const band=new THREE.Mesh(new THREE.CylinderGeometry(.05,.05,.07,14),M3.pink);band.rotation.z=Math.PI/2;band.position.x=-.3;g.add(band);
+    const yarn=new THREE.MeshStandardMaterial({color:'#9ee3c6',roughness:.9});for(let i=0;i<16;i++){const a=i/16*Math.PI*2,y0=Math.cos(a)*.04,z0=Math.sin(a)*.04;g.add(tube([[-.32,y0,z0],[-.4,y0*2.2,z0*2.2],[-.47,y0*2.6+rand(-.02,.02),z0*2.6],[-.5,y0*2.4,z0*2.4]],.018,yarn,10))}}
+  g.traverse(o=>{if(o.isMesh)o.castShadow=true});scene.add(g);return g}
+function addItem(type,x,y,col,home){const d=ITEM_DEF[type],it={type,d,w:d.w,h:d.h,x,y,py:y,vx:0,vy:0,rot:0,z:d.tool?.25:-.55,home,mesh:itemMesh(type,col),held:null,grab:null,offT:0};items.push(it);return it}
+function initItems(){for(const it of items)scene.remove(it.mesh);items=[];const L=room.props.shelfL,S=room.props.shelfS;
+  if(L){[['pink',-.98],['mint',-.7],['yellow',-.42]].forEach(([c,dx])=>addItem('book',L.x+dx,L.y+.26,c,{prop:'shelfL',dx}));addItem('jar',L.x+.7,L.y+.23,null,{prop:'shelfL',dx:.7})}
+  if(S)addItem('crystal',S.x-.35,S.y+.22,null,{prop:'shelfS',dx:-.35});
+  addItem('stick',-Xw+1.3,.07);addItem('mop',-Xw+2.4,.08)}
+function updItems(dt){for(const f of frogs)bbox(f);for(const it of items){const hw=it.w/2,hb=it.h/2;
+  if(it.held){holdPose(it);continue}
+  if(it.grab){const P=pointers.get(it.grab);if(!P){it.grab=null}else{const nx=P.x,ny=Math.max(hb,P.y);it.vx=(nx-it.x)/dt*.5;it.vy=(ny-it.y)/dt*.5;it.x=nx;it.y=ny;it.py=it.y;it.mesh.position.set(it.x,it.y,it.z);continue}}
+  it.py=it.y;it.vx+=GX*dt;it.vy+=GY*dt;it.vx*=.995;it.x+=it.vx*dt;it.y+=it.vy*dt;let sup=null;
+  if(it.y-hb<0){it.y=hb;sup={vx:0,vy:0,kind:'floor'}}
+  else for(const pl of plats){if(it.x<pl.x0-hw*.3||it.x>pl.x1+hw*.3)continue;if(it.y-hb<pl.y&&it.py-hb>=pl.py-.03){it.y=pl.y+hb;sup=pl;break}}
+  if(sup){const rvy=it.vy-sup.vy;it.vy=rvy<-3?sup.vy-rvy*.25:sup.vy;let rel=it.vx-sup.vx;const dec=7*Math.abs(GY)/15*dt;rel=Math.abs(rel)<dec?0:rel-Math.sign(rel)*dec;it.vx=sup.vx+rel;it.rot*=.8;if(rvy<-3)tone(500+rand(0,200),300,.06,.05,'triangle')}
+  else it.rot+=it.vx*dt*1.2;
+  if(it.x<-Xw+hw){it.x=-Xw+hw;it.vx*=-.3}else if(it.x>Xw-hw){it.x=Xw-hw;it.vx*=-.3}
+  it.sup=sup;
+  // 被蛙撞：点进了摆件框 → 推开蛙的点，摆件被反推
+  for(const f of frogs){if(f.bx1<it.x-hw||f.bx0>it.x+hw||f.by1<it.y-hb||f.by0>it.y+hb)continue;for(const p of f.pts){const l=p.x-(it.x-hw),r=(it.x+hw)-p.x,b=p.y-(it.y-hb),t=(it.y+hb)-p.y;if(l<0||r<0||b<0||t<0)continue;const m=Math.min(l,r,b,t);
+    if(m===t){p.y+=t*.7;it.y-=t*.15;it.vy-=t*4}else if(m===b){p.y-=b*.7;it.vy+=b*6}else if(m===l){p.x-=l*.7;it.vx+=l*14}else{p.x+=r*.7;it.vx-=r*14}}}
+  // 离开原来的隔板超过 3 秒算"掉下去了"
+  const hp=it.home&&room.props[it.home.prop];it.fallen=!!hp&&it.sup&&it.sup.kind==='floor'?(it.offT+=dt)>3:(it.offT=0,false);
+  it.mesh.position.set(it.x,it.y,it.z);it.mesh.rotation.z=it.rot}}
+// 蛙拿着工具 / 举着摆件
+function holdPose(it){const f=it.held;if(!frogs.includes(f)){it.held=null;return}const c=centroid(f);
+  if(it.d.tool){const side=f.face||1,sw=f.toolSwing||0;it.x=c.x+side*f.hx*.7;it.y=c.y-f.hy*.05;it.z=f.d0+.1;it.rot=it.type==='mop'?Math.PI/2-.3*side+sw*.6*side:side>0?1-sw:Math.PI-1+sw}
+  else{it.x=c.x;it.y=c.y+f.hy+it.h/2-.02;it.z=0;it.rot=0}
+  it.mesh.position.set(it.x,it.y,it.z);it.mesh.rotation.z=it.rot;it.vx=it.vy=0}
+function dropItem(it,f){if(!it||it.held!==f)return;it.held=null;f.toolSwing=0;it.vx=0;it.vy=0;it.z=it.d.tool?.25:-.55;if(it.d.tool){it.y=Math.max(it.y,.1);it.rot=0}}
+function itemAt(x,y){for(const it of items){if(it.held)continue;if(Math.abs(x-it.x)<it.w/2+.15&&Math.abs(y-it.y)<it.h/2+.15)return it}return null}
+
+/* ---------- 表情贴纸（素材到了换成 icons_emotes） ---------- */
+const EMO={};
+function emoTex(draw){return canTex(96,96,(x,w)=>{x.translate(w/2,w/2);x.lineJoin=x.lineCap='round';draw(x)})}
+function outlineText(x,t,size,col){x.font=`900 ${size}px "Noto Sans SC",sans-serif`;x.textAlign='center';x.textBaseline='middle';x.lineWidth=8;x.strokeStyle='#fff';x.strokeText(t,0,0);x.fillStyle=col;x.fillText(t,0,0)}
+EMO.zzz=emoTex(x=>{x.save();x.translate(-14,12);outlineText(x,'Z',34,'#7d8cff');x.restore();x.save();x.translate(12,-14);outlineText(x,'z',26,'#9aa6ff');x.restore()});
+EMO.bang=emoTex(x=>outlineText(x,'!',64,'#ff6a3d'));
+EMO.note=emoTex(x=>outlineText(x,'♪',60,'#ff7da8'));
+EMO.sour=emoTex(x=>outlineText(x,'酸',48,'#d9b400'));
+EMO.anger=emoTex(x=>{x.strokeStyle='#fff';x.lineWidth=16;const d=()=>{for(const a of [0,1,2,3]){x.save();x.rotate(a*Math.PI/2);x.beginPath();x.arc(17,17,13,Math.PI,Math.PI*1.5);x.stroke();x.restore()}};d();x.strokeStyle='#ff3d5a';x.lineWidth=8;d()});
+EMO.sweat=emoTex(x=>{x.beginPath();x.moveTo(0,-30);x.bezierCurveTo(24,0,22,30,0,30);x.bezierCurveTo(-22,30,-24,0,0,-30);x.fillStyle='#7fc8ff';x.strokeStyle='#fff';x.lineWidth=6;x.stroke();x.fill();x.fillStyle='rgba(255,255,255,.8)';x.beginPath();x.ellipse(-7,8,4,8,-.3,0,7);x.fill()});
+EMO.dizzy=emoTex(x=>{x.strokeStyle='rgba(255,210,90,.8)';x.lineWidth=4;x.beginPath();x.ellipse(0,6,36,14,0,0,7);x.stroke();
+  for(const a of [0,2.1,4.2]){x.save();x.translate(Math.cos(a)*34,6+Math.sin(a)*13);x.fillStyle='#ffd23a';x.strokeStyle='#fff';x.lineWidth=3;x.beginPath();for(let i=0;i<10;i++){const r=i%2?5:12,t=i/10*Math.PI*2-Math.PI/2;x.lineTo(Math.cos(t)*r,Math.sin(t)*r)}x.closePath();x.stroke();x.fill();x.restore()}});
+EMO.heart=emoTex(x=>{x.translate(0,4);x.beginPath();x.moveTo(0,24);x.bezierCurveTo(-38,-2,-21,-34,0,-13);x.bezierCurveTo(21,-34,38,-2,0,24);const g=x.createLinearGradient(0,-30,0,24);g.addColorStop(0,'#ff9ab8');g.addColorStop(1,'#ff4f7e');x.fillStyle=g;x.strokeStyle='#fff';x.lineWidth=6;x.stroke();x.fill();
+  x.fillStyle='rgba(255,255,255,.75)';x.beginPath();x.ellipse(-13,-12,7,4,-.6,0,7);x.fill()});
+const emoAR=()=>1;
+function emote(f,kind,dur=1.6){f.emoK=kind;if(!f.emo){f.emo=new THREE.Sprite(new THREE.SpriteMaterial({map:EMO[kind],transparent:true,depthWrite:false}));f.emo.renderOrder=20;scene.add(f.emo)}f.emo.material.map=EMO[kind];f.emo.material.needsUpdate=true;f.emoT=dur;f.emoA=0;f.emo.visible=true}
+
+/* ---------- 性格 ---------- */
+const TRAITS={angry:{name:'暴躁'},diligent:{name:'勤劳'},lazy:{name:'懒洋洋'},timid:{name:'胆小'},social:{name:'社牛'},playful:{name:'调皮'},owl:{name:'夜猫子'}};
+const TRAIT_K=Object.keys(TRAITS);
+// 皮肤能力：挤压时喷出的东西 / 可乐摇晃 / 火焰融冰
+const SKILL={'牛奶白':{spray:'#fffdf6',res:'milk'},'草莓牛奶':{spray:'#ffd3df',res:'milk'},'珍珠奶茶':{spray:'#e6c8a0',res:'pearl',pearls:1},'柠檬黄':{spray:'#ffe45c',res:'juice',sour:1},
+  '葡萄':{spray:'#8a3fd0',res:'juice'},'蓝莓紫':{spray:'#7c5cff',res:'juice'},'蜜桃':{spray:'#ffb39c',res:'juice'},'橘子橙':{spray:'#ff9a3c',res:'juice',sour:1},'可乐':{spray:'#6b3415',res:'juice',fizz:1},'火焰蛙':{heat:1},'熔岩蛙':{heat:1}};
+const RES_NAME={milk:'牛奶',juice:'果汁',pearl:'珍珠'};
+let res={milk:0,juice:0,pearl:0};try{Object.assign(res,JSON.parse(localStorage.getItem('jf3d.res')||'{}'))}catch(e){}
+function addRes(k,n,x,y){res[k]=(res[k]||0)+n;try{localStorage.setItem('jf3d.res',JSON.stringify(res))}catch(e){}floatText(x,y,`+${n} ${RES_NAME[k]}`,'');hud();bump('openRes')}
+const _mv=new THREE.Vector3();
+function spray(f,k,dt){const sk=SKILL[f.C.name];f.sprayAcc=(f.sprayAcc||0)+dt*50*k;f.mouth.getWorldPosition(_mv);const col=new THREE.Color(sk.spray);
+  while(f.sprayAcc>=1){f.sprayAcc--;addPart({x:_mv.x+rand(-.04,.04),y:_mv.y,z:_mv.z,vx:rand(-1.3,1.3),vy:rand(3.5,6.5)*(.6+k*.6),vz:rand(.6,2.2),s:rand(.03,.055),life:3,col,kind:'jelly',dl:25})}
+  if(sk.pearls&&Math.random()<dt*5)addPart({x:_mv.x,y:_mv.y,z:_mv.z,vx:rand(-1.6,1.6),vy:rand(4,6),vz:rand(.5,1.5),s:.075,life:3.5,col:new THREE.Color('#3a2010'),kind:'pearl'});
+  f.hissT=(f.hissT||0)-dt;if(f.hissT<=0){f.hissT=.14;noiseB(.16,.07,'bandpass',2600,1400)}
+  f.resAcc=(f.resAcc||0)+dt*k;if(f.resAcc>=1.2){f.resAcc=0;const c=centroid(f);addRes(sk.res,1,c.x,c.y+f.hy+.3)}
+  if(sk.sour)for(const o of frogs){if(o===f)continue;const c=centroid(o);if(Math.abs(c.x-_mv.x)<2&&Math.abs(c.y-_mv.y)<2){o.expr='sour';o.exprT=.6;if(Math.random()<dt*1.5)emote(o,'sour',1)}}}
+
+/* ---------- 性格 AI：每只蛙按性格和需要挑事做（用生成器写成一步步的小剧本） ---------- */
+function* wait(s){for(let t=0;t<s;t+=STEP)yield}
+const onPlat=f=>f.lastPlat&&clock-(f.platT||-9)<.35?f.lastPlat:null;
+const onFloor=f=>clock-(f.floorT||-9)<.35;
+function* settle(f,max=3){for(let t=0;t<max;t+=STEP){if(f.ground>2)return true;yield}return false}
+// 在当前这一层上一蹦一蹦走到 x
+function* goTo(f,x,maxT=9){const pl=onPlat(f);if(pl&&pl.kind==='shelf')x=clamp(x,pl.x0+.25,pl.x1-.25);
+  for(let t=0;t<maxT;t+=STEP){const c=centroid(f),dx=x-c.x;f.face=Math.sign(dx)||f.face||1;if(Math.abs(dx)<.22+f.r*.25)return true;
+    f.aiHop=(f.aiHop||0)-STEP;if(f.ground>2&&f.aiHop<=0){const sh=onPlat(f)&&onPlat(f).kind==='shelf';addVel(f,clamp(dx*2,-2.6,2.6)*(sh?.7:1)*f.S.hopX**.5,rand(3.4,4.4)*f.S.hop,.3);f.aiHop=rand(.35,.55);tone(480*f.S.pitch,760*f.S.pitch,.07,.04)}yield}
+  return false}
+function* goToFrog(f,o,gap,maxT=8){for(let t=0;t<maxT;t+=STEP){if(!frogs.includes(o))return false;const c=centroid(f),co=centroid(o),dx=co.x-c.x;f.face=Math.sign(dx)||1;if(Math.abs(dx)<f.hx+o.hx+gap&&Math.abs(co.y-c.y)<1)return true;
+    f.aiHop=(f.aiHop||0)-STEP;if(f.ground>2&&f.aiHop<=0){addVel(f,clamp(dx*2,-3,3),rand(3.4,4.4)*f.S.hop,.3);f.aiHop=rand(.3,.5)}yield}return false}
+// 蓄力后沿弧线跳到 (x, 平台高度 y)
+function* jumpTo(f,x,y,arc){for(let i=0;i<14;i++){f.sq=Math.max(f.sq,.55);yield}const c=centroid(f),ty=y+f.hy*.95,d=Math.hypot(x-c.x,ty-c.y);
+  f.fly={t:0,dur:clamp(.35+d*.09,.4,.8),x0:c.x,y0:c.y,x1:x,y1:ty,mode:'hop',arc:arc??Math.max(.5,Math.min(1.4,d*.35)),ai:true};f.face=Math.sign(x-c.x)||1;tone(380*f.S.pitch,900*f.S.pitch,.14,.08);
+  while(f.fly)yield;yield*settle(f,1.5)}
+// 顺着梯子/藤蔓爬上隔板
+function* climb(f,cl){if(!(yield*goTo(f,cl.x)))return false;f.kin={x:cl.x,y:cl.y1+f.hy*.6,spd:cl.kind==='vine'?1.1:1.4};while(f.kin)yield;
+  const pl=cl.plat,tx=clamp(cl.x+(cl.x<(pl.x0+pl.x1)/2?.55:-.55),pl.x0+.3,pl.x1-.3);yield*jumpTo(f,tx,pl.y,.45);return onPlat(f)===pl}
+// 从地面上到某块隔板：有梯子/藤蔓多半去爬，否则跳上去
+function* reachShelf(f,pl){if(onPlat(f)===pl)return true;if(onPlat(f))yield*leavePlat(f);const cl=climbs.find(c=>c.plat===pl);
+  if(cl&&Math.random()<.75)return yield*climb(f,cl);const c=centroid(f),x=clamp(c.x,pl.x0+.35,pl.x1-.35);yield*goTo(f,x);yield*jumpTo(f,x,pl.y,.6);return onPlat(f)===pl}
+function* leavePlat(f){const pl=onPlat(f);if(!pl||pl.kind==='tramp'||pl.kind==='soft'){if(pl)yield*jumpTo(f,clamp(centroid(f).x+(Math.random()<.5?-1.3:1.3),-Xw+.8,Xw-.8),0,.6);return}
+  const c=centroid(f),left=c.x-pl.x0<pl.x1-c.x,x=clamp(left?pl.x0-.7:pl.x1+.7,-Xw+.7,Xw-.7);yield*jumpTo(f,x,0,.5)}
+function updKin(f,c){const K=f.kin,dx=K.x-c.x,dy=K.y-c.y,d=Math.hypot(dx,dy),st=K.spd*STEP;let vx=0,vy=0;for(const p of f.pts){vx+=p.x-p.px;vy+=p.y-p.py}vx/=N;vy/=N;
+  const mx=d<st?dx:dx/d*st+Math.sin(clock*9)*.006,my=d<st?dy:dy/d*st;for(const p of f.pts){p.px+=vx;p.py+=vy;p.x+=mx;p.y+=my;p.px+=mx;p.py+=my}f.sq=.18+.12*Math.sin(clock*12);if(d<st)f.kin=null}
+const freeTool=t=>items.find(it=>it.type===t&&!it.held&&!it.grab);
+function* pickUp(f,it){if(!(yield*goTo(f,it.x)))return false;if(it.held||it.grab)return false;const c=centroid(f);if(Math.abs(c.y-it.y)>1.2)return false;it.held=f;tone(700,1000,.08,.08);return true}
+// —— 各种行为 ——
+function* actSleep(f){const bb=prop('beanbag');if(bb&&!onPlat(f)&&Math.random()<.8&&!frogs.some(o=>o!==f&&o.sleeping&&onPlat(o)===bb.plat)){yield*goTo(f,bb.x);yield*jumpTo(f,bb.x+rand(-.25,.25),bb.plat.y,.45)}
+  f.sleeping=true;try{for(let t=0;;t+=STEP){f.expr='sleep';f.exprT=.2;if(t%1.5<STEP)emote(f,'zzz',1.3);f.ai.energy=Math.min(1.2,f.ai.energy+STEP*.04);
+      const wake=f.trait==='owl'?f.ai.energy>.95:!isNight()&&f.ai.energy>.9;if(wake&&t>3)break;yield}}finally{f.sleeping=false;f.expr='idle'}
+  emote(f,'note',1);f.expr='happy';f.exprT=.8}
+function* actTramp(f){const T=prop('tramp');if(!T)return;if(onPlat(f))yield*leavePlat(f);yield*goTo(f,T.x+(centroid(f).x<T.x?-1.1:1.1));yield*jumpTo(f,T.x,T.plat.y,.8);if(onPlat(f)!==T.plat)return;
+  f.bouncing=true;emote(f,'note',1.2);try{for(let t=0,n=rand(4,8);t<n;t+=STEP){const c=centroid(f);if(Math.abs(c.x-T.x)>.95)break;if(f.ground>2&&Math.abs(c.x-T.x)>.3)addVel(f,(T.x-c.x)*.6,0,0);yield}}finally{f.bouncing=false}
+  f.ai.fun=Math.min(1,f.ai.fun+.6);yield*wait(.6);yield*jumpTo(f,clamp(T.x+(Math.random()<.5?-1.4:1.4),-Xw+.8,Xw-.8),0,1)}
+function* actSwing(f){const S=prop('swing');if(!S||frogs.some(o=>o!==f&&o.riding))return;if(onPlat(f))yield*leavePlat(f);yield*goTo(f,S.pivot.x-1.4);
+  for(let t=0;t<4&&Math.abs(S.th)>.12;t+=STEP)yield;yield*jumpTo(f,S.plat.x0+.47,S.plat.y,.5);if(onPlat(f)!==S.plat)return;
+  f.riding=true;emote(f,'note',1.5);try{let off=0;for(let t=0,n=rand(7,12);t<n;t+=STEP){if(onPlat(f)!==S.plat){if((off+=STEP)>.8)return}else off=0;
+      if(Math.abs(S.th)<.35&&Math.abs(S.w)<3.2)S.w+=Math.sign(S.w||1)*(f.trait==='playful'?2.2:1.4)*STEP;yield}
+    // 荡到高处跳下去
+    for(let t=0;t<4;t+=STEP){if(Math.abs(S.th)>.55&&Math.sign(S.w)!==Math.sign(S.th)||Math.abs(S.w)<.3)break;yield}
+    if(onPlat(f)===S.plat){addVel(f,Math.sign(S.th||1)*rand(3,5),rand(5,7),.3);emote(f,'bang',.8)}}finally{f.riding=false}
+  f.ai.fun=Math.min(1,f.ai.fun+.7)}
+function* actShelf(f){const sh=Object.values(room.props).filter(P=>P.d.kind==='shelf');if(!sh.length)return;const P=pick(sh);if(!(yield*reachShelf(f,P.plat)))return;
+  yield*goTo(f,rand(P.plat.x0+.4,P.plat.x1-.4));for(let t=0,n=rand(5,10);t<n;t+=STEP){if(onPlat(f)!==P.plat&&!f.fly)return;if(t%3<STEP&&Math.random()<.4)emote(f,f.trait==='timid'?'heart':'note',1);yield}
+  if(Math.random()<.6)yield*leavePlat(f)}
+function* actMop(f){const mop=freeTool('mop');if(!mop||onPlat(f))return;if(!(yield*pickUp(f,mop)))return;emote(f,'bang',.8);
+  try{for(let n=0;n<8;n++){const c=centroid(f),ds=decals.filter(d=>d.life>2&&Math.abs(d.x)<Xw-.4);if(!ds.length)break;ds.sort((a,b)=>Math.abs(a.x-c.x)-Math.abs(b.x-c.x));const d=ds[0];
+      if(!(yield*goTo(f,d.x)))break;for(let t=0;t<1.6;t+=STEP){f.toolSwing=Math.sin(t*14)*.35;const cx=centroid(f).x;for(const e of decals)if(Math.abs(e.x-cx)<.75)e.life=Math.min(e.life,2)-STEP*1.5;if(t%.3<STEP)noiseB(.12,.05,'bandpass',900,500);yield}}
+    emote(f,'heart',1.2);f.expr='happy';f.exprT=1}finally{dropItem(mop,f)}}
+function* actReturn(f,it){if(onPlat(f))yield*leavePlat(f);if(!(yield*pickUp(f,it)))return;try{const P=room.props[it.home.prop];if(!P)return;if(!(yield*reachShelf(f,P.plat)))return;yield*goTo(f,P.x+it.home.dx);
+    dropItem(it,f);it.y=P.plat.y+it.h/2+.02;it.x=clamp(P.x+it.home.dx,P.plat.x0+.1,P.plat.x1-.1);it.offT=0;emote(f,'heart',1.2);f.expr='happy';f.exprT=1}finally{dropItem(it,f)}}
+function* actBonk(f){const st=freeTool('stick');if(!st||onPlat(f))return;if(!(yield*pickUp(f,st)))return;emote(f,'anger',1.4);f.ai.bonkCd=18;
+  try{for(let n=0;n<2;n++){const vs=frogs.filter(o=>o!==f&&o.jst!=='in'&&!o.fly&&onFloor(o));if(!vs.length)break;const c=centroid(f);vs.sort((a,b)=>Math.abs(centroid(a).x-c.x)-Math.abs(centroid(b).x-c.x));const v=vs[0];
+      if(!(yield*goToFrog(f,v,.15)))break;for(let t=0;t<.18;t+=STEP){f.toolSwing=-t/.18*1.1;yield}f.toolSwing=.5;bonked(v,f);for(let t=0;t<.5;t+=STEP){f.toolSwing=lerp(f.toolSwing,0,.15);yield}yield*wait(.6)}}finally{dropItem(st,f)}}
+function bonked(v,by){const c=centroid(v),dir=Math.sign(c.x-centroid(by).x)||1;stars(c.x,c.y+v.hy,5);sfx.bonk();buzz(15);v.sq=.7;addVel(v,dir*3.5,3,.4);v.expr='squeeze';v.exprT=.8;emote(v,'dizzy',2);
+  stopAI(v);if(v.trait==='timid'){v.ai.co=actFlee(v,by)}else if(v.trait==='angry'&&Math.random()<.5){v.ai.co=(function*(){yield*wait(1.2);emote(v,'anger',1.2);yield*goToFrog(v,by,.1,4);if(frogs.includes(by)){bonked(by,v)}})()}}
+function* actFlee(f,from){yield*wait(.6);emote(f,'sweat',2.4);const c=centroid(f),fx=frogs.includes(from)?centroid(from).x:c.x-1,x=clamp(c.x+(c.x>fx?4:-4),-Xw+.8,Xw-.8);
+  for(let t=0;t<3.5;t+=STEP){const cc=centroid(f);if(Math.abs(cc.x-x)<.4)break;f.aiHop=(f.aiHop||0)-STEP;if(f.ground>2&&f.aiHop<=0){addVel(f,Math.sign(x-cc.x)*3.4,rand(3.6,4.6),.3);f.aiHop=.28}yield}
+  for(let t=0;t<2;t+=STEP){if(Math.random()<.3)addVel(f,rand(-.25,.25),0,0);yield}}
+function* actHug(f){const os=frogs.filter(o=>o!==f&&o.jst!=='in'&&!o.sleeping&&onFloor(o));if(!os.length)return;const o=pick(os);if(!(yield*goToFrog(f,o,.05)))return;
+  emote(f,'heart',1.6);emote(o,'heart',1.6);for(let t=0;t<1.4;t+=STEP){if(!frogs.includes(o))break;const a=centroid(f),b=centroid(o),d=Math.sign(b.x-a.x);if(t%.35<STEP){addVel(f,d*.8,.6,0);addVel(o,-d*.8,.6,0);hearts((a.x+b.x)/2,a.y+f.hy,1,.22)}f.expr=o.expr='happy';f.exprT=o.exprT=.3;yield}
+  f.ai.fun=Math.min(1,f.ai.fun+.4)}
+function chooseAction(f){const a=f.ai,T=f.trait,opts=[],add=(w,g)=>{if(w>0)opts.push([w,g])},nightOwl=T==='owl';
+  const sleepy=(isNight()&&!nightOwl?1.2:0)+(1-a.energy)*(T==='lazy'?1.8:1)-(nightOwl&&!isNight()?-.3:0);
+  if(sleepy>.55)add(sleepy*2,()=>actSleep(f));
+  const awake=isNight()&&!nightOwl?.15:1,fun=(1-a.fun)*(T==='playful'?2:1)*awake;
+  if(prop('tramp'))add(fun*1.1,()=>actTramp(f));
+  if(prop('swing'))add(fun*(T==='playful'||T==='social'?1.3:.9),()=>actSwing(f));
+  if(plats.some(p=>p.kind==='shelf'))add(.55*awake*(T==='timid'||T==='lazy'?1.6:1),()=>actShelf(f));
+  if(T==='diligent'){if(decals.filter(d=>d.life>2).length>=3&&freeTool('mop'))add(3,()=>actMop(f));const it=items.find(i=>i.fallen&&!i.held&&!i.grab);if(it)add(2.6,()=>actReturn(f,it))}
+  if(T==='angry'&&a.bonkCd<=0&&freeTool('stick')&&frogs.length>1)add(1.5*awake,()=>actBonk(f));
+  if(T==='social'&&frogs.length>1)add(1.3*awake,()=>actHug(f));
+  add(.8,null);let s=0;for(const o of opts)s+=o[0];let r=Math.random()*s;for(const [w,g] of opts){if((r-=w)<=0){a.act=g?(String(g).match(/act\w+/)||[''])[0]:'';return g?g():null}}return null}
+function aiFree(f){return !decor&&!f.grabs.length&&f.press<=0&&f.frozen<=0&&!f.merge&&f.jst!=='in'&&!f.rocket&&!(f.fly&&!f.fly.ai)&&!f.carried}
+function stopAI(f){const a=f.ai;if(a.co){const co=a.co;a.co=null;try{co.return()}catch(e){}}f.kin=null;if(f.fly&&f.fly.ai)f.fly=null;f.bouncing=false;f.riding=false;f.sleeping=false;f.toolSwing=0;for(const it of items)if(it.held===f)dropItem(it,f);a.next=rand(1.5,3)}
+function updAI(f,dt){const a=f.ai;a.energy=Math.max(0,a.energy-dt*(isNight()&&f.trait!=='owl'?.02:.006));a.fun=Math.max(0,a.fun-dt*.012);a.bonkCd-=dt;
+  if(!aiFree(f)){if(a.co||f.kin||(f.fly&&f.fly.ai))stopAI(f);return}
+  if(a.co){let r;try{r=a.co.next()}catch(e){console.error(e);r={done:true}}if(r.done){a.co=null;a.next=rand(1.5,4)}return}
+  a.next-=dt;if(a.next>0||f.ground<=2)return;a.next=rand(2,4);a.co=chooseAction(f)}
+// 每帧：表情、发光、工具、可乐、火焰（syncFrog 末尾调用）
+function syncExtras(f,c){if(f.emo){f.emoT-=1/60;f.emoA=Math.min(1,f.emoA+.12);const s=.42*(f.emoA<1?1.2-.2*f.emoA:1);const sk=s*Math.min(1,f.emoT*3);f.emo.scale.set(sk*emoAR(f.emoK),sk,1);f.emo.position.set(c.x+f.hx*.55,c.y+f.hy+.22+Math.sin(clock*4)*.03,.9);f.emo.visible=f.emoT>0}
+  if(GLOW.has(f.C.name)){if(!f.glow&&night>.01){f.glow=new THREE.Sprite(new THREE.SpriteMaterial({map:glowTex,color:new THREE.Color(colorOf(f.C)),transparent:true,depthWrite:false,blending:THREE.AdditiveBlending}));scene.add(f.glow)}
+    if(f.glow){f.glow.position.set(c.x,c.y,-.25);f.glow.scale.setScalar(f.r*5.5*(1+.05*Math.sin(clock*2+f.seed*9)));f.glow.material.opacity=night*.75;f.glow.visible=night>.01}
+    if(f.mat.emissiveIntensity!==undefined&&f.C.glow)f.mat.emissiveIntensity=.08+night*.7}}
+function updGlowLights(){const gs=frogs.filter(f=>GLOW.has(f.C.name)).slice(0,3);glowLights.forEach((l,i)=>{const f=gs[i];if(!f||night<.01){l.intensity=0;return}const c=centroid(f);l.position.set(c.x,c.y,.7);l.color.set(colorOf(f.C));l.intensity=night*2.2})}
+function updSkills(f,c,dt){const sk=SKILL[f.C.name];if(!sk)return;
+  if(sk.fizz){if(f.grabs.length&&Math.hypot(f.ax||0,f.ay||0)>300)f.fizz=Math.min(1,(f.fizz||0)+dt*.7);
+    if(f.fizz>.6&&!f.rocket){for(const p of f.pts){p.x+=rand(-.004,.004)}if(Math.random()<dt*3)noiseB(.1,.04,'highpass',3000,5000)}
+    if(f.fizz>=1&&!f.grabs.length&&f.jst!=='in'&&!f.fly&&!f.rocket){f.rocket=1.4;f.rocketA=rand(1.2,1.9);emote(f,'bang',1);stopAI(f);sfx.boing(1)}
+    if(f.rocket){f.rocket-=dt;f.rocketA+=rand(-6,6)*dt;addVel(f,Math.cos(f.rocketA)*30*dt,Math.sin(f.rocketA)*30*dt+15*dt,0);f.expr='squeeze';f.exprT=.2;
+      f.mouth.getWorldPosition(_mv);for(let i=0;i<3;i++)addPart({x:_mv.x,y:_mv.y,z:_mv.z,vx:-Math.cos(f.rocketA)*rand(3,6)+rand(-1,1),vy:-Math.sin(f.rocketA)*rand(3,6)+rand(-1,1),vz:rand(-1,1),s:rand(.03,.06),life:2,col:new THREE.Color(i?'#6b3415':'#f2e6d8'),kind:'jelly',dl:20});
+      if(Math.random()<dt*8)noiseB(.12,.12,'bandpass',1800,900);if(f.rocket<=0){f.rocket=0;f.fizz=0;emote(f,'dizzy',2)}}}
+  if(sk.heat)for(const o of frogs)if(o.frozen>0){const co=centroid(o);if(Math.hypot(co.x-c.x,co.y-c.y)<1.8){o.frozen-=dt*2.5;if(Math.random()<dt*6)addPart({x:co.x+rand(-.3,.3),y:co.y+o.hy,z:.3,vx:rand(-.3,.3),vy:rand(1,2),vz:0,s:.05,life:.6,col:new THREE.Color('#ffffff'),kind:'spark'})}}}
+
+/* ---------- 布置模式：拖动家具、收起/摆出 ---------- */
+function propAt(e){ndc.set(e.clientX/innerWidth*2-1,-(e.clientY/innerHeight)*2+1);ray.setFromCamera(ndc,camera);const gs=Object.values(room.props).map(P=>P.g);const h=ray.intersectObjects(gs,true)[0];if(!h)return null;let o=h.object;while(o&&!o.userData.prop)o=o.parent;return o?room.props[o.userData.prop]:null}
+function setDecor(on){decor=on;$('mainBar').hidden=on;$('decorBar').hidden=!on;if(on){for(const f of frogs)stopAI(f);renderChips();toast('拖动家具换位置 · 点下面的名字收起或摆出','',2200)}else saveRoom()}
+function renderChips(){const B=$('propChips');B.textContent='';for(const id in PROP_DEF){const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=PROP_DEF[id].name;b.setAttribute('aria-pressed',layout[id].on?'true':'false');
+  b.addEventListener('click',()=>{layout[id].on=!layout[id].on;if(layout[id].on){layout[id].fx=PROP_DEF[id].fx;layout[id].y=PROP_DEF[id].y}b.setAttribute('aria-pressed',layout[id].on?'true':'false');layoutRoom();saveRoom();tone(layout[id].on?700:400,layout[id].on?1000:250,.08,.08)});B.appendChild(b)}}
+function dragProp(D,w){const d=PROP_DEF[D.id],L=layout[D.id];L.fx=clamp((w.x-D.ox)/Xw,-.97,.97);if(d.kind==='shelf'||d.kind==='lamp')L.y=w.y-D.oy;layoutRoom()}
 
 /* ---------- 每帧逻辑 ---------- */
-function logic(dt){clock+=dt;
+function logic(dt){clock+=dt;updRoom(dt);updItems(dt);
   GX=lerp(GX,tilt?tilt.x*15:0,.08);GY=lerp(GY,tilt?tilt.y*15:-15,.08);
   updPress(dt);
   for(const f of frogs.slice()){if(!frogs.includes(f))continue;const c=centroid(f),S=f.S;
@@ -762,29 +1216,31 @@ function logic(dt){clock+=dt;
     f.sagK=lerp(f.sagK,onG&&!f.grabs.length&&f.frozen<=0&&!f.fly?1:0,Math.min(1,dt*(onG?2.5:8)));
     if(!f.lucky&&clock-(f.petT||-9)>1.5)f.love=Math.max(0,f.love-dt*.05);
     if(f.lucky&&Math.random()<dt*.6)hearts(c.x+rand(-.3,.3)*f.r,c.y+f.hy,1,.18);
+    updAI(f,dt);updSkills(f,c,dt);
     if(f.fly){updFly(f,c,dt);continue}
+    if(f.kin){updKin(f,c);continue}
     if(f.frozen>0){f.frozen-=dt;updIce(f);if(f.frozen<=0)shatter(f)}
     const pl=f.r*2.2;let stretch=1;if(f.grabs.length>=2){const p1=f.pts[f.grabs[0].i],p2=f.pts[f.grabs[1].i];stretch=Math.hypot(p1.x-p2.x,p1.y-p2.y)/pl;if(stretch>(f.frozen>0?2.6:S.pop)){if(f.frozen>0)shatter(f);burst(f,1.1);continue}}
     jarState(f,c);
     if(f.jst==='in'&&!f.inJar&&GY<-8)addVel(f,0,-24*dt,0);
     if(f.grabs.length===1&&f.frozen<=0&&Math.random()<dt*2.5){for(const p of f.pts)if(Math.random()<.3){p.px-=rand(-1,1)*1.2*H2;p.py-=rand(-.4,1)*1.2*H2}}
-    if(!f.grabs.length&&onG&&f.frozen<=0&&!f.merge&&f.press<=0){f.hopT-=dt;if(f.hopT<=0){f.hopT=f.shape==='round'?rand(1,2.4):f.shape==='floppy'?rand(2.6,5):rand(1.6,3.8);
+    if(!f.grabs.length&&onG&&f.frozen<=0&&!f.merge&&f.press<=0&&!f.ai.co&&!f.rocket&&!(isNight()&&f.trait!=='owl')&&!decor){f.hopT-=dt;if(f.hopT<=0){f.hopT=f.shape==='round'?rand(1,2.4):f.shape==='floppy'?rand(2.6,5):rand(1.6,3.8);
       if(f.jst==='in'){if(!J.sealed&&Math.random()<.35)addVel(f,rand(-.3,.3),rand(5,6.2)*S.hop,.35)}
       else{let dir=Math.random()<.5?-1:1;const mate=frogs.find(o=>o!==f&&o.C===f.C&&o.tier===f.tier&&o.jst!=='in');if(mate&&Math.random()<.55)dir=Math.sign(centroid(mate).x-c.x)||dir;
         if(c.x<-Xw+f.r*2)dir=1;if(c.x>Xw-f.r*2)dir=-1;if(J.on&&Math.abs(c.x-J.x)<J.bw+f.r*1.8)dir=Math.sign(c.x-J.x)||-1;
         addVel(f,dir*rand(.8,2)*S.hopX,rand(5,7)*(1-.06*(f.tier-1))*(f.C.soft>.08?1.15:1)*S.hop,.35);tone(420*S.pitch/(1+.12*(f.tier-1)),760*S.pitch,.1,.07)}}}}
   checkMerges(dt);updMerges(dt);
-  for(const r of reforms)r.t-=dt;for(const r of reforms.filter(r=>r.t<=0)){if(frogs.length<MAXF+2){const{f}=newFrog(r.C,r.tier,r.x,Math.min(Ytop-1,2.2),.35,r.shape);addVel(f,0,3,.2);tone(300,700,.1,.2)}}reforms=reforms.filter(r=>r.t>0);
+  for(const r of reforms)r.t-=dt;for(const r of reforms.filter(r=>r.t<=0)){if(frogs.length<MAXF+2){const{f}=newFrog(r.C,r.tier,r.x,Math.min(Ytop-1,2.2),.35,r.shape,r.trait);addVel(f,0,3,.2);tone(300,700,.1,.2)}}reforms=reforms.filter(r=>r.t>0);
   if(J.lidT>0&&J.lidT<1){J.lidT=Math.min(1,J.lidT+dt*2.2);const t=1-Math.pow(1-J.lidT,3),a=corkHome(),b=new THREE.Vector3(J.x,J.H+.12,0);cork.position.lerpVectors(a,b,t);cork.position.y+=Math.sin(t*Math.PI)*1.4;cork.rotation.z=(1-t)*3;
     if(J.lidT>=1){J.sealed=true;J.sealT=1.1;cork.position.copy(b);cork.rotation.z=0;sfx.cork();for(const f of frogs)if(f.inJar){f.expr='happy';f.exprT=1.2}}}
   if(J.sealed&&J.sealT>0&&!jarFly){J.sealT-=dt;if(J.sealT<=0)collectJar()}
-  updJarAnim(dt);updJarFly(dt);updJarUI();updBombs(dt);updHammers(dt);updParts(dt);updFlashes(dt);shake=Math.max(0,shake-dt);
+  updGlowLights();updJarAnim(dt);updJarFly(dt);updJarUI();updBombs(dt);updHammers(dt);updParts(dt);updFlashes(dt);shake=Math.max(0,shake-dt);
 }
 
 /* ---------- 撸蛙 / 长按捏扁 ---------- */
 const heartTex=canTex(64,64,(x,w)=>{x.translate(w/2,w/2+3);x.fillStyle='#fff';x.beginPath();x.moveTo(0,18);x.bezierCurveTo(-30,-2,-16,-26,0,-10);x.bezierCurveTo(16,-26,30,-2,0,18);x.fill()});
-function hearts(x,y,n=1,size=.3){for(let i=0;i<n;i++){const s=new THREE.Sprite(new THREE.SpriteMaterial({map:heartTex,color:new THREE.Color(pick(['#ff6f91','#ff8fb0','#ff5c8a'])).multiplyScalar(1.3),transparent:true,depthWrite:false}));
-  s.position.set(x+rand(-.15,.15),y,1);scene.add(s);flashes.push({s,t:0,dur:1.1,size:size*rand(.8,1.2),vx:rand(-.6,.6)*(n>1?2:1),vy:rand(.8,1.6),up:1})}}
+function hearts(x,y,n=1,size=.3){for(let i=0;i<n;i++){const s=new THREE.Sprite(new THREE.SpriteMaterial({transparent:true,depthWrite:false}));
+  s.material.map=EMO.heart;s.position.set(x+rand(-.15,.15),y,1);scene.add(s);flashes.push({s,t:0,dur:1.1,size:size*rand(.8,1.2),vx:rand(-.6,.6)*(n>1?2:1),vy:rand(.8,1.6),up:1})}}
 function petFrog(f,d,w){const c=centroid(f);f.petT=clock;f.love=Math.min(1,f.love+d*.09);f.petAcc=(f.petAcc||0)+d;f.expr='happy';f.exprT=.45;f.sq=Math.max(f.sq,.2);
   if(f.petAcc>.75){f.petAcc=0;hearts(w.x,Math.max(w.y,c.y)+.15,1);sfx.heart()}
   if(clock-(f.purrT||-9)>.55){f.purrT=clock;sfx.purr();buzz(4)}
@@ -792,7 +1248,7 @@ function petFrog(f,d,w){const c=centroid(f);f.petT=clock;f.love=Math.min(1,f.lov
 function updPress(dt){const now=performance.now();
   for(const [pid,P] of pointers){if(P.pressF){const f=P.pressF;if(!frogs.includes(f)||f.fly){P.pressF=null;continue}P.pt+=dt;const k=Math.min(1,P.pt/1.1);f.press=k;f.sq=Math.max(f.sq,k*.95);
       if(k>.5){const a=(k-.5)*.012*f.r;for(const p of f.pts){p.x+=rand(-a,a);p.y+=rand(-a,a)}}
-      P.sqT=(P.sqT||0)-dt;if(P.sqT<=0){P.sqT=.16;sfx.squeak(k*.8);buzz(3)}}
+      P.sqT=(P.sqT||0)-dt;if(P.sqT<=0){P.sqT=.16;sfx.squeak(k*.8);buzz(3)}if(k>.4&&SKILL[f.C.name]&&SKILL[f.C.name].spray)spray(f,k,dt)}
     else if(P.frog&&tool==='hand'&&P.moved<.08&&now-P.t>320&&P.frog.frozen<=0&&!P.frog.fly&&!P.frog.merge&&P.frog.grabs.length===1){const f=P.frog;f.grabs=f.grabs.filter(g=>g.pid!==pid);P.frog=null;P.pressF=f;P.pt=0;f.expr='squeeze';f.exprT=99}}}
 function releasePress(P){const f=P.pressF;P.pressF=null;if(!frogs.includes(f))return;const k=f.press;f.press=0;f.sq=0;f.exprT=0;
   if(k<.12){f.expr='idle';return}addVel(f,rand(-.4,.4),3.5+k*10*f.S.hop,.35);f.expr='happy';f.exprT=1;sfx.boing(k);buzz(15);const c=centroid(f);if(k>.8){stars(c.x,c.y,5);floatText(c.x,c.y+f.hy+.2,'啵嘤～','')}}
@@ -805,36 +1261,41 @@ function useTool(t,w){if(t==='bomb')dropBomb(w.x,w.y);else if(t==='hammer')hamme
   else if(t==='freeze'){const f=frogNear(w.x,w.y,1.5);if(f&&!f.fly)freeze(f);else{sfx.freeze();for(let i=0;i<10;i++)addPart({x:w.x,y:Math.max(.1,w.y),z:.4,vx:rand(-2,2),vy:rand(0,2.5),vz:rand(-1,1),s:rand(.025,.045),life:.5,col:new THREE.Color('#e8f8ff'),kind:'spark'})}}}
 canvas.addEventListener('pointerdown',e=>{audio();askMotion();e.preventDefault();try{canvas.setPointerCapture(e.pointerId)}catch(_){}
   const w=toWorld(e),P={x:w.x,y:w.y,t:performance.now(),moved:0,frog:null};pointers.set(e.pointerId,P);if(++interactions===6)$('hint').classList.add('fade');
+  if(decor){const Pp=propAt(e);if(Pp){P.prop={id:Pp.id,ox:w.x-Pp.x,oy:w.y-(Pp.y||0)};tone(500,700,.06,.08)}return}
   if(tool!=='hand'){useTool(tool,w);return}
   ndc.set(e.clientX/innerWidth*2-1,-(e.clientY/innerHeight)*2+1);ray.setFromCamera(ndc,camera);
   if(J.on&&cork.visible&&J.lidT<=0&&!jarAnim&&ray.intersectObject(cork).length){if(sealAvail())seal();else{toast(frogs.some(f=>f.jst==='in')?'等蛙完全进去再封':'先把蛙放进罐子','',1200);tone(300,200,.1,.1)}return}
   const best=frogNear(w.x,w.y,1.35);
-  if(best&&best.fly)return;
+  if(best&&best.fly&&!best.fly.ai)return;
+  if(!best){const it=itemAt(w.x,w.y);if(it){it.grab=e.pointerId;it.vx=it.vy=0;tone(600,800,.06,.08);return}
+    const Pp=propAt(e);if(Pp&&Pp.d.kind==='lamp'){Pp.L.lit=!Pp.L.lit;saveRoom();tone(Pp.L.lit?900:500,Pp.L.lit?1200:300,.06,.12);noiseB(.04,.15,'highpass',3000,5000);buzz(10);return}
+    if(Pp&&Pp.d.kind==='swing'){const s=Pp.plat;if(w.y<3.1){Pp.w+=(w.x<(s.x0+s.x1)/2?1:-1)*1.6;tone(300,500,.1,.1);return}}
+    if(Pp&&Pp.d.kind==='tramp'){Pp.dip=.15;tone(160,90,.15,.15);for(const f of frogs)if(onPlat(f)===Pp.plat)addVel(f,0,6,.3);return}}
   if(best){let bi=0,b2=1e9;best.pts.forEach((p,i)=>{const d=(p.x-w.x)**2+(p.y-w.y)**2;if(d<b2){b2=d;bi=i}});const cl=[];for(const k of [-1,0,1]){const i=(bi+k+N)%N;cl.push({i,ox:(best.rest[i].x-best.rest[bi].x)*.9,oy:(best.rest[i].y-best.rest[bi].y)*.9})}
     best.grabs.push({pid:e.pointerId,i:bi,cl});P.frog=best;tone(380,240,.09,.12);buzz(8)}
   else P.pet=true},{passive:false});
-canvas.addEventListener('pointermove',e=>{const P=pointers.get(e.pointerId);if(!P)return;const w=toWorld(e),d=Math.abs(w.x-P.x)+Math.abs(w.y-P.y);P.moved+=d;P.x=w.x;P.y=w.y;
+canvas.addEventListener('pointermove',e=>{const P=pointers.get(e.pointerId);if(!P)return;const w=toWorld(e),d=Math.abs(w.x-P.x)+Math.abs(w.y-P.y);P.moved+=d;P.x=w.x;P.y=w.y;if(P.prop){dragProp(P.prop,w);return}
   if(P.pet&&d>0){const f=frogNear(w.x,w.y,1.05);if(f&&!f.fly&&f.frozen<=0)petFrog(f,Math.min(d,.4),w)}});
-function up(e){const P=pointers.get(e.pointerId);if(!P)return;pointers.delete(e.pointerId);if(P.pressF){releasePress(P);return}
+function up(e){const P=pointers.get(e.pointerId);if(!P)return;pointers.delete(e.pointerId);if(P.pressF){releasePress(P);return}if(P.prop){saveRoom();return}for(const it of items)if(it.grab===e.pointerId)it.grab=null;
   if(!P.frog)return;const f=P.frog;f.grabs=f.grabs.filter(g=>g.pid!==e.pointerId);if(!frogs.includes(f))return;
   const tap=performance.now()-P.t<260&&P.moved<.1;
   if(J.on&&!jarBusy()&&f.frozen<=0&&!f.fly&&!f.merge&&!f.grabs.length){const c=centroid(f),room=jarFill()+f.A0/JAR_CAP<=1.02;
     if(tap){if(f.jst==='in'){flyOut(f);return}if(!room){toast('装不下啦，先拿出来一只','',1100);f.expr='squeeze';f.exprT=.4;tone(300,200,.1,.1);return}flyIn(f);return}
     // 拖到瓶口附近松手：吸进去
     if(f.jst!=='in'&&room&&Math.abs(c.x-J.x)<J.bw+.7&&c.y>J.H-.4&&c.y<J.H+2.4){flyTo(f,J.x,J.H+f.hy+.2,'in',.3,.15);return}}
-  if(tap&&f.frozen<=0){addVel(f,rand(-.4,.4),rand(4.5,6)*f.S.hop,.35);f.expr='happy';f.exprT=.7;tone(620*f.S.pitch,980*f.S.pitch,.08,.15)}}
+  if(tap&&f.frozen<=0){const c=centroid(f);floatText(c.x,c.y+f.hy+.2,`${TRAITS[f.trait].name}的${f.C.name}`,'');addVel(f,rand(-.4,.4),rand(4.5,6)*f.S.hop,.35);f.expr='happy';f.exprT=.7;tone(620*f.S.pitch,980*f.S.pitch,.08,.15)}}
 canvas.addEventListener('pointerup',up);canvas.addEventListener('pointercancel',up);canvas.addEventListener('lostpointercapture',up);
 function buzz(ms){try{navigator.vibrate&&navigator.vibrate(ms)}catch(e){}}
 // 按钮果冻回弹
 document.querySelectorAll('.tool,.spawn,.jarbtn,.bbtn,.stat').forEach(b=>{b.addEventListener('click',()=>{b.classList.remove('jelly');void b.offsetWidth;b.classList.add('jelly')});b.addEventListener('animationend',()=>b.classList.remove('jelly'))});
 // 工具：点一下 = 切换模式；直接拖到桌上 = 在松手处用一次
 const TIPS={bomb:'点任意位置扔炸弹',hammer:'点青蛙敲一下，冰冻的会被敲碎',freeze:'点青蛙冻成冰块'};
-function setTool(t){tool=t;document.querySelectorAll('.tool').forEach(x=>x.setAttribute('aria-pressed',x.dataset.tool===t?'true':'false'))}
+function setTool(t){tool=t;document.querySelectorAll('.tool[data-tool]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.tool===t?'true':'false'))}
 let dragT=null;
-document.querySelectorAll('.tool').forEach(b=>{
+document.querySelectorAll('.tool[data-tool]').forEach(b=>{
   b.addEventListener('pointerdown',e=>{if(b.dataset.tool==='hand')return;dragT={t:b.dataset.tool,b,x:e.clientX,y:e.clientY,id:e.pointerId,on:false};try{b.releasePointerCapture(e.pointerId)}catch(_){}});
   b.addEventListener('click',()=>{audio();if(b.dataset.dragged){delete b.dataset.dragged;return}setTool(b.dataset.tool);if(TIPS[tool])toast(TIPS[tool]+'（也可以直接拖到桌上）','',1300)})});
-addEventListener('pointermove',e=>{const d=dragT;if(!d||e.pointerId!==d.id)return;if(!d.on&&Math.hypot(e.clientX-d.x,e.clientY-d.y)>12){d.on=true;d.g=document.createElement('div');d.g.className='ghost-tool glass';d.g.innerHTML=d.b.querySelector('svg').outerHTML;document.body.appendChild(d.g)}
+addEventListener('pointermove',e=>{const d=dragT;if(!d||e.pointerId!==d.id)return;if(!d.on&&Math.hypot(e.clientX-d.x,e.clientY-d.y)>12){d.on=true;d.g=document.createElement('div');d.g.className='ghost-tool glass';d.g.innerHTML=d.b.querySelector('img').outerHTML;document.body.appendChild(d.g)}
   if(d.on){d.g.style.left=e.clientX+'px';d.g.style.top=e.clientY+'px'}});
 function dropTool(e){const d=dragT;if(!d||e.pointerId!==d.id)return;dragT=null;if(!d.on)return;d.g.remove();d.b.dataset.dragged='1';setTimeout(()=>delete d.b.dataset.dragged,50);
   if(e.type==='pointerup'&&document.elementFromPoint(e.clientX,e.clientY)===canvas){audio();useTool(d.t,toWorld(e))}}
@@ -843,6 +1304,10 @@ $('spawn').addEventListener('click',()=>{audio();askMotion();if(frogs.length>=MA
   const commons=POOL.c,lone=commons.filter(c=>frogs.filter(f=>f.C===c&&f.tier===1).length%2===1);const C=lone.length&&Math.random()<.65?pick(lone):pick(commons);
   const{f,nw}=newFrog(C,1,rand(-Xw+1,J.on?J.x-J.bw-1:Xw-1),Ytop-.8);addVel(f,rand(-1,1),0);tone(420,760,.12,.1);if(nw)toast(C.name,'新发现',1400)});
 $('jarBtn').addEventListener('click',()=>{audio();setTool('hand');enterJar()});
+$('decorBtn').addEventListener('click',()=>{audio();setTool('hand');setDecor(true)});$('decorDone').addEventListener('click',()=>{audio();setDecor(false)});
+$('helpBtn').addEventListener('click',()=>{const h=$('hint');h.classList.remove('fade');clearTimeout(h._t);h._t=setTimeout(()=>h.classList.add('fade'),9000)});
+$('soundBtn').addEventListener('click',()=>{audio();const on=$('soundBtn').getAttribute('aria-pressed')!=='true';$('soundBtn').setAttribute('aria-pressed',on);if(master)master.gain.value=on?.5:0});
+$('openRes').addEventListener('click',()=>{const B=$('resBody');B.textContent='';for(const [k,col] of [['milk','#fffaf0'],['juice','#a55ae0'],['pearl','#3a2010']]){const r=document.createElement('div');r.className='res-row';const i=document.createElement('i');i.style.background=col;const n=document.createElement('span');n.textContent=res[k]||0;r.append(i,document.createTextNode(RES_NAME[k]),n);B.appendChild(r)}$('resSheet').hidden=false});
 $('jarCancel').addEventListener('click',()=>{audio();cancelJar()});
 $('jarSeal').addEventListener('click',()=>{audio();seal()});
 function renderDex(){const B=$('dexBody');B.textContent='';
@@ -866,7 +1331,7 @@ document.querySelectorAll('.sheet').forEach(s=>s.addEventListener('pointerdown',
 buildJar();
 let PR=Math.min(2,window.devicePixelRatio||1);
 function fit(){renderer.setPixelRatio(PR);composer.setPixelRatio(PR);resize();DPR=Math.min(2,devicePixelRatio||1);fxc.width=innerWidth*DPR|0;fxc.height=innerHeight*DPR|0}
-fit();addEventListener('resize',fit);
+fit();addEventListener('resize',fit);buildShell();layoutRoom();initItems();applyNight(true);
 for(const [i,C] of [POOL.c[0],POOL.c[0],POOL.c[1],POOL.c[1],POOL.c[2],POOL.c[2]].entries())newFrog(C,1,lerp(-Xw+1.2,Xw-1.2,i/5),1+(i%2)*1.2);
 hud();setTimeout(()=>$('hint').classList.add('fade'),14000);
 let last=performance.now(),acc=0,errShown=false,perfT=0,perfN=0;
@@ -874,11 +1339,11 @@ function frame(t){requestAnimationFrame(frame);const raw=(t-last)/1000,dt=Math.m
   // 自适应清晰度：持续掉帧就降低像素比
   perfT+=raw;perfN++;if(perfT>2){const fps=perfN/perfT;perfT=0;perfN=0;if(fps<45&&PR>1&&!document.hidden){PR=Math.max(1,PR-.25);fit()}}
   try{let n=0;while(acc>=1/60&&n<3){physics();logic(1/60);acc-=1/60;n++}if(n===3)acc=0;for(const f of frogs)syncFrog(f);
-    const tt=performance.now()/1000;for(const m of gemMats)m.uniforms.uTime.value=tt;
+    applyNight(clock-nightT>.5&&(nightT=clock,true));const tt=performance.now()/1000;for(const m of gemMats)m.uniforms.uTime.value=tt;
     camera.position.copy(camBase);if(shake>0){camera.position.x+=rand(-1,1)*shake*.18;camera.position.y+=rand(-1,1)*shake*.18}
     composer.render();drawSplats(dt)}catch(err){if(!errShown){errShown=true;console.error(err)}}}
 requestAnimationFrame(frame);
-window.__g={kill:f=>killFrog(f),step:n=>{for(let i=0;i<n;i++){physics();logic(1/60)}},collection:()=>collection,seenS:()=>seenS,camBase,camera,frogs:()=>frogs,J,centroid,newFrog,COLORS,SHAPES,explode,freeze,hammerAt,burst,seal,enterJar,cancelJar,flyIn,jarFill,sealAvail,petFrog,toScreen,setTool};
+window.__g={room:()=>room,items:()=>items,plats:()=>plats,layout,setDecor,night:()=>night,res:()=>res,TRAITS,kill:f=>killFrog(f),step:n=>{for(let i=0;i<n;i++){physics();logic(1/60)}},collection:()=>collection,seenS:()=>seenS,camBase,camera,frogs:()=>frogs,J,centroid,newFrog,COLORS,SHAPES,explode,freeze,hammerAt,burst,seal,enterJar,cancelJar,flyIn,jarFill,sealAvail,petFrog,toScreen,setTool};
 </script>
 
 
